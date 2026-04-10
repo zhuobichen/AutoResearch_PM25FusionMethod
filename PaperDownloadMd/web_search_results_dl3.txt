@@ -1,0 +1,56 @@
+# Web Search Results: CMAQ model downscaling kriging
+# Search Time: 2026-04-08
+
+## Top 10 Papers/Resources Found:
+
+1. **CMAQ模式建立本地化模拟方案教程**
+   - 来源: 知乎 (2023)
+   - 链接: https://zhuanlan.zhihu.com/p/596737077
+   - 摘要: CMAQ模型编译、模拟和输入数据处理方法，模型后处理
+
+2. **CMAQ Release Notes: Instrumented Models**
+   - 来源: EPA/CMAQ Wiki, GitHub (2022)
+   - 链接: https://github.com/USEPA/CMAQ/wiki
+   - 摘要: CMAQ-ISAM源分配方法，CMAQ-DDM3D敏感度分析
+
+3. **CMAQ Models Official Page**
+   - 来源: US EPA (2025)
+   - 链接: https://www.epa.gov/cmaq/cmaq-models-0
+   - 摘要: WRF-CMAQ, MPAS-CMAQ等模型介绍
+
+4. **CMAQ Source Code Repository**
+   - 来源: GitHub, US EPA
+   - 链接: https://www.epa.gov/cmaq/access-cmaq-source-code
+   - 摘要: CMAQ Fortran 90源代码下载
+
+5. **基于Kriging模型的栅格翼外形参数优化研究**
+   - 来源: 系统仿真技术及应用学术会议 (2012)
+   - 链接: https://cpfd.cnki.com.cn/Article/CPFDTOTAL-XTFZ201208001106.htm
+   - 摘要: Kriging方法与遗传算法相结合的优化程序
+
+6. **两端固定弦振动方程的kriging校正模型**
+   - 来源: 道客巴巴 (2021)
+   - 链接: https://www.doc88.com/p-55959574542756.html
+   - 摘要: Kriging校正模型在振动方程中的应用
+
+7. **CMAQ空气质量模式技术**
+   - 来源: 知乎专栏
+   - 摘要: 空气质量模式发展历程，三代模型演变
+
+8. **WRF-CMAQ气象驱动**
+   - 来源: EPA官方
+   - 摘要: WRF模型为CMAQ提供气象场
+
+9. **Kriging空间插值方法**
+   - 来源: 学术文献
+   - 摘要: 空间插值与优化设计
+
+10. **MPAS-CMAQ下一代气象模型**
+    - 来源: EPA (2025)
+    - 摘要: Model for Prediction Across Scales集成
+
+## PDF Download Links:
+- CMAQ官方文档: https://www.epa.gov/cmaq
+- CMAQ GitHub: https://github.com/USEPA/CMAQ
+- 知乎教程: https://zhuanlan.zhihu.com/p/596737077
+- CNKI文献: https://cpfd.cnki.com.cn/Article/CPFDTOTAL-XTFZ201208001106.htm

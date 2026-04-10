@@ -1,0 +1,47 @@
+# Web Search Results: PM2.5 CMAQ data fusion methodology
+# Search Time: 2026-04-08
+
+## Top 10 Papers Found:
+
+1. **基于AOD数据反演地面PM2.5浓度研究进展**
+   - 来源: 环境科学与技术, 学术之家
+   - 摘要: AOD数据分辨率的不同产生了不同精度的反演结果;线性回归模型和非线性回归模型的反演精度存在差异;通过在模型中加入气象参数、气溶胶垂直分布特性以及地表信息等因素会显著改善反演结果
+
+2. **PMF 参考文献PM2.5源分析**
+   - 作者: Mingjie Xie, Ricardo Piedrahita, Steven J. Dutton等
+   - 来源: Atmospheric Environment (2013)
+   - 摘要: Positive matrix factorization (PMF) applied to 32-month series of daily PM2.5 speciation data with temperature stratification
+
+3. **基于GF-5 DPC数据的PM2.5估算方法研究**
+   - 来源: 北华航天工业学院研究生教学部 (2023)
+   - 摘要: 提出了由GF-5 DPC偏振反射率直接估算近地面PM2.5浓度的方法，基于改进Stacking的DPC-PM2.5估算模型
+
+4. **Image-Based PM2.5 Prediction 论文**
+   - 来源: CSDN博客 (2020-2021)
+   - 摘要: PM2.5监测使用信息丰度测量和Wide and Deep Learning，以及特征增强和融合方法
+
+5. **基于Model-3/CMAQ和CAMx模式的台州市PM2.5数值模拟研究**
+   - 作者: 汪辉, 刘强, 王昱等
+   - 来源: 环境与可持续发展 (2019)
+   - 摘要: 基于CMAQ和CAMx模式进行PM2.5数值模拟研究
+
+6. **环境空气PM2.5自动监测数据准确度评价方法研究**
+   - 来源: 2016中国环境科学学会学术年会论文集
+
+7. **Spatial representativeness of PM2.5 monitoring stations**
+   - 来源: Air Quality, Atmosphere & Health (Springer, 2022)
+   - 摘要: 讨论监测站的空间代表性及其对健康评估的影响
+
+8. **PM2.5浓度估算中的特征增强和融合方法**
+   - 来源: 基于图像的PM2.5预测研究
+
+9. **DPC偏振反射率与PM2.5浓度估算**
+   - 来源: 集成学习Stacking方法
+
+10. **AOD气溶胶光学厚度与PM2.5反演**
+    - 来源: 环境科学学术文献
+
+## PDF Download Links:
+- CMAQ相关: https://www.epa.gov/cmaq (CMAQ官方EPA网站)
+- CMAQ源代码: https://github.com/USEPA/CMAQ
+- 台州市PM2.5研究: https://www.doc88.com/p-1532905014993.html (道客吧)

@@ -1,0 +1,101 @@
+[
+  {
+    "arxiv_id": "2512.05377v4",
+    "title": "China Regional 3km Downscaling Based on Residual Corrective Diffusion Model",
+    "authors": [
+      "Honglu Sun",
+      "Hao Jing",
+      "Zhixiang Dai",
+      "Sa Xiao",
+      "Wei Xue",
+      "Jian Sun",
+      "Qifeng Lu"
+    ],
+    "year": 2025,
+    "score": 4,
+    "abstract": "Statistical downscaling using diffusion-based framework for CMA-GFS model outputs to generate 3km forecasts.",
+    "pdf_url": "https://arxiv.org/pdf/2512.05377v4",
+    "matched_keywords": [
+      "CMA",
+      "downscaling",
+      "diffusion model"
+    ],
+    "dedup_key": "0e992ca8e20b34ce"
+  },
+  {
+    "arxiv_id": "2410.15628v3",
+    "title": "Towards Kriging-informed Conditional Diffusion for Regional Sea-Level Data Downscaling",
+    "authors": [
+      "Subhankar Ghosh",
+      "Arun Sharma",
+      "Jayant Gupta",
+      "Aneesh Subramanian",
+      "Shashi Shekhar"
+    ],
+    "year": 2024,
+    "score": 4,
+    "abstract": "Kriging-informed Conditional Diffusion Probabilistic Model (Ki-CDPM) for spatial downscaling.",
+    "pdf_url": "https://arxiv.org/pdf/2410.15628v3",
+    "matched_keywords": [
+      "kriging",
+      "diffusion",
+      "downscaling"
+    ],
+    "dedup_key": "a560a3466a9e0ab4"
+  },
+  {
+    "arxiv_id": "2404.05009v1",
+    "title": "Generative downscaling of PDE solvers with physics-guided diffusion models",
+    "authors": [
+      "Yulong Lu",
+      "Wuzhe Xu"
+    ],
+    "year": 2024,
+    "score": 3,
+    "abstract": "Physics-Guided Diffusion Model (PGDM) for downscaling PDE solver outputs.",
+    "pdf_url": "https://arxiv.org/pdf/2404.05009v1",
+    "matched_keywords": [
+      "downscaling",
+      "diffusion",
+      "physics-guided"
+    ],
+    "dedup_key": "c0f981c1c96a2965"
+  },
+  {
+    "arxiv_id": "2402.14049v2",
+    "title": "Generative Adversarial Models for Extreme Geospatial Downscaling",
+    "authors": [
+      "Guiye Li",
+      "Guofeng Cao"
+    ],
+    "year": 2024,
+    "score": 3,
+    "abstract": "Conditional GAN-based stochastic geospatial downscaling method with kriging comparison.",
+    "pdf_url": "https://arxiv.org/pdf/2402.14049v2",
+    "matched_keywords": [
+      "downscaling",
+      "kriging",
+      "GAN"
+    ],
+    "dedup_key": "0a87e4d702024cbe"
+  },
+  {
+    "arxiv_id": "2502.16116v3",
+    "title": "Integrating Weather Station Data and Radar for Precipitation Nowcasting: SmaAt-Krige-GNet",
+    "authors": [
+      "Jie Shi",
+      "Aleksej Cornelissen",
+      "Siamak Mehrkanoon"
+    ],
+    "year": 2025,
+    "score": 3,
+    "abstract": "SmaAt-Krige-GNet combines Kriging with deep learning for precipitation nowcasting.",
+    "pdf_url": "https://arxiv.org/pdf/2502.16116v3",
+    "matched_keywords": [
+      "kriging",
+      "deep learning",
+      "precipitation"
+    ],
+    "dedup_key": "cd24eb8cd3a1e668"
+  }
+]

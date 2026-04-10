@@ -1,0 +1,49 @@
+# Web Search Results: PM2.5 spatial interpolation monitoring stations
+# Search Time: 2026-04-08
+
+## Top 10 Papers/Resources Found:
+
+1. **Spatial representativeness of PM2.5 monitoring stations and its implication for health assessment**
+   - 来源: Air Quality, Atmosphere & Health, Springer (2022)
+   - 链接: https://link.springer.com/10.1007/s11869-022-01202-2
+   - 摘要: 研究监测站空间代表性及其对健康评估的影响
+
+2. **PM2.5监测站点数据获取与传输技术**
+   - 来源: 搜狐网 (2025)
+   - 摘要: 4G网络传输技术，快速将监测数据传输至云端服务器
+
+3. **17个PM2.5监测站点 - 珠三角空气质量监测网络**
+   - 来源: China Cities (2026)
+   - 摘要: 珠三角17个监测站，广州10个，深圳18个
+
+4. **PM2.5在线监测系统技术**
+   - 来源: 哔哩哔哩 (2023)
+   - 摘要: 基于光散射法或光吸收法的PM2.5自动监测系统
+
+5. **PM2.5概述及其检测标准**
+   - 来源: Antpedia百科
+   - 摘要: PM2.5检测标准及来源分析
+
+6. **不同检测原理在PM2.5在线监测系统中的应用与比较**
+   - 来源: 哔哩哔哩 (2023)
+   - 摘要: 光散射法、光吸收法等原理比较
+
+7. **国家PM2.5监测网络**
+   - 来源: 中国环境监测总站
+   - 摘要: 全国339个地级及以上城市监测网络
+
+8. **PM2.5空间插值方法**
+   - 来源: 学术文献
+   - 摘要: 克里金插值(IDW)等空间分析方法
+
+9. **空气监测中的PM2.5指标知识科普**
+   - 来源: 腾讯QQ (2021)
+   - 摘要: 2021年全国339个城市平均优良天数比例74.7%
+
+10. **PM2.5监测方法与标准**
+    - 来源: 广西恒沁检测科技
+    - 摘要: PM2.5定义、来源及检测标准
+
+## PDF Download Links:
+- Springer论文: https://link.springer.com/10.1007/s11869-022-01202-2 (需订阅)
+- EPA监测网络: https://www.epa.gov/

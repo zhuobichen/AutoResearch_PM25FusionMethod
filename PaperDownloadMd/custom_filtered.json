@@ -1,0 +1,890 @@
+{
+  "search_query": "PM2.5 CMAQ data fusion methodology",
+  "categories": null,
+  "min_year": null,
+  "total_arxiv": 200,
+  "total_s2": 29,
+  "total_unique": 229,
+  "top_papers": [
+    {
+      "paperId": "8fc931c7229dbed7963352ff571281bcdc0c87b5",
+      "externalIds": {
+        "MAG": "2510416374",
+        "DOI": "10.1016/j.envres.2016.07.012",
+        "CorpusId": 4861917,
+        "PubMed": "27543787"
+      },
+      "url": "https://www.semanticscholar.org/paper/8fc931c7229dbed7963352ff571281bcdc0c87b5",
+      "title": "Assessing the impact of fine particulate matter (PM2.5) on respiratory-cardiovascular chronic diseases in the New York City Metropolitan area using Hierarchical Bayesian Model estimates.",
+      "citationCount": 117,
+      "influentialCitationCount": 5,
+      "openAccessPdf": {
+        "url": "https://doi.org/10.1016/j.envres.2016.07.012",
+        "status": "HYBRID",
+        "license": "CCBYNCND",
+        "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.1016/j.envres.2016.07.012?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1016/j.envres.2016.07.012, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+      },
+      "publicationDate": "2016-11-01",
+      "authors": [
+        {
+          "authorId": "2826157",
+          "name": "S. Weber"
+        },
+        {
+          "authorId": "8215745",
+          "name": "T. Insaf"
+        },
+        {
+          "authorId": "2083423172",
+          "name": "E. Hall"
+        },
+        {
+          "authorId": "8904025",
+          "name": "T. Talbot"
+        },
+        {
+          "authorId": "46520994",
+          "name": "A. Huff"
+        }
+      ],
+      "abstract": "An enhanced research paradigm is presented to address the spatial and temporal gaps in fine particulate matter (PM2.5) measurements and generate realistic and representative concentration fields for use in epidemiological studies of human exposure to ambient air particulate concentrations. The general approach for research designed to analyze health impacts of exposure to PM2.5 is to use concentration data from the nearest ground-based air quality monitor(s), which typically have missing data on the temporal and spatial scales due to filter sampling schedules and monitor placement, respectively. To circumvent these data gaps, this research project uses a Hierarchical Bayesian Model (HBM) to generate estimates of PM2.5 in areas with and without air quality monitors by combining PM2.5 concentrations measured by monitors, PM2.5 concentration estimates derived from satellite aerosol optical depth (AOD) data, and Community-Multiscale Air Quality (CMAQ) model predictions of PM2.5 concentrations. This methodology represents a substantial step forward in the approach for developing representative PM2.5 concentration datasets to correlate with inpatient hospitalizations and emergency room visits data for asthma and inpatient hospitalizations for myocardial infarction (MI) and heart failure (HF) using case-crossover analysis. There were two key objective of this current study. First was to show that the inputs to the HBM could be expanded to include AOD data in addition to data from PM2.5 monitors and predictions from CMAQ. The second objective was to determine if inclusion of AOD surfaces in HBM model algorithms results in PM2.5 air pollutant concentration surfaces which more accurately predict hospital admittance and emergency room visits for MI, asthma, and HF. This study focuses on the New York City, NY metropolitan and surrounding areas during the 2004-2006 time period, in order to compare the health outcome impacts with those from previous studies and focus on any benefits derived from the changes in the HBM model surfaces. Consistent with previous studies, the results show high PM2.5 exposure is associated with increased risk of asthma, myocardial infarction and heart failure. The estimates derived from concentration surfaces that incorporate AOD had a similar model fit and estimate of risk as compared to those derived from combining monitor and CMAQ data alone. Thus, this study demonstrates that estimates of PM2.5 concentrations from satellite data can be used to supplement PM2.5 monitor data in the estimates of risk associated with three common health outcomes. Results from this study were inconclusive regarding the potential benefits derived from adding AOD data to the HBM, as the addition of the satellite data did not significantly increase model performance. However, this study was limited to one metropolitan area over a short two-year time period. The use of next-generation, high temporal and spatial resolution satellite AOD data from geostationary and polar-orbiting satellites is expected to improve predictions in epidemiological studies in areas with fewer pollutant monitors or over wider geographic areas.",
+      "source": "semantic_scholar",
+      "scores": {
+        "relevance": 2.0,
+        "recency": 1.0,
+        "popularity": 3.0,
+        "quality": 1.2,
+        "recommendation": 7.6
+      },
+      "matched_keywords": [
+        "pm2.5",
+        "cmaq",
+        "data",
+        "methodology"
+      ],
+      "is_classic": true
+    },
+    {
+      "paperId": "e3445835b05551e777c51634810c4b3724fddd44",
+      "externalIds": {
+        "MAG": "2906533572",
+        "DOI": "10.1016/j.jenvman.2018.12.060",
+        "CorpusId": 58667443,
+        "PubMed": "30594114"
+      },
+      "url": "https://www.semanticscholar.org/paper/e3445835b05551e777c51634810c4b3724fddd44",
+      "title": "Health benefit assessment of PM2.5 reduction in Pearl River Delta region of China using a model-monitor data fusion approach.",
+      "citationCount": 57,
+      "influentialCitationCount": 3,
+      "openAccessPdf": {
+        "url": "https://europepmc.org/articles/pmc7260885?pdf=render",
+        "status": "GREEN",
+        "license": null,
+        "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.1016/j.jenvman.2018.12.060?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1016/j.jenvman.2018.12.060, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+      },
+      "publicationDate": "2019-03-01",
+      "authors": [
+        {
+          "authorId": "2109024009",
+          "name": "Jiabin Li"
+        },
+        {
+          "authorId": "144057175",
+          "name": "Yun Zhu"
+        },
+        {
+          "authorId": "27021758",
+          "name": "J. Kelly"
+        },
+        {
+          "authorId": "92831402",
+          "name": "C. Jang"
+        },
+        {
+          "authorId": "143788670",
+          "name": "Shuxiao Wang"
+        },
+        {
+          "authorId": "153906044",
+          "name": "A. Hanna"
+        },
+        {
+          "authorId": "153288309",
+          "name": "J. Xing"
+        },
+        {
+          "authorId": "2475745",
+          "name": "Che-Jen Lin"
+        },
+        {
+          "authorId": "12141654",
+          "name": "Shicheng Long"
+        },
+        {
+          "authorId": "2112488847",
+          "name": "Lian Yu"
+        }
+      ],
+      "abstract": "The Pearl River Delta (PRD), one of the most polluted and populous regions of China, experienced a 28% reduction in fine particulate matter (PM2.5) concentration between 2013 (47 μg/m3) and 2015 (34 μg/m3) under a stringent national policy known as the Air Pollution Prevention and Control Action Plan (hereafter Action Plan). In this study, the health and economic benefits associated with PM2.5 reductions in PRD during 2013-2015 were estimated using the Environmental Benefits Mapping and Analysis Program-Community Edition (BenMAP-CE) software. To create reliable gridded PM2.5 surfaces for BenMAP-CE calculations, a data fusion tool which incorporates the accuracy of monitoring data and the spatial coverage of predictions from the Community Multiscale Air Quality (CMAQ) model has been developed. The population-weighted average PM2.5 concentration over PRD was predicted to decline by 24%. PM2.5-related mortality was estimated to decrease by more than 3800 due to decreases in stroke (48%), ischemic heart disease (IHD) (35%), chronic obstructive pulmonary disease (COPD) (10%), and lung cancer (LC) (7%). A 13% reduction in PM2.5-related premature deaths from these four causes yielded a large economic benefit of about 1300 million US dollars. Our research suggests that the Action Plan played a major role in reducing emissions and additional measures should be implemented to further reduce PM2.5 pollution and protect public health in the future.",
+      "source": "semantic_scholar",
+      "scores": {
+        "relevance": 2.8,
+        "recency": 1.0,
+        "popularity": 1.71,
+        "quality": 0.8,
+        "recommendation": 6.38
+      },
+      "matched_keywords": [
+        "pm2.5",
+        "cmaq",
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.06724v1",
+      "title": "Bi Directional Feedback Fusion for Activity Aware Forecasting of Indoor CO2 and PM2.5",
+      "summary": "Indoor air quality (IAQ) forecasting plays a critical role in safeguarding occupant health, ensuring thermal comfort, and supporting intelligent building control. However, predicting future concentrations of key pollutants such as carbon dioxide (CO2) and fine particulate matter (PM2.5) remains challenging due to the complex interplay between environmental factors and highly dynamic occupant behaviours. Traditional data driven models primarily rely on historical sensor trajectories and often fail to anticipate behaviour induced emission spikes or rapid concentration shifts. To address these limitations, we present a dual stream bi directional feedback fusion framework that jointly models indoor environmental evolution and action derived embeddings representing human activities. The proposed architecture integrates a context aware modulation mechanism that adaptively scales and shifts each stream based on a shared, evolving fusion state, enabling the model to selectively emphasise behavioural cues or long term environmental trends. Furthermore, we introduce dual timescale temporal modules that independently capture gradual CO2 accumulation patterns and short term PM2.5 fluctuations. A composite loss function combining weighted mean squared error, spike aware penalties, and uncertainty regularisation facilitates robust learning under volatile indoor conditions. Extensive validation on real-world IAQ datasets demonstrates that our approach significantly outperforms state of the art forecasting baselines while providing interpretable uncertainty estimates essential for practical deployment in smart buildings and health-aware monitoring systems.",
+      "authors": [
+        "Harshala Gammulle",
+        "Lidia Morawska",
+        "Sridha Sridharan",
+        "Clinton Fookes"
+      ],
+      "published": "2026-03-06T01:21:44Z",
+      "published_date": "2026-03-06 01:21:44+00:00",
+      "updated": "2026-03-06T01:21:44Z",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.06724v1",
+      "url": "http://arxiv.org/abs/2603.06724v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.0,
+        "recency": 3.0,
+        "popularity": 1.0,
+        "quality": 2.0,
+        "recommendation": 6.33
+      },
+      "matched_keywords": [
+        "pm2.5",
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2504.20268v1",
+      "title": "Spatio-temporal data fusion of censored threshold exceedances",
+      "summary": "Data fusion models are widely used in air quality monitoring to integrate in situ and remote-sensing data, offering spatially complete and temporally detailed estimates. However, traditional Gaussian-based models often underestimate extreme pollution values, leading to biased risk assessments. To address this, we present a Bayesian hierarchical data fusion framework rooted in extreme value theory, using the Dirac-delta generalised Pareto distribution to jointly account for threshold and non-threshold exceedances while preserving the temporal structure of extreme events. Our model is used to describe and predict censored threshold exceedances of PM2.5 pollution in the Greater London region by using remote sensing observations from the EAC4 dataset, a reanalysis product from the Copernicus Atmospheric Monitoring Service (CAMS), and in situ observation stations from the automatic urban and rural network (AURN) ran by the UK government. Some of our approach's key innovations include combining data with varying spatio-temporal resolutions and fully accounting for parameter uncertainties. Results show that our model outperforms Gaussian-based alternatives and standalone remote-sensing data in predicting threshold exceedances at the majority of observation sites and can even result in improved spatial patterns of PM2.5 pollution than those discernible from the remote-sensing data. Moreover, our approach captures greater variability and spatial patterns, such as higher PM2.5 concentrations near coastal areas, which are not evident in remote-sensing data alone.",
+      "authors": [
+        "M. Daniela Cuba",
+        "Craig Wilkie",
+        "Marian Scott",
+        "Daniela Castro-Camilo"
+      ],
+      "published": "2025-04-28T21:16:10Z",
+      "published_date": "2025-04-28 21:16:10+00:00",
+      "updated": "2025-04-28T21:16:10Z",
+      "categories": [
+        "stat.AP"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2504.20268v1",
+      "url": "http://arxiv.org/abs/2504.20268v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.0,
+        "recency": 3.0,
+        "popularity": 1.0,
+        "quality": 2.0,
+        "recommendation": 6.33
+      },
+      "matched_keywords": [
+        "pm2.5",
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "paperId": "2e61a5327c18419a46f60ac68d3cbaf80bc9780f",
+      "externalIds": {
+        "DBLP": "journals/remotesensing/XueZGZJZH17",
+        "MAG": "2589460290",
+        "DOI": "10.3390/rs9030221",
+        "CorpusId": 33674849
+      },
+      "url": "https://www.semanticscholar.org/paper/2e61a5327c18419a46f60ac68d3cbaf80bc9780f",
+      "title": "Fusing Observational, Satellite Remote Sensing and Air Quality Model Simulated Data to Estimate Spatiotemporal Variations of PM2.5 Exposure in China",
+      "citationCount": 56,
+      "influentialCitationCount": 1,
+      "openAccessPdf": {
+        "url": "https://www.mdpi.com/2072-4292/9/3/221/pdf?version=1488436070",
+        "status": "GOLD",
+        "license": "CCBY",
+        "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.3390/rs9030221?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.3390/rs9030221, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+      },
+      "publicationDate": "2017-03-01",
+      "authors": [
+        {
+          "authorId": "2348222331",
+          "name": "Tao Xue"
+        },
+        {
+          "authorId": "10809088",
+          "name": "Yixuan Zheng"
+        },
+        {
+          "authorId": "123208941",
+          "name": "G. Geng"
+        },
+        {
+          "authorId": "2302251709",
+          "name": "Bo Zheng"
+        },
+        {
+          "authorId": "5119673",
+          "name": "Xujia Jiang"
+        },
+        {
+          "authorId": "2241941015",
+          "name": "Qiang Zhang"
+        },
+        {
+          "authorId": "2242033932",
+          "name": "Kebin He"
+        }
+      ],
+      "abstract": "Estimating ground surface PM2.5 with fine spatiotemporal resolution is a critical technique for exposure assessments in epidemiological studies of its health risks. Previous studies have utilized monitoring, satellite remote sensing or air quality modeling data to evaluate the spatiotemporal variations of PM2.5 concentrations, but such studies rarely combined these data simultaneously. Through assembling techniques, including linear mixed effect regressions with a spatial-varying coefficient, a maximum likelihood estimator and the spatiotemporal Kriging together, we develop a three-stage model to fuse PM2.5 monitoring data, satellite-derived aerosol optical depth (AOD) and community multi-scale air quality (CMAQ) simulations together and apply it to estimate daily PM2.5 at a spatial resolution of 0.1° over China. Performance of the three-stage model is evaluated using a cross-validation (CV) method step by step. CV results show that the finally fused estimator of PM2.5 is in good agreement with the observational data (RMSE = 23.0 μg/m3 and R2 = 0.72) and outperforms either AOD-derived PM2.5 (R2 = 0.62) or CMAQ simulations (R2 = 0.51). According to step-specific CVs, in data fusion, AOD-derived PM2.5 plays a key role to reduce mean bias, whereas CMAQ provides spatiotemporally complete predictions, which avoids sampling bias caused by non-random incompleteness in satellite-derived AOD. Our fused products are more capable than either CMAQ simulations or AOD-based estimates in characterizing the polluting procedure during haze episodes and thus can support both chronic and acute exposure assessments of ambient PM2.5. Based on the products, averaged concentration of annual exposure to PM2.5 was 55.7 μg/m3, while averaged count of polluted days (PM2.5 > 75 μg/m3) was 81 across China during 2014. Fused estimates will be publicly available for future health-related studies.",
+      "source": "semantic_scholar",
+      "scores": {
+        "relevance": 2.4,
+        "recency": 1.0,
+        "popularity": 1.68,
+        "quality": 1.5,
+        "recommendation": 6.05
+      },
+      "matched_keywords": [
+        "pm2.5",
+        "cmaq",
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "paperId": "0f986013fbec75a814dc8b33170972019736aa14",
+      "externalIds": {
+        "DOI": "10.62051/ijgem.v6n3.25",
+        "CorpusId": 278157171
+      },
+      "url": "https://www.semanticscholar.org/paper/0f986013fbec75a814dc8b33170972019736aa14",
+      "title": "A Secondary Modeling Approach for Air Quality Prediction Based on LSTM-FC Multi-model Fusion",
+      "citationCount": 0,
+      "influentialCitationCount": 0,
+      "openAccessPdf": {
+        "url": "",
+        "status": null,
+        "license": null,
+        "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.62051/ijgem.v6n3.25?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.62051/ijgem.v6n3.25, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+      },
+      "publicationDate": "2025-04-26",
+      "authors": [
+        {
+          "authorId": "2345412559",
+          "name": "Dehao Wang"
+        }
+      ],
+      "abstract": "Aiming at the insufficient forecasting accuracy of the traditional WRF-CMAQ model due to meteorological field uncertainty and emission inventory errors, this paper proposes a secondary modeling framework that integrates multi-source data with deep learning. The multi-pollutant concentration prediction accuracy is significantly improved by introducing the pseudo-unique thermal coded wind feature reconstruction, CEEMDAN adaptive noise cancellation technique, and combining the random forest feature selection with the LSTM-FNN combined model. Experiments show that the method has a mean absolute error (MAE) of 1.76 μg/m³ in PM2.5 prediction at monitoring points A, B, and C, which is 8.3% lower than that of a single model, and its MAE is reduced to 13.53 μg/m³ for the CEEMDAN_IPSOSE_SVR model for ozone (O3), which is a 21% decrease from the baseline. The model achieves 92.7% accuracy in the identification of the top pollutants, and the relative error of AQI prediction is only 6.2%. This study provides a highly interpretable and robust technical solution for regional air quality forecasting.",
+      "source": "semantic_scholar",
+      "scores": {
+        "relevance": 2.0,
+        "recency": 3.0,
+        "popularity": 0.8,
+        "quality": 1.6,
+        "recommendation": 6.0
+      },
+      "matched_keywords": [
+        "pm2.5",
+        "cmaq",
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2302.10278v1",
+      "title": "Data level and decision level fusion of satellite multi-sensor AOD retrievals for improving PM2.5 estimations, a study on Tehran",
+      "summary": "One of the techniques for estimating the surface particle concentration with a diameter of fewer than 2.5 micrometers (PM2.5) is using aerosol optical depth (AOD) products. Different AOD products are retrieved from various satellite sensors, like MODIS and VIIRS, by various algorithms, such as Deep Blue and Dark Target. Therefore, they do not have the same accuracy and spatial resolution. Additionally, the weakness of algorithms in AOD retrieval reduces the spatial coverage of products, particularly in cloudy or snowy areas. Consequently, for the first time, the present study investigated the possibility of fusing AOD products from observations of MODIS and VIIRS sensors retrieved by Deep Blue and Dark Target algorithms to estimate PM2.5 more accurately. For this purpose, AOD products were fused by machine learning algorithms using different fusion strategies at two levels: the data level and the decision level. First, the performance of various machine learning algorithms for estimating PM2.5 using AOD data was evaluated. After that, the XGBoost algorithm was selected as the base model for the proposed fusion strategies. Then, AOD products were fused. The fusion results showed that the estimated PM2.5 accuracy at the data level in all three metrics, RMSE, MAE, and R2, was improved (R2=0.64). Despite the simplicity and lower computational cost of the data level fusion method, the spatial coverage did not improve considerably due to eliminating poor quality data through the fusion process. Afterward, the fusion of products at the decision level was followed in eleven scenarios. In this way, the best result was obtained by fusing Deep Blue products of MODIS and VIIRS sensors (R2=0.81)",
+      "authors": [
+        "Ali Mirzaei",
+        "Hossein Bagheri",
+        "Mehran Sattari"
+      ],
+      "published": "2023-02-01T08:07:00Z",
+      "published_date": "2023-02-01 08:07:00+00:00",
+      "updated": "2023-02-01T08:07:00Z",
+      "categories": [
+        "cs.CV",
+        "eess.SP"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2302.10278v1",
+      "url": "http://arxiv.org/abs/2302.10278v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.4,
+        "recency": 1.5,
+        "popularity": 1.0,
+        "quality": 2.0,
+        "recommendation": 5.87
+      },
+      "matched_keywords": [
+        "pm2.5",
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.04595v1",
+      "title": "A Late-Fusion Multimodal AI Framework for Privacy-Preserving Deduplication in National Healthcare Data Environments",
+      "summary": "Duplicate records pose significant challenges in customer relationship management (CRM)and healthcare, often leading to inaccuracies in analytics, impaired user experiences, and compliance risks. Traditional deduplication methods rely heavily on direct identifiers such as names, emails, or Social Security Numbers (SSNs), making them ineffective under strict privacy regulations like GDPR and HIPAA, where such personally identifiable information (PII) is restricted or masked. In this research, I propose a novel, scalable, multimodal AI framework for detecting duplicates without depending on sensitive information. This system leverages three distinct modalities: semantic embeddings derived from textual fields (names, cities) using pre-trained DistilBERT models, behavioral patterns extracted from user login timestamps, and device metadata encoded through categorical embeddings. These heterogeneous modalities are combined using a late fusion approach and clustered via DBSCAN, an unsupervised density-based algorithm. This proposed model is evaluated against a traditional string-matching baseline on a synthetic CRM dataset specifically designed to reflect privacy-preserving constraints. The multimodal framework demonstrated good performance, achieving a good F1-score by effectively identifying duplicates despite variations and noise inherent in the data. This approach offers a privacy-compliant solution to entity resolution and supports secure digital infrastructure, enhances the reliability of public health analytics, and promotes ethical AI adoption across government and enterprise settings. It is well-suited for integration into national health data modernization efforts, aligning with broader goals of privacy-first innovation.",
+      "authors": [
+        "Mohammed Omer Shakeel Ahmed"
+      ],
+      "published": "2026-03-04T20:46:26Z",
+      "published_date": "2026-03-04 20:46:26+00:00",
+      "updated": "2026-03-04T20:46:26Z",
+      "categories": [
+        "cs.LG"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.04595v1",
+      "url": "http://arxiv.org/abs/2603.04595v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.6,
+        "recency": 3.0,
+        "popularity": 1.0,
+        "quality": 2.0,
+        "recommendation": 5.8
+      },
+      "matched_keywords": [
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "paperId": "b0a83b7fc5baab0c81117a0cbf28357c99dfdc1a",
+      "externalIds": {
+        "MAG": "2949220266",
+        "DOI": "10.1021/acs.est.9b01117",
+        "CorpusId": 195695601,
+        "PubMed": "31244060"
+      },
+      "url": "https://www.semanticscholar.org/paper/b0a83b7fc5baab0c81117a0cbf28357c99dfdc1a",
+      "title": "Fusion Method Combining Ground-Level Observations with Chemical Transport Model Predictions Using an Ensemble Deep Learning Framework: Application in China to Estimate Spatiotemporally-Resolved PM2.5 Exposure Fields in 2014-2017.",
+      "citationCount": 48,
+      "influentialCitationCount": 1,
+      "openAccessPdf": {
+        "url": "",
+        "status": null,
+        "license": null,
+        "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.1021/acs.est.9b01117?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1021/acs.est.9b01117, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+      },
+      "publicationDate": "2019-06-06",
+      "authors": [
+        {
+          "authorId": "146279703",
+          "name": "Baolei Lyu"
+        },
+        {
+          "authorId": "34620556",
+          "name": "Yongtao Hu"
+        },
+        {
+          "authorId": "2108144130",
+          "name": "Wenxian Zhang"
+        },
+        {
+          "authorId": "152984379",
+          "name": "Yunsong Du"
+        },
+        {
+          "authorId": "2151264226",
+          "name": "B. Luo"
+        },
+        {
+          "authorId": "2144859883",
+          "name": "Xiaoling Sun"
+        },
+        {
+          "authorId": "2145129945",
+          "name": "Zhe Sun"
+        },
+        {
+          "authorId": "2075350661",
+          "name": "Zhu Deng"
+        },
+        {
+          "authorId": "2155455094",
+          "name": "Xiaojian Wang"
+        },
+        {
+          "authorId": "2157176234",
+          "name": "Jun Liu"
+        },
+        {
+          "authorId": "2108028089",
+          "name": "Xuesong Wang"
+        },
+        {
+          "authorId": "145408389",
+          "name": "A. Russell"
+        }
+      ],
+      "abstract": "Atmospheric chemical transport models (CTMs) have been widely used to simulate spatiotemporally resolved PM2.5 concentrations. However, CTM results are usually prone to bias and errors. In this study, we improved the accuracy of PM2.5 predictions by developing an ensemble deep learning framework to fuse model simulations with ground-level observations. The framework encompasses four machine-learning models, i.e., general linear model, fully connected neural network, random forest, and gradient boosting machine, and combines them by stacking approach. This framework is applied to PM2.5 concentrations simulated by the Community Multiscale Air Quality (CMAQ) model for China from 2014 to 2017, which has complete spatial coverage over the entirety of China at a 12-km resolution, with no sampling biases. The fused PM2.5 concentration fields were evaluated by comparing with an independent network of observations. The R2 values increased from 0.39 to 0.64, and the RMSE values decreased from 33.7 μg/m3 to 24.8 μg/m3. According to the fused data, the percentage of Chinese population residing under the level II National Ambient Air Quality Standards of 35 μg/m3 for PM2.5 has increased from 46.5% in 2014 to 61.7% in 2017. The method is readily adapted to utilize near-real-time observations for operational analyses and forecasting of pollutant concentrations and can be extended to provide source apportionment forecasts as well.",
+      "source": "semantic_scholar",
+      "scores": {
+        "relevance": 2.4,
+        "recency": 1.0,
+        "popularity": 1.44,
+        "quality": 1.3,
+        "recommendation": 5.74
+      },
+      "matched_keywords": [
+        "pm2.5",
+        "cmaq",
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2506.13127v2",
+      "title": "I$^2$RF-TFCKD: Intra-Inter Representation Fusion with Time-Frequency Calibration Knowledge Distillation for Speech Enhancement",
+      "summary": "In this paper, we propose an intra-inter representation fusion knowledge distillation (KD) framework with time-frequency calibration (I$^2$RF-TFCKD) for SE, which achieves distillation through the fusion of multi-layer teacher-student feature flows. Different from previous distillation strategies for SE, the proposed framework fully utilizes the time-frequency differential information of speech while promoting global knowledge flow. Firstly, we construct a collaborative distillation paradigm for intra-set and inter-set correlations. Within a correlated set, multi-layer teacher-student features are pairwise matched for calibrated distillation. Subsequently, we generate representative features from each correlated set through residual fusion to form the fused feature set that enables inter-set knowledge interaction. Secondly, we propose a multi-layer interactive distillation based on dual-stream time-frequency cross-calibration, which calculates the teacher-student similarity calibration weights in the time and frequency domains respectively and performs cross-weighting, thus enabling refined allocation of distillation contributions across different layers according to speech characteristics. The proposed distillation strategy is applied to the dual-path dilated convolutional recurrent network (DPDCRN) that ranked first in the SE track of the L3DAS23 challenge. To evaluate the effectiveness of I$^2$RF-TFCKD, we conduct experiments on both single-channel and multi-channel SE datasets. Objective evaluations demonstrate that the proposed KD strategy consistently and effectively improves the performance of the low-complexity student model and outperforms other distillation schemes.",
+      "authors": [
+        "Jiaming Cheng",
+        "Ruiyu Liang",
+        "Ye Ni",
+        "Chao Xu",
+        "Jing Li",
+        "Wei Zhou",
+        "Rui Liu",
+        "Björn W. Schuller",
+        "Xiaoshuai Hao"
+      ],
+      "published": "2025-06-16T06:20:09Z",
+      "published_date": "2025-06-16 06:20:09+00:00",
+      "updated": "2025-10-09T15:51:17Z",
+      "categories": [
+        "cs.SD",
+        "eess.AS"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2506.13127v2",
+      "url": "http://arxiv.org/abs/2506.13127v2",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.2,
+        "recency": 3.0,
+        "popularity": 1.15,
+        "quality": 2.3,
+        "recommendation": 5.52
+      },
+      "matched_keywords": [
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2510.12260v1",
+      "title": "AngularFuse: A Closer Look at Angle-based Perception for Spatial-Sensitive Multi-Modality Image Fusion",
+      "summary": "Visible-infrared image fusion is crucial in key applications such as autonomous driving and nighttime surveillance. Its main goal is to integrate multimodal information to produce enhanced images that are better suited for downstream tasks. Although deep learning based fusion methods have made significant progress, mainstream unsupervised approaches still face serious challenges in practical applications. Existing methods mostly rely on manually designed loss functions to guide the fusion process. However, these loss functions have obvious limitations. On one hand, the reference images constructed by existing methods often lack details and have uneven brightness. On the other hand, the widely used gradient losses focus only on gradient magnitude. To address these challenges, this paper proposes an angle-based perception framework for spatial-sensitive image fusion (AngularFuse). At first, we design a cross-modal complementary mask module to force the network to learn complementary information between modalities. Then, a fine-grained reference image synthesis strategy is introduced. By combining Laplacian edge enhancement with adaptive histogram equalization, reference images with richer details and more balanced brightness are generated. Last but not least, we introduce an angle-aware loss, which for the first time constrains both gradient magnitude and direction simultaneously in the gradient domain. AngularFuse ensures that the fused images preserve both texture intensity and correct edge orientation. Comprehensive experiments on the MSRS, RoadScene, and M3FD public datasets show that AngularFuse outperforms existing mainstream methods with clear margin. Visual comparisons further confirm that our method produces sharper and more detailed results in challenging scenes, demonstrating superior fusion capability.",
+      "authors": [
+        "Xiaopeng Liu",
+        "Yupei Lin",
+        "Sen Zhang",
+        "Xiao Wang",
+        "Yukai Shi",
+        "Liang Lin"
+      ],
+      "published": "2025-10-14T08:13:15Z",
+      "published_date": "2025-10-14 08:13:15+00:00",
+      "updated": "2025-10-14T08:13:15Z",
+      "categories": [
+        "cs.CV",
+        "cs.LG",
+        "eess.IV"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2510.12260v1",
+      "url": "http://arxiv.org/abs/2510.12260v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.2,
+        "recency": 3.0,
+        "popularity": 1.15,
+        "quality": 2.3,
+        "recommendation": 5.52
+      },
+      "matched_keywords": [
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "paperId": "2e2e115a07f41ac87dcead56b5b7e4f5cafba4c2",
+      "externalIds": {
+        "PubMedCentral": "10234552",
+        "DOI": "10.1371/journal.pone.0286406",
+        "CorpusId": 259022302,
+        "PubMed": "37262039"
+      },
+      "url": "https://www.semanticscholar.org/paper/2e2e115a07f41ac87dcead56b5b7e4f5cafba4c2",
+      "title": "A hyperlocal hybrid data fusion near-road PM2.5 and NO2 annual risk and environmental justice assessment across the United States",
+      "citationCount": 15,
+      "influentialCitationCount": 0,
+      "openAccessPdf": {
+        "url": "https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0286406&type=printable",
+        "status": "GOLD",
+        "license": "CCBY",
+        "disclaimer": "Notice: Paper or abstract available at https://pmc.ncbi.nlm.nih.gov/articles/PMC10234552, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+      },
+      "publicationDate": "2023-06-01",
+      "authors": [
+        {
+          "authorId": "50575092",
+          "name": "Alejandro Valencia"
+        },
+        {
+          "authorId": "2587317",
+          "name": "M. Serre"
+        },
+        {
+          "authorId": "1733499",
+          "name": "S. Arunachalam"
+        }
+      ],
+      "abstract": "Exposure to traffic-related air pollutants (TRAPs) has been associated with numerous adverse health effects. TRAP concentrations are highest meters away from major roads, and disproportionately affect minority (i.e., non-white) populations often considered the most vulnerable to TRAP exposure. To demonstrate an improved assessment of on-road emissions and to quantify exposure inequity in this population, we develop and apply a hybrid data fusion approach that utilizes the combined strength of air quality observations and regional/local scale models to estimate air pollution exposures at census block resolution for the entire U.S. We use the regional photochemical grid model CMAQ (Community Multiscale Air Quality) to predict the spatiotemporal impacts at local/regional scales, and the local scale dispersion model, R-LINE (Research LINE source) to estimate concentrations that capture the sharp TRAP gradients from roads. We further apply the Regionalized Air quality Model Performance (RAMP) Hybrid data fusion technique to consider the model’s nonhomogeneous, nonlinear performance to not only improve exposure estimates, but also achieve significant model performance improvement. With a R2 of 0.51 for PM2.5 and 0.81 for NO2, the RAMP hybrid method improved R2 by ~0.2 for both pollutants (an increase of up to ~70% for PM2.5 and ~31% NO2). Using the RAMP Hybrid method, we estimate 264,516 [95% confidence interval [CI], 223,506–307,577] premature deaths attributable to PM2.5 from all sources, a ~1% overall decrease in CMAQ-estimated premature mortality compared to RAMP Hybrid, despite increases and decreases in some locations. For NO2, RAMP Hybrid estimates 138,550 [69,275–207,826] premature deaths, a ~19% increase (22,576 [11,288 – 33,864]) compared to CMAQ. Finally, using our RAMP hybrid method to estimate exposure inequity across the U.S., we estimate that Minorities within 100 m from major roads are exposed to up to 15% more PM2.5 and up to 35% more NO2 than their White counterparts.",
+      "source": "semantic_scholar",
+      "scores": {
+        "relevance": 2.8,
+        "recency": 2.0,
+        "popularity": 0.45,
+        "quality": 0.0,
+        "recommendation": 5.52
+      },
+      "matched_keywords": [
+        "pm2.5",
+        "cmaq",
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2405.07404v1",
+      "title": "Indoor PM2.5 forecasting and the association with outdoor air pollution: a modelling study based on sensor data in Australia",
+      "summary": "Exposure to poor indoor air quality poses significant health risks, necessitating thorough assessment to mitigate associated dangers. This study aims to predict hourly indoor fine particulate matter (PM2.5) concentrations and investigate their correlation with outdoor PM2.5 levels across 24 distinct buildings in Australia. Indoor air quality data were gathered from 91 monitoring sensors in eight Australian cities spanning 2019 to 2022. Employing an innovative three-stage deep ensemble machine learning framework (DEML), comprising three base models (Support Vector Machine, Random Forest, and eXtreme Gradient Boosting) and two meta-models (Random Forest and Generalized Linear Model), hourly indoor PM2.5 concentrations were predicted. The model's accuracy was evaluated using a rolling windows approach, comparing its performance against three benchmark algorithms (SVM, RF, and XGBoost). Additionally, a correlation analysis assessed the relationship between indoor and outdoor PM2.5 concentrations. Results indicate that the DEML model consistently outperformed benchmark models, achieving an R2 ranging from 0.63 to 0.99 and RMSE from 0.01 to 0.663 mg/m3 for most sensors. Notably, outdoor PM2.5 concentrations significantly impacted indoor air quality, particularly evident during events like bushfires. This study underscores the importance of accurate indoor air quality prediction, crucial for developing location-specific early warning systems and informing effective interventions. By promoting protective behaviors, these efforts contribute to enhanced public health outcomes.",
+      "authors": [
+        "Wenhua Yu",
+        "Bahareh Nakisa",
+        "Seng W. Loke",
+        "Svetlana Stevanovic",
+        "Yuming Guo",
+        "Mohammad Naim Rastgoo"
+      ],
+      "published": "2024-05-13T00:51:36Z",
+      "published_date": "2024-05-13 00:51:36+00:00",
+      "updated": "2024-05-13T00:51:36Z",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2405.07404v1",
+      "url": "http://arxiv.org/abs/2405.07404v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.6,
+        "recency": 2.5,
+        "popularity": 1.0,
+        "quality": 2.0,
+        "recommendation": 5.47
+      },
+      "matched_keywords": [
+        "pm2.5",
+        "data"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2404.07476v1",
+      "title": "The Survey on Multi-Source Data Fusion in Cyber-Physical-Social Systems:Foundational Infrastructure for Industrial Metaverses and Industries 5.0",
+      "summary": "As the concept of Industries 5.0 develops, industrial metaverses are expected to operate in parallel with the actual industrial processes to offer ``Human-Centric\" Safe, Secure, Sustainable, Sensitive, Service, and Smartness ``6S\" manufacturing solutions. Industrial metaverses not only visualize the process of productivity in a dynamic and evolutional way, but also provide an immersive laboratory experimental environment for optimizing and remodeling the process. Besides, the customized user needs that are hidden in social media data can be discovered by social computing technologies, which introduces an input channel for building the whole social manufacturing process including industrial metaverses. This makes the fusion of multi-source data cross Cyber-Physical-Social Systems (CPSS) the foundational and key challenge. This work firstly proposes a multi-source-data-fusion-driven operational architecture for industrial metaverses on the basis of conducting a comprehensive literature review on the state-of-the-art multi-source data fusion methods. The advantages and disadvantages of each type of method are analyzed by considering the fusion mechanisms and application scenarios. Especially, we combine the strengths of deep learning and knowledge graphs in scalability and parallel computation to enable our proposed framework the ability of prescriptive optimization and evolution. This integration can address the shortcomings of deep learning in terms of explainability and fact fabrication, as well as overcoming the incompleteness and the challenges of construction and maintenance inherent in knowledge graphs. The effectiveness of the proposed architecture is validated through a parallel weaving case study. In the end, we discuss the challenges and future directions of multi-source data fusion cross CPSS for industrial metaverses and social manufacturing in Industries 5.0.",
+      "authors": [
+        "Xiao Wang",
+        "Yutong Wang",
+        "Jing Yang",
+        "Xiaofeng Jia",
+        "Lijun Li",
+        "Weiping Ding",
+        "Fei-Yue Wang"
+      ],
+      "published": "2024-04-11T05:09:32Z",
+      "published_date": "2024-04-11 05:09:32+00:00",
+      "updated": "2024-04-11T05:09:32Z",
+      "categories": [
+        "cs.CY"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2404.07476v1",
+      "url": "http://arxiv.org/abs/2404.07476v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.6,
+        "recency": 2.5,
+        "popularity": 0.95,
+        "quality": 1.9,
+        "recommendation": 5.38
+      },
+      "matched_keywords": [
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2506.10688v2",
+      "title": "A Bayesian Multisource Fusion Model for Spatiotemporal PM2.5 in an Urban Setting",
+      "summary": "Airborne particulate matter (PM2.5) is a major public health concern in urban environments, where population density and emission sources exacerbate exposure risks. We present a novel Bayesian spatiotemporal fusion model to estimate monthly PM2.5 concentrations over Greater London (2014-2019) at 1km resolution. The model integrates multiple PM2.5 data sources, including outputs from two atmospheric air quality dispersion models and predictive variables, such as vegetation and satellite aerosol optical depth, while explicitly modelling a latent spatiotemporal field. Spatial misalignment of the data is addressed through an upscaling approach to predict across the entire area. Building on stochastic partial differential equations (SPDE) within the integrated nested Laplace approximations (INLA) framework, our method introduces spatially- and temporally-varying coefficients to flexibly calibrate datasets and capture fine-scale variability. Model performance and complexity are balanced using predictive metrics such as the predictive model choice criterion and thorough cross-validation. The best performing model shows excellent fit and solid predictive performance, enabling reliable high-resolution spatiotemporal mapping of PM2.5 concentrations with the associated uncertainty. Furthermore, the model outputs, including full posterior predictive distributions, can be used to map exceedance probabilities of regulatory thresholds, supporting air quality management and targeted interventions in vulnerable urban areas, as well as providing refined exposure estimates of PM2.5 for epidemiological applications.",
+      "authors": [
+        "Abi I. Riley",
+        "Marta Blangiardo",
+        "Frédéric B. Piel",
+        "Andrew Beddows",
+        "Sean Beevers",
+        "Gary W. Fuller",
+        "Paul Agnew",
+        "Monica Pirani"
+      ],
+      "published": "2025-06-12T13:36:11Z",
+      "published_date": "2025-06-12 13:36:11+00:00",
+      "updated": "2025-06-16T12:10:16Z",
+      "categories": [
+        "stat.ME",
+        "stat.AP"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2506.10688v2",
+      "url": "http://arxiv.org/abs/2506.10688v2",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.0,
+        "recency": 3.0,
+        "popularity": 0.4,
+        "quality": 0.8,
+        "recommendation": 5.33
+      },
+      "matched_keywords": [
+        "pm2.5",
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2412.13935v1",
+      "title": "Spatio-Temporal Forecasting of PM2.5 via Spatial-Diffusion guided Encoder-Decoder Architecture",
+      "summary": "In many problem settings that require spatio-temporal forecasting, the values in the time-series not only exhibit spatio-temporal correlations but are also influenced by spatial diffusion across locations. One such example is forecasting the concentration of fine particulate matter (PM2.5) in the atmosphere which is influenced by many complex factors, the most important ones being diffusion due to meteorological factors as well as transport across vast distances over a period of time. We present a novel Spatio-Temporal Graph Neural Network architecture, that specifically captures these dependencies to forecast the PM2.5 concentration. Our model is based on an encoder-decoder architecture where the encoder and decoder parts leverage gated recurrent units (GRU) augmented with a graph neural network (TransformerConv) to account for spatial diffusion. Our model can also be seen as a generalization of various existing models for time-series or spatio-temporal forecasting. We demonstrate the model's effectiveness on two real-world PM2.5 datasets: (1) data collected by us using a recently deployed network of low-cost PM$_{2.5}$ sensors from 511 locations spanning the entirety of the Indian state of Bihar over a period of one year, and (2) another publicly available dataset that covers severely polluted regions from China for a period of 4 years. Our experimental results show our model's impressive ability to account for both spatial as well as temporal dependencies precisely.",
+      "authors": [
+        "Malay Pandey",
+        "Vaishali Jain",
+        "Nimit Godhani",
+        "Sachchida Nand Tripathi",
+        "Piyush Rai"
+      ],
+      "published": "2024-12-18T15:18:12Z",
+      "published_date": "2024-12-18 15:18:12+00:00",
+      "updated": "2024-12-18T15:18:12Z",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2412.13935v1",
+      "url": "http://arxiv.org/abs/2412.13935v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.0,
+        "recency": 2.5,
+        "popularity": 0.6,
+        "quality": 1.2,
+        "recommendation": 5.33
+      },
+      "matched_keywords": [
+        "pm2.5",
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "paperId": "4e91e214d02836f071ebb4ac868d791f1bba78fb",
+      "externalIds": {
+        "DOI": "10.9734/ijecc/2026/v16i15252",
+        "CorpusId": 285128306
+      },
+      "url": "https://www.semanticscholar.org/paper/4e91e214d02836f071ebb4ac868d791f1bba78fb",
+      "title": "Methods to Estimate Personal Exposure Levels to Air Pollution from Extensive Stationary Air Quality Dataset and Human Mobility Dataset",
+      "citationCount": 0,
+      "influentialCitationCount": 0,
+      "openAccessPdf": {
+        "url": "",
+        "status": null,
+        "license": null,
+        "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.9734/ijecc/2026/v16i15252?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.9734/ijecc/2026/v16i15252, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+      },
+      "publicationDate": "2026-01-27",
+      "authors": [
+        {
+          "authorId": "2314749418",
+          "name": "Abdulahi Opejin"
+        }
+      ],
+      "abstract": "Accurately assessing personal exposure to air pollution has long posed a challenge due to limitations in conventional monitoring approaches. Most studies still rely on sparse, stationary regulatory monitors, assigning identical exposure values to individuals regardless of their movements. This approach neglects the dynamic nature of human mobility patterns and activity locations, leading to inferential errors. This method developed an approach by integrating high-resolution global positioning system (GPS) trajectory data from 100 participants with air quality data from 213 PurpleAir low-cost stationary monitors across Eastern North Carolina. Using geostatistical modelling, which is an automated kriging (ordinary kriging) algorithm developed in Python, the method estimates individualised PM2.5 exposure every minute over a 3-day window (two weekdays and one weekend day), which encompasses 129,600-minute points. The study offers an innovative fusion of spatial and temporal data that bridges the gap between environmental sensing and actual human experience, and the result is a transformative methodology that significantly enhances the precision of personal air pollution exposure assessments from stationary air quality sensors.",
+      "source": "semantic_scholar",
+      "scores": {
+        "relevance": 2.0,
+        "recency": 3.0,
+        "popularity": 0.4,
+        "quality": 0.8,
+        "recommendation": 5.33
+      },
+      "matched_keywords": [
+        "pm2.5",
+        "data",
+        "fusion",
+        "methodology"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2507.12573v1",
+      "title": "IncA-DES: An incremental and adaptive dynamic ensemble selection approach using online K-d tree neighborhood search for data streams with concept drift",
+      "summary": "Data streams pose challenges not usually encountered in batch-based ML. One of them is concept drift, which is characterized by the change in data distribution over time. Among many approaches explored in literature, the fusion of classifiers has been showing good results and is getting growing attention. DS methods, due to the ensemble being instance-based, seem to be an efficient choice under drifting scenarios. However, some attention must be paid to adapting such methods for concept drift. The training must be done in order to create local experts, and the commonly used neighborhood-search DS may become prohibitive with the continuous arrival of data. In this work, we propose IncA-DES, which employs a training strategy that promotes the generation of local experts with the assumption that different regions of the feature space become available with time. Additionally, the fusion of a concept drift detector supports the maintenance of information and adaptation to a new concept. An overlap-based classification filter is also employed in order to avoid using the DS method when there is a consensus in the neighborhood, a strategy that we argue every DS method should employ, as it was shown to make them more applicable and quicker. Moreover, aiming to reduce the processing time of the kNN, we propose an Online K-d tree algorithm, which can quickly remove instances without becoming inconsistent and deals with unbalancing concerns that may occur in data streams. Experimental results showed that the proposed framework got the best average accuracy compared to seven state-of-the-art methods considering different levels of label availability and presented the smaller processing time between the most accurate methods. Additionally, the fusion with the Online K-d tree has improved processing time with a negligible loss in accuracy. We have made our framework available in an online repository.",
+      "authors": [
+        "Eduardo V. L. Barboza",
+        "Paulo R. Lisboa de Almeida",
+        "Alceu de Souza Britto",
+        "Robert Sabourin",
+        "Rafael M. O. Cruz"
+      ],
+      "published": "2025-07-16T18:42:12Z",
+      "published_date": "2025-07-16 18:42:12+00:00",
+      "updated": "2025-07-16T18:42:12Z",
+      "categories": [
+        "cs.LG"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2507.12573v1",
+      "url": "http://arxiv.org/abs/2507.12573v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.2,
+        "recency": 3.0,
+        "popularity": 1.0,
+        "quality": 2.0,
+        "recommendation": 5.27
+      },
+      "matched_keywords": [
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2508.11215v1",
+      "title": "Air Quality PM2.5 Index Prediction Model Based on CNN-LSTM",
+      "summary": "With the intensification of global climate change, accurate prediction of air quality indicators, especially PM2.5 concentration, has become increasingly important in fields such as environmental protection, public health, and urban management. To address this, we propose an air quality PM2.5 index prediction model based on a hybrid CNN-LSTM architecture. The model effectively combines Convolutional Neural Networks (CNN) for local spatial feature extraction and Long Short-Term Memory (LSTM) networks for modeling temporal dependencies in time series data. Using a multivariate dataset collected from an industrial area in Beijing between 2010 and 2015 -- which includes hourly records of PM2.5 concentration, temperature, dew point, pressure, wind direction, wind speed, and precipitation -- the model predicts the average PM2.5 concentration over 6-hour intervals. Experimental results show that the model achieves a root mean square error (RMSE) of 5.236, outperforming traditional time series models in both accuracy and generalization. This demonstrates its strong potential in real-world applications such as air pollution early warning systems. However, due to the complexity of multivariate inputs, the model demands high computational resources, and its ability to handle diverse atmospheric factors still requires optimization. Future work will focus on enhancing scalability and expanding support for more complex multivariate weather prediction tasks.",
+      "authors": [
+        "Zicheng Guo",
+        "Shuqi Wu",
+        "Meixing Zhu",
+        "He Guandi"
+      ],
+      "published": "2025-08-15T04:46:25Z",
+      "published_date": "2025-08-15 04:46:25+00:00",
+      "updated": "2025-08-15T04:46:25Z",
+      "categories": [
+        "cs.LG"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2508.11215v1",
+      "url": "http://arxiv.org/abs/2508.11215v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.2,
+        "recency": 3.0,
+        "popularity": 1.0,
+        "quality": 2.0,
+        "recommendation": 5.27
+      },
+      "matched_keywords": [
+        "pm2.5",
+        "data"
+      ],
+      "is_classic": false
+    },
+    {
+      "paperId": "c486231388fe89dc94c67f03ae6dd3add9b4b54d",
+      "externalIds": {
+        "DOI": "10.1080/01431161.2025.2516692",
+        "CorpusId": 279788090
+      },
+      "url": "https://www.semanticscholar.org/paper/c486231388fe89dc94c67f03ae6dd3add9b4b54d",
+      "title": "AirFusion: sensor data fusion for air quality monitoring",
+      "citationCount": 1,
+      "influentialCitationCount": 0,
+      "openAccessPdf": {
+        "url": "",
+        "status": null,
+        "license": null,
+        "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.1080/01431161.2025.2516692?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1080/01431161.2025.2516692, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+      },
+      "publicationDate": "2025-06-30",
+      "authors": [
+        {
+          "authorId": "2304763625",
+          "name": "Mirna Elbestar"
+        },
+        {
+          "authorId": "1738009",
+          "name": "S. Aly"
+        },
+        {
+          "authorId": "2266894635",
+          "name": "Rami Ghannam"
+        },
+        {
+          "authorId": "2150605",
+          "name": "Hesham M. Eraqi"
+        }
+      ],
+      "abstract": "Since traditional air quality monitoring methods often rely on geographically sparse and costly air quality monitoring stations, image-based air quality methodologies are recently offering a compelling alternative that utilizes images from sources like satellites, traffic cameras, and even smartphones to monitor pollution levels by using estimation models, image-processing techniques, and deep learning models. In this paper, we introduce a novel, multimodal dataset designed to address the limitations of existing resources, which are often restricted in size, geographical coverage, and fixed-scene imagery, impeding the generalization of existing deep learning prediction models. Our AirFusion dataset comprises 9,411 images paired with synchronized meteorological and geospatial readings, collected by a portable commercial air quality sensor, from 179 diverse locations. Moreover, we introduce AirFusionNet, which leverages transfer learning of the pre-trained ResNet50 and uses an attention mechanism to extract features from both image and sensory data to predict five key air quality parameters: PM 1 , PM 2 : 5 , PM 10 , temperature, and humidity. Our analysis of AirFusionNet establishes baseline results on this challenging dataset. Our model achieves a Root Square Mean Error (RMSE) of 10.44, 11.56, 13.18, 2.98, and 9.02 for PM1, PM2.5, PM10, temperature, and humidity, respectively, on the filtered day data-set and achieves an RMSE of 9.08, 9.75, 10.69, 2.63, and 8.49 for the same parameters, respectively, on the filtered combined day-night dataset.",
+      "source": "semantic_scholar",
+      "scores": {
+        "relevance": 2.0,
+        "recency": 3.0,
+        "popularity": 0.03,
+        "quality": 1.6,
+        "recommendation": 5.23
+      },
+      "matched_keywords": [
+        "pm2.5",
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    }
+  ]
+}
