@@ -5,12 +5,12 @@
     "RMSE": 11.0
   },
   "current_best_metrics": {
-    "R2": 0.8571,
-    "MAE": 6.95,
-    "RMSE": 10.85
+    "R2": 0.8519,
+    "MAE": 7.09,
+    "RMSE": 11.05
   },
-  "current_best_method": "SuperStackingEnsemble",
-  "iteration": 4,
+  "current_best_method": "RK-Poly",
+  "iteration": 2,
   "max_iterations": 20,
   "consecutive_no_improvement": 1,
   "max_consecutive_no_improvement": 5,
@@ -92,6 +92,25 @@
       "iteration": 3,
       "failure_reason": "",
       "code_diff": ""
+    },
+    {
+      "mutation_id": "mut_1_0",
+      "method_name": "RK-Poly",
+      "description": "多项式校正+GPR残差克里金，有物理机制",
+      "metric_before": {
+        "R2": 0.81,
+        "MAE": 7.5,
+        "RMSE": 11.0
+      },
+      "metric_after": {
+        "R2": 0.8519,
+        "MAE": 7.09,
+        "RMSE": 11.05
+      },
+      "status": "accepted",
+      "iteration": 1,
+      "failure_reason": "",
+      "code_diff": ""
     }
   ],
   "rejected_mutations": [
@@ -131,6 +150,25 @@
       "status": "rejected",
       "iteration": 4,
       "failure_reason": "参数迁移性差，1月整月平均Δ=-0.00003 << 0.01阈值",
+      "code_diff": ""
+    },
+    {
+      "mutation_id": "mut_2_1",
+      "method_name": "SuperStackingEnsemble",
+      "description": "Ridge加权组合基础模型OOF预测",
+      "metric_before": {
+        "R2": 0.8519,
+        "MAE": 7.09,
+        "RMSE": 11.05
+      },
+      "metric_after": {
+        "R2": 0.8571,
+        "MAE": 6.95,
+        "RMSE": 10.85
+      },
+      "status": "rejected",
+      "iteration": 2,
+      "failure_reason": "权重组合无物理意义，+0.0052差距可能是运气，统计不显著",
       "code_diff": ""
     }
   ],
@@ -260,6 +298,48 @@
       "timestamp": "2026-04-10T09:01:59.741184",
       "iteration": 4,
       "method": "CSP-RK"
+    },
+    {
+      "name": "R2",
+      "value": 0.8519,
+      "timestamp": "2026-04-10T09:46:54.924150",
+      "iteration": 1,
+      "method": "RK-Poly"
+    },
+    {
+      "name": "MAE",
+      "value": 7.09,
+      "timestamp": "2026-04-10T09:46:54.924172",
+      "iteration": 1,
+      "method": "RK-Poly"
+    },
+    {
+      "name": "RMSE",
+      "value": 11.05,
+      "timestamp": "2026-04-10T09:46:54.924179",
+      "iteration": 1,
+      "method": "RK-Poly"
+    },
+    {
+      "name": "R2",
+      "value": 0.8571,
+      "timestamp": "2026-04-10T09:46:54.928957",
+      "iteration": 2,
+      "method": "SuperStackingEnsemble"
+    },
+    {
+      "name": "MAE",
+      "value": 6.95,
+      "timestamp": "2026-04-10T09:46:54.928969",
+      "iteration": 2,
+      "method": "SuperStackingEnsemble"
+    },
+    {
+      "name": "RMSE",
+      "value": 10.85,
+      "timestamp": "2026-04-10T09:46:54.928975",
+      "iteration": 2,
+      "method": "SuperStackingEnsemble"
     }
   ],
   "active_hypotheses": [],
@@ -285,8 +365,19 @@
         "RMSE": 10.99
       },
       "timestamp": "2026-04-10T09:01:59.742561"
+    },
+    {
+      "method": "SuperStackingEnsemble",
+      "reason": "权重组合无物理意义，+0.0052差距可能是运气，统计不显著",
+      "iteration": 2,
+      "metrics": {
+        "R2": 0.8571,
+        "MAE": 6.95,
+        "RMSE": 10.85
+      },
+      "timestamp": "2026-04-10T09:46:54.931438"
     }
   ],
-  "current_method": "CSP-RK",
-  "current_mutation_id": "mut_4_3"
+  "current_method": "SuperStackingEnsemble",
+  "current_mutation_id": "mut_2_1"
 }

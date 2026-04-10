@@ -105,18 +105,21 @@ Step 3: 融合
 
 ## 三、方法排名 (Top-10)
 
-| 排名 | 方法 | R² | MAE | RMSE | 类别 |
-|------|------|-----|------|------|------|
-| 1 | SuperStackingEnsemble | 0.8571 | 6.95 | 10.85 | 创新 |
-| 2 | UltimateStackingEnsemble | 0.8571 | 6.95 | 10.85 | 创新 |
-| 3 | EnhancedStackingEnsemble | 0.8569 | 6.96 | 10.86 | 创新 |
-| 4 | StackingEnsemble | 0.8552 | 6.99 | 10.93 | 创新 |
-| 5 | FeatureStackingEnsemble | 0.8552 | 6.99 | 10.93 | 创新 |
-| 6 | LogRatioEnsemble | 0.8531 | 7.08 | 11.01 | 创新 |
-| 7 | SpatialZoneEnsemble | 0.8524 | 7.10 | 11.03 | 创新 |
-| 8 | PolyEnsemble | 0.8523 | 7.10 | 11.04 | 创新 |
-| 9 | PolyRK | 0.8519 | 7.09 | 11.05 | 创新 |
-| 10 | SuperEnsemble | 0.8502 | 7.16 | 11.11 | 创新 |
+| 排名 | 方法 | R² | MAE | RMSE | 类别 | 状态 |
+|------|------|-----|------|------|------|------|
+| 1 | **PolyEnsemble** | **0.8523** | 7.10 | 11.04 | 创新 | ✅ 有效 |
+| 2 | **RK-Poly** | **0.8519** | 7.09 | 11.05 | 创新 | ✅ 有效（核心方法） |
+| 3 | SuperStackingEnsemble | 0.8571 | 6.95 | 10.85 | 创新 | ❌ 排除（权重碰运气） |
+| 4 | UltimateStackingEnsemble | 0.8571 | 6.95 | 10.85 | 创新 | ❌ 排除（权重碰运气） |
+| 5 | EnhancedStackingEnsemble | 0.8569 | 6.96 | 10.86 | 创新 | ❌ 排除（权重碰运气） |
+| 6 | StackingEnsemble | 0.8552 | 6.99 | 10.93 | 创新 | ❌ 排除（权重碰运气） |
+| 7 | FeatureStackingEnsemble | 0.8552 | 6.99 | 10.93 | 创新 | ❌ 排除（权重碰运气） |
+| 8 | LogRatioEnsemble | 0.8531 | 7.08 | 11.01 | 创新 | ⚠️ 待验证 |
+| 9 | SpatialZoneEnsemble | 0.8524 | 7.10 | 11.03 | 创新 | ⚠️ 待验证 |
+| 10 | SuperEnsemble | 0.8502 | 7.16 | 11.11 | 创新 | ⚠️ 待验证 |
+
+> **注意**：Stacking 类方法（Ridge 权重组合）应排除。+0.0052 差距统计不显著，可能是运气。
+> **真正有效方法**：RK-Poly（二次多项式校正 + GPR 空间插值）
 
 ---
 
@@ -136,7 +139,24 @@ Step 3: 融合
 
 ---
 
-## 五、SuperStackingEnsemble架构
+## 五、RK-Poly方法核心公式（真正有效的创新方法）
+
+$$P_{RK-Poly} = \underbrace{a + bM + cM^2}_{\text{多项式校正}} + \underbrace{R^*_{GPR}}_{\text{空间插值残差}}$$
+
+### 步骤
+
+1. **多项式OLS校正**: $O = a + bM + cM^2 + e$ (二次多项式)
+2. **GPR残差建模**: 对残差$e$使用RBF核高斯过程回归进行空间插值
+3. **融合预测**: $P = a + bM + cM^2 + GPR(e)$
+
+**为什么RK-Poly是有效创新**：
+- 二次项捕捉 CMAQ 在高污染时的非线性偏差
+- GPR 空间插值修正局地偏差
+- 参数相对稳定（有物理机制）
+
+---
+
+## 六、SuperStackingEnsemble架构（应排除）
 
 ```
 第三层: Ridge元学习器 (alpha=0.001)
@@ -146,7 +166,12 @@ Step 3: 融合
         RK-Poly | RK-Poly3 | RK-OLS | eVNA | aVNA
 ```
 
-### 学习到的Ridge权重
+> **❌ 应排除原因**：
+> - Ridge 权重组合本质上是数学加权，非真正创新
+> - R²=0.8571 vs RK-Poly=0.8519，仅 +0.0052，统计不显著
+> - 权重对单日数据敏感，跨日期不稳定（碰运气）
+
+### 学习到的Ridge权重（无物理可解释性）
 
 | 特征 | 权重 | 贡献 |
 |------|------|------|
@@ -157,11 +182,7 @@ Step 3: 融合
 | aVNA | -0.216 | 消除冗余 |
 | CMAQ | +0.100 | 微弱贡献 |
 
----
-
-## 六、RK-Poly方法核心公式
-
-$$P_{RK-Poly} = \underbrace{a + bM + cM^2}_{\text{多项式校正}} + \underbrace{R^*_{GPR}}_{\text{空间插值残差}}$$
+权重 (2.93, -0.94, -1.00...) 无法给出物理解释，仅是数学拟合结果。
 
 ### 步骤
 
