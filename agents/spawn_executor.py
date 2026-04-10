@@ -20,6 +20,8 @@ Agent Spawn 执行器
 
 import os
 import json
+import glob
+import pandas as pd
 from datetime import datetime
 from typing import Dict, List, Optional
 
@@ -31,17 +33,28 @@ class SpawnExecutor:
     Agent Spawn 执行器
 
     管理工作流状态，并在主会话中协调 Agent spawn
+    自动集成 StateTracker 更新研究状态
     """
 
     def __init__(self, project_root: str):
         self.project_root = project_root
         self.state_file = os.path.join(project_root, '.agent_state.json')
         self.error_dir = os.path.join(project_root, 'error')
+        self.test_result_dir = os.path.join(project_root, 'test_result', '创新方法')
 
         # 确保目录存在
         os.makedirs(self.error_dir, exist_ok=True)
 
         self.state = self._load_state()
+
+        # 初始化 StateTracker
+        try:
+            from agents.research_state_tracker import StateTracker
+            state_tracker_dir = os.path.join(project_root, 'test_result', '.state')
+            self.state_tracker = StateTracker(state_tracker_dir)
+        except Exception as e:
+            print(f"  [警告] StateTracker 初始化失败: {e}")
+            self.state_tracker = None
 
     def _load_state(self) -> Dict:
         if os.path.exists(self.state_file):
@@ -90,13 +103,90 @@ class SpawnExecutor:
         }
 
     def mark_completed(self, agent_id: str, result: any = None):
-        """标记 Agent 完成"""
+        """标记 Agent 完成，并自动触发 StateTracker 更新"""
         if agent_id in self.state['agents']:
             self.state['agents'][agent_id]['status'] = 'completed'
             self.state['agents'][agent_id]['completed_at'] = datetime.now().isoformat()
             if result:
                 self.state['agents'][agent_id]['result'] = result
             self._save_state()
+
+        # 自动更新 StateTracker（verifier 阶段）
+        if agent_id == 'verifier' and self.state_tracker:
+            self._auto_update_state_tracker()
+
+    def _auto_update_state_tracker(self):
+        """自动读取最新测试结果并更新 StateTracker"""
+        if not os.path.exists(self.test_result_dir):
+            return
+
+        try:
+            # 查找最新的测试结果文件
+            csv_files = glob.glob(os.path.join(self.test_result_dir, '*_summary.csv'))
+            if not csv_files:
+                return
+
+            # 读取所有 summary 文件，提取最新方法的结果
+            latest_results = []
+            for f in csv_files:
+                df = pd.read_csv(f)
+                for _, row in df.iterrows():
+                    latest_results.append({
+                        'method': row.get('method', ''),
+                        'R2': row.get('R2', 0),
+                        'MAE': row.get('MAE', 0),
+                        'RMSE': row.get('RMSE', 0)
+                    })
+
+            if not latest_results:
+                return
+
+            # 找 R² 最高的方法作为当前最佳
+            latest_results.sort(key=lambda x: x['R2'], reverse=True)
+            best = latest_results[0]
+
+            method_name = best['method']
+            metrics = {
+                'R2': float(best['R2']),
+                'MAE': float(best['MAE']),
+                'RMSE': float(best['RMSE'])
+            }
+
+            # 开始新迭代
+            self.state_tracker.start_iteration(method_name)
+            self.state_tracker.update_metrics(metrics, method_name)
+
+            # 检查是否应该接受（需要对比历史最佳）
+            current_best_r2 = self.state_tracker.state.current_best_metrics.get('R2', 0)
+            improvement = metrics['R2'] - current_best_r2
+
+            # 判断是否属于应排除的 Stacking 类方法
+            stacking_keywords = ['Stacking', 'Ensemble', 'StackingEnsemble', 'SuperStacking']
+            is_stacking = any(kw in method_name for kw in stacking_keywords)
+
+            if is_stacking:
+                # Stacking 类方法直接拒绝
+                self.state_tracker.reject_mutation(
+                    method_name=method_name,
+                    metrics=metrics,
+                    reason='Stacking类权重组合方法应排除（无物理可解释性）'
+                )
+                print(f"  [StateTracker] {method_name}: 标记为排除（Stacking类）")
+            elif improvement >= 0.01:
+                # 有显著提升，接受
+                self.state_tracker.accept_mutation(method_name, metrics)
+                print(f"  [StateTracker] {method_name}: R²={metrics['R2']:.4f} ✅ 接受")
+            else:
+                # 提升不足但非Stacking，记录但不接受
+                self.state_tracker.state.iteration -= 1  # 不算有效迭代
+                print(f"  [StateTracker] {method_name}: R²={metrics['R2']:.4f}, Δ={improvement:+.4f} (<0.01)")
+
+            # 生成简短报告
+            state = self.state_tracker.get_current_state()
+            print(f"  [StateTracker] 当前最佳: {state['current_best_method']} (R²={state['current_best_r2']:.4f})")
+
+        except Exception as e:
+            print(f"  [StateTracker] 更新失败: {e}")
 
     def mark_failed(self, agent_id: str, error: str):
         """标记 Agent 失败"""
