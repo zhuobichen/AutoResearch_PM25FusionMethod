@@ -1,0 +1,31 @@
+# 论文PDF（排除）
+PaperDownload/
+
+# 临时文件
+*.tmp
+*.temp
+temp_*.txt
+
+# Python缓存
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Git状态文件
+.agent_state.json
+
+# 大型输出文件
+*.docx
+*.pdf
+
+# 测试数据（保留结构但排除大文件）
+test_data/raw/Monitor/*.csv
+test_data/raw/CMAQ/*.nc
+
+# Node模块（如有）
+node_modules/
+
+# IDE配置（选择性保留）
+.vscode/
+.idea/
