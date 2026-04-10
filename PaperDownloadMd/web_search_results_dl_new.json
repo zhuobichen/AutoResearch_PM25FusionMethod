@@ -1,0 +1,701 @@
+{
+  "search_query": "PM2.5 CMAQ data fusion",
+  "categories": null,
+  "min_year": null,
+  "total_arxiv": 100,
+  "total_s2": 0,
+  "total_unique": 100,
+  "top_papers": [
+    {
+      "id": "http://arxiv.org/abs/2603.06724v1",
+      "title": "Bi Directional Feedback Fusion for Activity Aware Forecasting of Indoor CO2 and PM2.5",
+      "summary": "Indoor air quality (IAQ) forecasting plays a critical role in safeguarding occupant health, ensuring thermal comfort, and supporting intelligent building control. However, predicting future concentrations of key pollutants such as carbon dioxide (CO2) and fine particulate matter (PM2.5) remains challenging due to the complex interplay between environmental factors and highly dynamic occupant behaviours. Traditional data driven models primarily rely on historical sensor trajectories and often fail to anticipate behaviour induced emission spikes or rapid concentration shifts. To address these limitations, we present a dual stream bi directional feedback fusion framework that jointly models indoor environmental evolution and action derived embeddings representing human activities. The proposed architecture integrates a context aware modulation mechanism that adaptively scales and shifts each stream based on a shared, evolving fusion state, enabling the model to selectively emphasise behavioural cues or long term environmental trends. Furthermore, we introduce dual timescale temporal modules that independently capture gradual CO2 accumulation patterns and short term PM2.5 fluctuations. A composite loss function combining weighted mean squared error, spike aware penalties, and uncertainty regularisation facilitates robust learning under volatile indoor conditions. Extensive validation on real-world IAQ datasets demonstrates that our approach significantly outperforms state of the art forecasting baselines while providing interpretable uncertainty estimates essential for practical deployment in smart buildings and health-aware monitoring systems.",
+      "authors": [
+        "Harshala Gammulle",
+        "Lidia Morawska",
+        "Sridha Sridharan",
+        "Clinton Fookes"
+      ],
+      "published": "2026-03-06T01:21:44Z",
+      "published_date": "2026-03-06 01:21:44+00:00",
+      "updated": "2026-03-06T01:21:44Z",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.06724v1",
+      "url": "http://arxiv.org/abs/2603.06724v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.0,
+        "recency": 3.0,
+        "popularity": 1.0,
+        "quality": 2.0,
+        "recommendation": 6.33
+      },
+      "matched_keywords": [
+        "pm2.5",
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2302.10278v1",
+      "title": "Data level and decision level fusion of satellite multi-sensor AOD retrievals for improving PM2.5 estimations, a study on Tehran",
+      "summary": "One of the techniques for estimating the surface particle concentration with a diameter of fewer than 2.5 micrometers (PM2.5) is using aerosol optical depth (AOD) products. Different AOD products are retrieved from various satellite sensors, like MODIS and VIIRS, by various algorithms, such as Deep Blue and Dark Target. Therefore, they do not have the same accuracy and spatial resolution. Additionally, the weakness of algorithms in AOD retrieval reduces the spatial coverage of products, particularly in cloudy or snowy areas. Consequently, for the first time, the present study investigated the possibility of fusing AOD products from observations of MODIS and VIIRS sensors retrieved by Deep Blue and Dark Target algorithms to estimate PM2.5 more accurately. For this purpose, AOD products were fused by machine learning algorithms using different fusion strategies at two levels: the data level and the decision level. First, the performance of various machine learning algorithms for estimating PM2.5 using AOD data was evaluated. After that, the XGBoost algorithm was selected as the base model for the proposed fusion strategies. Then, AOD products were fused. The fusion results showed that the estimated PM2.5 accuracy at the data level in all three metrics, RMSE, MAE, and R2, was improved (R2=0.64). Despite the simplicity and lower computational cost of the data level fusion method, the spatial coverage did not improve considerably due to eliminating poor quality data through the fusion process. Afterward, the fusion of products at the decision level was followed in eleven scenarios. In this way, the best result was obtained by fusing Deep Blue products of MODIS and VIIRS sensors (R2=0.81)",
+      "authors": [
+        "Ali Mirzaei",
+        "Hossein Bagheri",
+        "Mehran Sattari"
+      ],
+      "published": "2023-02-01T08:07:00Z",
+      "published_date": "2023-02-01 08:07:00+00:00",
+      "updated": "2023-02-01T08:07:00Z",
+      "categories": [
+        "cs.CV",
+        "eess.SP"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2302.10278v1",
+      "url": "http://arxiv.org/abs/2302.10278v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.4,
+        "recency": 1.5,
+        "popularity": 1.0,
+        "quality": 2.0,
+        "recommendation": 5.87
+      },
+      "matched_keywords": [
+        "pm2.5",
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2405.07404v1",
+      "title": "Indoor PM2.5 forecasting and the association with outdoor air pollution: a modelling study based on sensor data in Australia",
+      "summary": "Exposure to poor indoor air quality poses significant health risks, necessitating thorough assessment to mitigate associated dangers. This study aims to predict hourly indoor fine particulate matter (PM2.5) concentrations and investigate their correlation with outdoor PM2.5 levels across 24 distinct buildings in Australia. Indoor air quality data were gathered from 91 monitoring sensors in eight Australian cities spanning 2019 to 2022. Employing an innovative three-stage deep ensemble machine learning framework (DEML), comprising three base models (Support Vector Machine, Random Forest, and eXtreme Gradient Boosting) and two meta-models (Random Forest and Generalized Linear Model), hourly indoor PM2.5 concentrations were predicted. The model's accuracy was evaluated using a rolling windows approach, comparing its performance against three benchmark algorithms (SVM, RF, and XGBoost). Additionally, a correlation analysis assessed the relationship between indoor and outdoor PM2.5 concentrations. Results indicate that the DEML model consistently outperformed benchmark models, achieving an R2 ranging from 0.63 to 0.99 and RMSE from 0.01 to 0.663 mg/m3 for most sensors. Notably, outdoor PM2.5 concentrations significantly impacted indoor air quality, particularly evident during events like bushfires. This study underscores the importance of accurate indoor air quality prediction, crucial for developing location-specific early warning systems and informing effective interventions. By promoting protective behaviors, these efforts contribute to enhanced public health outcomes.",
+      "authors": [
+        "Wenhua Yu",
+        "Bahareh Nakisa",
+        "Seng W. Loke",
+        "Svetlana Stevanovic",
+        "Yuming Guo",
+        "Mohammad Naim Rastgoo"
+      ],
+      "published": "2024-05-13T00:51:36Z",
+      "published_date": "2024-05-13 00:51:36+00:00",
+      "updated": "2024-05-13T00:51:36Z",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2405.07404v1",
+      "url": "http://arxiv.org/abs/2405.07404v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.6,
+        "recency": 2.5,
+        "popularity": 1.0,
+        "quality": 2.0,
+        "recommendation": 5.47
+      },
+      "matched_keywords": [
+        "pm2.5",
+        "data"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2404.07476v1",
+      "title": "The Survey on Multi-Source Data Fusion in Cyber-Physical-Social Systems:Foundational Infrastructure for Industrial Metaverses and Industries 5.0",
+      "summary": "As the concept of Industries 5.0 develops, industrial metaverses are expected to operate in parallel with the actual industrial processes to offer ``Human-Centric\" Safe, Secure, Sustainable, Sensitive, Service, and Smartness ``6S\" manufacturing solutions. Industrial metaverses not only visualize the process of productivity in a dynamic and evolutional way, but also provide an immersive laboratory experimental environment for optimizing and remodeling the process. Besides, the customized user needs that are hidden in social media data can be discovered by social computing technologies, which introduces an input channel for building the whole social manufacturing process including industrial metaverses. This makes the fusion of multi-source data cross Cyber-Physical-Social Systems (CPSS) the foundational and key challenge. This work firstly proposes a multi-source-data-fusion-driven operational architecture for industrial metaverses on the basis of conducting a comprehensive literature review on the state-of-the-art multi-source data fusion methods. The advantages and disadvantages of each type of method are analyzed by considering the fusion mechanisms and application scenarios. Especially, we combine the strengths of deep learning and knowledge graphs in scalability and parallel computation to enable our proposed framework the ability of prescriptive optimization and evolution. This integration can address the shortcomings of deep learning in terms of explainability and fact fabrication, as well as overcoming the incompleteness and the challenges of construction and maintenance inherent in knowledge graphs. The effectiveness of the proposed architecture is validated through a parallel weaving case study. In the end, we discuss the challenges and future directions of multi-source data fusion cross CPSS for industrial metaverses and social manufacturing in Industries 5.0.",
+      "authors": [
+        "Xiao Wang",
+        "Yutong Wang",
+        "Jing Yang",
+        "Xiaofeng Jia",
+        "Lijun Li",
+        "Weiping Ding",
+        "Fei-Yue Wang"
+      ],
+      "published": "2024-04-11T05:09:32Z",
+      "published_date": "2024-04-11 05:09:32+00:00",
+      "updated": "2024-04-11T05:09:32Z",
+      "categories": [
+        "cs.CY"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2404.07476v1",
+      "url": "http://arxiv.org/abs/2404.07476v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.6,
+        "recency": 2.5,
+        "popularity": 0.95,
+        "quality": 1.9,
+        "recommendation": 5.38
+      },
+      "matched_keywords": [
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2506.10688v2",
+      "title": "A Bayesian Multisource Fusion Model for Spatiotemporal PM2.5 in an Urban Setting",
+      "summary": "Airborne particulate matter (PM2.5) is a major public health concern in urban environments, where population density and emission sources exacerbate exposure risks. We present a novel Bayesian spatiotemporal fusion model to estimate monthly PM2.5 concentrations over Greater London (2014-2019) at 1km resolution. The model integrates multiple PM2.5 data sources, including outputs from two atmospheric air quality dispersion models and predictive variables, such as vegetation and satellite aerosol optical depth, while explicitly modelling a latent spatiotemporal field. Spatial misalignment of the data is addressed through an upscaling approach to predict across the entire area. Building on stochastic partial differential equations (SPDE) within the integrated nested Laplace approximations (INLA) framework, our method introduces spatially- and temporally-varying coefficients to flexibly calibrate datasets and capture fine-scale variability. Model performance and complexity are balanced using predictive metrics such as the predictive model choice criterion and thorough cross-validation. The best performing model shows excellent fit and solid predictive performance, enabling reliable high-resolution spatiotemporal mapping of PM2.5 concentrations with the associated uncertainty. Furthermore, the model outputs, including full posterior predictive distributions, can be used to map exceedance probabilities of regulatory thresholds, supporting air quality management and targeted interventions in vulnerable urban areas, as well as providing refined exposure estimates of PM2.5 for epidemiological applications.",
+      "authors": [
+        "Abi I. Riley",
+        "Marta Blangiardo",
+        "Frédéric B. Piel",
+        "Andrew Beddows",
+        "Sean Beevers",
+        "Gary W. Fuller",
+        "Paul Agnew",
+        "Monica Pirani"
+      ],
+      "published": "2025-06-12T13:36:11Z",
+      "published_date": "2025-06-12 13:36:11+00:00",
+      "updated": "2025-06-16T12:10:16Z",
+      "categories": [
+        "stat.ME",
+        "stat.AP"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2506.10688v2",
+      "url": "http://arxiv.org/abs/2506.10688v2",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.0,
+        "recency": 3.0,
+        "popularity": 0.4,
+        "quality": 0.8,
+        "recommendation": 5.33
+      },
+      "matched_keywords": [
+        "pm2.5",
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2412.13935v1",
+      "title": "Spatio-Temporal Forecasting of PM2.5 via Spatial-Diffusion guided Encoder-Decoder Architecture",
+      "summary": "In many problem settings that require spatio-temporal forecasting, the values in the time-series not only exhibit spatio-temporal correlations but are also influenced by spatial diffusion across locations. One such example is forecasting the concentration of fine particulate matter (PM2.5) in the atmosphere which is influenced by many complex factors, the most important ones being diffusion due to meteorological factors as well as transport across vast distances over a period of time. We present a novel Spatio-Temporal Graph Neural Network architecture, that specifically captures these dependencies to forecast the PM2.5 concentration. Our model is based on an encoder-decoder architecture where the encoder and decoder parts leverage gated recurrent units (GRU) augmented with a graph neural network (TransformerConv) to account for spatial diffusion. Our model can also be seen as a generalization of various existing models for time-series or spatio-temporal forecasting. We demonstrate the model's effectiveness on two real-world PM2.5 datasets: (1) data collected by us using a recently deployed network of low-cost PM$_{2.5}$ sensors from 511 locations spanning the entirety of the Indian state of Bihar over a period of one year, and (2) another publicly available dataset that covers severely polluted regions from China for a period of 4 years. Our experimental results show our model's impressive ability to account for both spatial as well as temporal dependencies precisely.",
+      "authors": [
+        "Malay Pandey",
+        "Vaishali Jain",
+        "Nimit Godhani",
+        "Sachchida Nand Tripathi",
+        "Piyush Rai"
+      ],
+      "published": "2024-12-18T15:18:12Z",
+      "published_date": "2024-12-18 15:18:12+00:00",
+      "updated": "2024-12-18T15:18:12Z",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2412.13935v1",
+      "url": "http://arxiv.org/abs/2412.13935v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.0,
+        "recency": 2.5,
+        "popularity": 0.6,
+        "quality": 1.2,
+        "recommendation": 5.33
+      },
+      "matched_keywords": [
+        "pm2.5",
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2411.15497v3",
+      "title": "AeroGen: Enhancing Remote Sensing Object Detection with Diffusion-Driven Data Generation",
+      "summary": "Remote sensing image object detection (RSIOD) aims to identify and locate specific objects within satellite or aerial imagery. However, there is a scarcity of labeled data in current RSIOD datasets, which significantly limits the performance of current detection algorithms. Although existing techniques, e.g., data augmentation and semi-supervised learning, can mitigate this scarcity issue to some extent, they are heavily dependent on high-quality labeled data and perform worse in rare object classes. To address this issue, this paper proposes a layout-controllable diffusion generative model (i.e. AeroGen) tailored for RSIOD. To our knowledge, AeroGen is the first model to simultaneously support horizontal and rotated bounding box condition generation, thus enabling the generation of high-quality synthetic images that meet specific layout and object category requirements. Additionally, we propose an end-to-end data augmentation framework that integrates a diversity-conditioned generator and a filtering mechanism to enhance both the diversity and quality of generated data. Experimental results demonstrate that the synthetic data produced by our method are of high quality and diversity. Furthermore, the synthetic RSIOD data can significantly improve the detection performance of existing RSIOD models, i.e., the mAP metrics on DIOR, DIOR-R, and HRSC datasets are improved by 3.7%, 4.3%, and 2.43%, respectively. The code is available at https://github.com/Sonettoo/AeroGen.",
+      "authors": [
+        "Datao Tang",
+        "Xiangyong Cao",
+        "Xuan Wu",
+        "Jialin Li",
+        "Jing Yao",
+        "Xueru Bai",
+        "Dongsheng Jiang",
+        "Yin Li",
+        "Deyu Meng"
+      ],
+      "published": "2024-11-23T09:04:33Z",
+      "published_date": "2024-11-23 09:04:33+00:00",
+      "updated": "2025-02-24T15:22:40Z",
+      "categories": [
+        "cs.CV"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2411.15497v3",
+      "url": "http://arxiv.org/abs/2411.15497v3",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.6,
+        "recency": 2.5,
+        "popularity": 0.8,
+        "quality": 1.6,
+        "recommendation": 5.13
+      },
+      "matched_keywords": [
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2406.15003v2",
+      "title": "Real-Time Hand Gesture Recognition: Integrating Skeleton-Based Data Fusion and Multi-Stream CNN",
+      "summary": "Hand Gesture Recognition (HGR) enables intuitive human-computer interactions in various real-world contexts. However, existing frameworks often struggle to meet the real-time requirements essential for practical HGR applications. This study introduces a robust, skeleton-based framework for dynamic HGR that simplifies the recognition of dynamic hand gestures into a static image classification task, effectively reducing both hardware and computational demands. Our framework utilizes a data-level fusion technique to encode 3D skeleton data from dynamic gestures into static RGB spatiotemporal images. It incorporates a specialized end-to-end Ensemble Tuner (e2eET) Multi-Stream CNN architecture that optimizes the semantic connections between data representations while minimizing computational needs. Tested across five benchmark datasets (SHREC'17, DHG-14/28, FPHA, LMDHG, and CNR), the framework showed competitive performance with the state-of-the-art. Its capability to support real-time HGR applications was also demonstrated through deployment on standard consumer PC hardware, showcasing low latency and minimal resource usage in real-world settings. The successful deployment of this framework underscores its potential to enhance real-time applications in fields such as virtual/augmented reality, ambient intelligence, and assistive technologies, providing a scalable and efficient solution for dynamic gesture recognition.",
+      "authors": [
+        "Oluwaleke Yusuf",
+        "Maki Habib",
+        "Mohamed Moustafa"
+      ],
+      "published": "2024-06-21T09:30:59Z",
+      "published_date": "2024-06-21 09:30:59+00:00",
+      "updated": "2024-10-06T04:06:44Z",
+      "categories": [
+        "cs.CV",
+        "cs.HC"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2406.15003v2",
+      "url": "http://arxiv.org/abs/2406.15003v2",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.6,
+        "recency": 2.5,
+        "popularity": 0.8,
+        "quality": 1.6,
+        "recommendation": 5.13
+      },
+      "matched_keywords": [
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.01797v1",
+      "title": "The IAEA Fusion Data Lake Project -- Accelerating AI and Big Data Applications through Open Science and FAIR Data",
+      "summary": "AI applications in fusion is a maturing field, playing a key role as surrogate models and digital twins to overcome computational expense limitations and insufficiently characterised phenomena, and expanding the horizon for real-time applications. The IAEA is supporting this activity through the AI for Fusion Coordinated Research Project (CRP), a five-year initiative launched in 2022, which involves 24 institutions across 11 countries. A key goal is to support the development of modern data infrastructure required to enable the development of agnostic AI models that can be safely extrapolate into the parameter space of future fusion power plants.\n  The IAEA is playing an active role in contributing to the data infrastructure with the Fusion Data Lake project. A modern data platform to enable the development of AI workflows in line with FAIR data principles. The platform comprises three major components:\n  1. An international data catalogue;\n  2. A centralised medium-term storage; and\n  3. A data federation of the various fusion data platforms around the world.\n  The current proof of concept (PoC) demonstrates the data cataloguing and federation capacity by integrating with the UKAEA's MAST Data Catalog. Currently, the second phase of the PoC will demonstrate scalability by integrating two additional experimental fusion device catalogues.\n  This report presents a high-level project overview, including:\n  - Technical architecture and design, collaborations and contributions, and the PoC solution;\n  - Data and metadata model development and ontological concepts; and\n  - The approach to data governance and terms of service.\n  This illustrates the approach, results, and direction of the work, highlighting the high potential value to the fusion community of increasing the visibility and accessibility of the numerous international experimental data sets.",
+      "authors": [
+        "Daljeet Singh Gahle",
+        "Matteo Barbarino"
+      ],
+      "published": "2026-04-02T09:12:59Z",
+      "published_date": "2026-04-02 09:12:59+00:00",
+      "updated": "2026-04-02T09:12:59Z",
+      "categories": [
+        "physics.plasm-ph",
+        "physics.app-ph"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2604.01797v1",
+      "url": "http://arxiv.org/abs/2604.01797v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.6,
+        "recency": 3.0,
+        "popularity": 0.45,
+        "quality": 0.9,
+        "recommendation": 4.88
+      },
+      "matched_keywords": [
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/1807.02323v1",
+      "title": "Optimal Sensor Data Fusion Architecture for Object Detection in Adverse Weather Conditions",
+      "summary": "A good and robust sensor data fusion in diverse weather conditions is a quite challenging task. There are several fusion architectures in the literature, e.g. the sensor data can be fused right at the beginning (Early Fusion), or they can be first processed separately and then concatenated later (Late Fusion). In this work, different fusion architectures are compared and evaluated by means of object detection tasks, in which the goal is to recognize and localize predefined objects in a stream of data. Usually, state-of-the-art object detectors based on neural networks are highly optimized for good weather conditions, since the well-known benchmarks only consist of sensor data recorded in optimal weather conditions. Therefore, the performance of these approaches decreases enormously or even fails in adverse weather conditions. In this work, different sensor fusion architectures are compared for good and adverse weather conditions for finding the optimal fusion architecture for diverse weather situations. A new training strategy is also introduced such that the performance of the object detector is greatly enhanced in adverse weather scenarios or if a sensor fails. Furthermore, the paper responds to the question if the detection accuracy can be increased further by providing the neural network with a-priori knowledge such as the spatial calibration of the sensors.",
+      "authors": [
+        "Andreas Pfeuffer",
+        "Klaus Dietmayer"
+      ],
+      "published": "2018-07-06T09:21:58Z",
+      "published_date": "2018-07-06 09:21:58+00:00",
+      "updated": "2018-07-06T09:21:58Z",
+      "categories": [
+        "cs.CV"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/1807.02323v1",
+      "url": "http://arxiv.org/abs/1807.02323v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.6,
+        "recency": 1.0,
+        "popularity": 1.15,
+        "quality": 2.3,
+        "recommendation": 4.72
+      },
+      "matched_keywords": [
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2506.18018v1",
+      "title": "A deep-learning model for predicting daily PM2.5 concentration in response to emission reduction",
+      "summary": "Air pollution remains a leading global health threat, with fine particulate matter (PM2.5) contributing to millions of premature deaths annually. Chemical transport models (CTMs) are essential tools for evaluating how emission controls improve air quality and save lives, but they are computationally intensive. Reduced form models accelerate simulations but sacrifice spatial-temporal granularity, accuracy, and flexibility. Here we present CleanAir, a deep-learning-based model developed as an efficient alternative to CTMs in simulating daily PM2.5 and its chemical compositions in response to precursor emission reductions at 36 km resolution, which could predict PM2.5 concentration for a full year within 10 seconds on a single GPU, a speed five orders of magnitude faster. Built on a Residual Symmetric 3D U-Net architecture and trained on more than 2,400 emission reduction scenarios generated by a well-validated Community Multiscale Air Quality (CMAQ) model, CleanAir generalizes well across unseen meteorological years and emission patterns. It produces results comparable to CMAQ in both absolute concentrations and emission-induced changes, enabling efficient, full-coverage simulations across short-term interventions and long-term planning horizons. This advance empowers researchers and policymakers to rapidly evaluate a wide range of air quality strategies and assess the associated health impacts, thereby supporting more responsive and informed environmental decision-making.",
+      "authors": [
+        "Shigan Liu",
+        "Guannan Geng",
+        "Yanfei Xiang",
+        "Hejun Hu",
+        "Xiaodong Liu",
+        "Xiaomeng Huang",
+        "Qiang Zhang"
+      ],
+      "published": "2025-06-22T12:55:22Z",
+      "published_date": "2025-06-22 12:55:22+00:00",
+      "updated": "2025-06-22T12:55:22Z",
+      "categories": [
+        "physics.ao-ph"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2506.18018v1",
+      "url": "http://arxiv.org/abs/2506.18018v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.2,
+        "recency": 3.0,
+        "popularity": 0.65,
+        "quality": 1.3,
+        "recommendation": 4.68
+      },
+      "matched_keywords": [
+        "pm2.5",
+        "cmaq"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2402.18603v5",
+      "title": "MMSR: Symbolic Regression is a Multi-Modal Information Fusion Task",
+      "summary": "Mathematical formulas are the crystallization of human wisdom in exploring the laws of nature for thousands of years. Describing the complex laws of nature with a concise mathematical formula is a constant pursuit of scientists and a great challenge for artificial intelligence. This field is called symbolic regression (SR). Symbolic regression was originally formulated as a combinatorial optimization problem, and Genetic Programming (GP) and Reinforcement Learning algorithms were used to solve it. However, GP is sensitive to hyperparameters, and these two types of algorithms are inefficient. To solve this problem, researchers treat the mapping from data to expressions as a translation problem. And the corresponding large-scale pre-trained model is introduced. However, the data and expression skeletons do not have very clear word correspondences as the two languages do. Instead, they are more like two modalities (e.g., image and text). Therefore, in this paper, we proposed MMSR. The SR problem is solved as a pure multi-modal problem, and contrastive learning is also introduced in the training process for modal alignment to facilitate later modal feature fusion. It is worth noting that to better promote the modal feature fusion, we adopt the strategy of training contrastive learning loss and other losses at the same time, which only needs one-step training, instead of training contrastive learning loss first and then training other losses. Because our experiments prove training together can make the feature extraction module and feature fusion module wearing-in better. Experimental results show that compared with multiple large-scale pre-training baselines, MMSR achieves the most advanced results on multiple mainstream datasets including SRBench. Our code is open source at https://github.com/1716757342/MMSR",
+      "authors": [
+        "Yanjie Li",
+        "Jingyi Liu",
+        "Weijun Li",
+        "Lina Yu",
+        "Min Wu",
+        "Wenqiang Li",
+        "Meilan Hao",
+        "Su Wei",
+        "Yusong Deng"
+      ],
+      "published": "2024-02-28T08:29:42Z",
+      "published_date": "2024-02-28 08:29:42+00:00",
+      "updated": "2024-09-19T12:30:04Z",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2402.18603v5",
+      "url": "http://arxiv.org/abs/2402.18603v5",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.2,
+        "recency": 2.0,
+        "popularity": 1.0,
+        "quality": 2.0,
+        "recommendation": 4.6
+      },
+      "matched_keywords": [
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/1803.03409v2",
+      "title": "Real-time and Seamless Monitoring of Ground-level PM2.5 Using Satellite Remote Sensing",
+      "summary": "Satellite remote sensing has been reported to be a promising approach for the monitoring of atmospheric PM2.5. However, the satellite-based monitoring of ground-level PM2.5 is still challenging. First, the previously used polar-orbiting satellite observations, which can be usually acquired only once per day, are hard to monitor PM2.5 in real time. Second, many data gaps exist in satellite-derived PM2.5 due to the cloud contamination. In this paper, the hourly geostationary satellite (i.e., Himawari-8) observations were adopted for the real-time monitoring of PM2.5 in a deep learning architecture. On this basis, the satellite-derived PM2.5 in conjunction with ground PM2.5 measurements are incorporated into a spatio-temporal fusion model to fill the data gaps. Using Wuhan Urban Agglomeration as an example, we have successfully derived the real-time and seamless PM2.5 distributions. The results demonstrate that Himawari-8 satellite-based deep learning model achieves a satisfactory performance (out-of-sample cross-validation R2=0.80, RMSE=17.49 ug/m3) for the estimation of PM2.5. The missing data in satellite-derive PM2.5 are accurately recovered, with R2 between recoveries and ground measurements of 0.75. Overall, this study has inherently provided an effective strategy for the real-time and seamless monitoring of ground-level PM2.5.",
+      "authors": [
+        "Tongwen Li",
+        "Chengyue Zhang",
+        "Huanfeng Shen",
+        "Qiangqiang Yuan",
+        "Liangpei Zhang"
+      ],
+      "published": "2018-03-09T08:04:00Z",
+      "published_date": "2018-03-09 08:04:00+00:00",
+      "updated": "2018-05-29T01:16:16Z",
+      "categories": [
+        "physics.ao-ph"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/1803.03409v2",
+      "url": "http://arxiv.org/abs/1803.03409v2",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.6,
+        "recency": 1.0,
+        "popularity": 1.0,
+        "quality": 2.0,
+        "recommendation": 4.47
+      },
+      "matched_keywords": [
+        "pm2.5",
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2009.06345v1",
+      "title": "Data fusion strategies for energy efficiency in buildings: Overview, challenges and novel orientations",
+      "summary": "Recently, tremendous interest has been devoted to develop data fusion strategies for energy efficiency in buildings, where various kinds of information can be processed. However, applying the appropriate data fusion strategy to design an efficient energy efficiency system is not straightforward; it requires a priori knowledge of existing fusion strategies, their applications and their properties. To this regard, seeking to provide the energy research community with a better understanding of data fusion strategies in building energy saving systems, their principles, advantages, and potential applications, this paper proposes an extensive survey of existing data fusion mechanisms deployed to reduce excessive consumption and promote sustainability. We investigate their conceptualizations, advantages, challenges and drawbacks, as well as performing a taxonomy of existing data fusion strategies and other contributing factors. Following, a comprehensive comparison of the state-of-the-art data fusion based energy efficiency frameworks is conducted using various parameters, including data fusion level, data fusion techniques, behavioral change influencer, behavioral change incentive, recorded data, platform architecture, IoT technology and application scenario. Moreover, a novel method for electrical appliance identification is proposed based on the fusion of 2D local texture descriptors, where 1D power signals are transformed into 2D space and treated as images. The empirical evaluation, conducted on three real datasets, shows promising performance, in which up to 99.68% accuracy and 99.52% F1 score have been attained. In addition, various open research challenges and future orientations to improve data fusion based energy efficiency ecosystems are explored.",
+      "authors": [
+        "Yassine Himeur",
+        "Abdullah Alsalemi",
+        "Ayman Al-Kababji",
+        "Faycal Bensaali",
+        "Abbes Amira"
+      ],
+      "published": "2020-09-14T12:04:30Z",
+      "published_date": "2020-09-14 12:04:30+00:00",
+      "updated": "2020-09-14T12:04:30Z",
+      "categories": [
+        "cs.CY",
+        "cs.AI"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2009.06345v1",
+      "url": "http://arxiv.org/abs/2009.06345v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.6,
+        "recency": 1.0,
+        "popularity": 1.0,
+        "quality": 2.0,
+        "recommendation": 4.47
+      },
+      "matched_keywords": [
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/1905.10117v1",
+      "title": "Robust Semantic Segmentation in Adverse Weather Conditions by means of Sensor Data Fusion",
+      "summary": "A robust and reliable semantic segmentation in adverse weather conditions is very important for autonomous cars, but most state-of-the-art approaches only achieve high accuracy rates in optimal weather conditions. The reason is that they are only optimized for good weather conditions and given noise models. However, most of them fail, if data with unknown disturbances occur, and their performance decrease enormously. One possibility to still obtain reliable results is to observe the environment with different sensor types, such as camera and lidar, and to fuse the sensor data by means of neural networks, since different sensors behave differently in diverse weather conditions. Hence, the sensors can complement each other by means of an appropriate sensor data fusion. Nevertheless, the fusion-based approaches are still susceptible to disturbances and fail to classify disturbed image areas correctly. This problem can be solved by means of a special training method, the so called Robust Learning Method (RLM), a method by which the neural network learns to handle unknown noise. In this work, two different sensor fusion architectures for semantic segmentation are compared and evaluated on several datasets. Furthermore, it is shown that the RLM increases the robustness in adverse weather conditions enormously, and achieve good results although no disturbance model has been learned by the neural network.",
+      "authors": [
+        "Andreas Pfeuffer",
+        "Klaus Dietmayer"
+      ],
+      "published": "2019-05-24T09:55:57Z",
+      "published_date": "2019-05-24 09:55:57+00:00",
+      "updated": "2019-05-24T09:55:57Z",
+      "categories": [
+        "cs.CV",
+        "cs.LG",
+        "cs.RO"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/1905.10117v1",
+      "url": "http://arxiv.org/abs/1905.10117v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.6,
+        "recency": 1.0,
+        "popularity": 1.0,
+        "quality": 2.0,
+        "recommendation": 4.47
+      },
+      "matched_keywords": [
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2510.21391v1",
+      "title": "TerraGen: A Unified Multi-Task Layout Generation Framework for Remote Sensing Data Augmentation",
+      "summary": "Remote sensing vision tasks require extensive labeled data across multiple, interconnected domains. However, current generative data augmentation frameworks are task-isolated, i.e., each vision task requires training an independent generative model, and ignores the modeling of geographical information and spatial constraints. To address these issues, we propose \\textbf{TerraGen}, a unified layout-to-image generation framework that enables flexible, spatially controllable synthesis of remote sensing imagery for various high-level vision tasks, e.g., detection, segmentation, and extraction. Specifically, TerraGen introduces a geographic-spatial layout encoder that unifies bounding box and segmentation mask inputs, combined with a multi-scale injection scheme and mask-weighted loss to explicitly encode spatial constraints, from global structures to fine details. Also, we construct the first large-scale multi-task remote sensing layout generation dataset containing 45k images and establish a standardized evaluation protocol for this task. Experimental results show that our TerraGen can achieve the best generation image quality across diverse tasks. Additionally, TerraGen can be used as a universal data-augmentation generator, enhancing downstream task performance significantly and demonstrating robust cross-task generalisation in both full-data and few-shot scenarios.",
+      "authors": [
+        "Datao Tang",
+        "Hao Wang",
+        "Yudeng Xin",
+        "Hui Qiao",
+        "Dongsheng Jiang",
+        "Yin Li",
+        "Zhiheng Yu",
+        "Xiangyong Cao"
+      ],
+      "published": "2025-10-24T12:29:12Z",
+      "published_date": "2025-10-24 12:29:12+00:00",
+      "updated": "2025-10-24T12:29:12Z",
+      "categories": [
+        "cs.CV"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2510.21391v1",
+      "url": "http://arxiv.org/abs/2510.21391v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 0.8,
+        "recency": 3.0,
+        "popularity": 0.8,
+        "quality": 1.6,
+        "recommendation": 4.4
+      },
+      "matched_keywords": [
+        "data"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2508.05264v6",
+      "title": "SGDFuse: SAM-Guided Diffusion Model for High-Fidelity Infrared and Visible Image Fusion",
+      "summary": "Infrared and visible image fusion (IVIF) is essential for integrating thermal saliency with textural details to support downstream perception. However, most existing approaches suffer from \"semantic blindness,\" leading to the erroneous suppression of thermal targets and the introduction of visual artifacts. To address this, we propose SAM-Guided Diffusion Fusion Network (SGDFuse), a novel Semantic-Guided Generation (SGG) framework that reframes IVIF as a semantically-steered generative task rather than simplistic pixel mapping. Our method uniquely couples high-level semantic priors from the Segment Anything Model (SAM) with the high-fidelity generative power of a conditional diffusion model. We employ a deliberate two-stage strategy to decouple multimodal alignment from iterative refinement: Stage I establishes a robust structural foundation via preliminary fusion, while Stage II utilizes dual-modality semantic masks as spatial anchors to guide the diffusion process toward a semantically coherent, high-fidelity reconstruction. Comprehensive experiments demonstrate that SGDFuse not only delivers state-of-the-art image quality but also enhances downstream task performance, confirming its effectiveness as a new Methodological Framework for semantically aware image fusion. The code is available at https://github.com/boshizhang123/SGDFuse.",
+      "authors": [
+        "Xiaoyang Zhang",
+        "jinjiang Li",
+        "Guodong Fan",
+        "Yakun Ju",
+        "Linwei Fan",
+        "Jun Liu",
+        "Alex C. Kot"
+      ],
+      "published": "2025-08-07T10:58:52Z",
+      "published_date": "2025-08-07 10:58:52+00:00",
+      "updated": "2026-03-21T04:22:33Z",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2508.05264v6",
+      "url": "http://arxiv.org/abs/2508.05264v6",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 0.8,
+        "recency": 3.0,
+        "popularity": 0.8,
+        "quality": 1.6,
+        "recommendation": 4.4
+      },
+      "matched_keywords": [
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2505.23047v1",
+      "title": "Measurements of Fusion Yield on the Centrifugal Mirror Fusion Experiment",
+      "summary": "The Centrifugal Mirror Fusion Experiment (CMFX) at the University of Maryland, College Park is a rotating mirror device that utilizes a central cathode to generate a radial electric field which induces a strongly sheared azimuthal $E\\times B$ flow to improve plasma confinement and stability. The fusion yield of CMFX plasmas is assessed by diagnosis of neutron emission for the first time. The total neutron yield is measured with two xylene (EJ-301) and deuterated-xylene (EJ-301D) liquid scintillator detectors absolutely calibrated with an in silico method. A larger xylene scintillator was cross-calibrated and used to measure the time dynamics of the fusion rate under various experimental conditions. A permanently installed $^3$He gas tube detector was independently calibrated with a Cf-252 neutron source to make total yield measurements and provide an independent validation of the scintillator calibration. An interpretive modeling framework was developed using the 0D code MCTrans++ (Schwartz et al 2024 JPP) to infer undiagnosed plasma parameters such as density, temperature, and confinement time. A peak neutron emission rate of 8.4$\\times 10^{6}$ $\\pm$ 7.0$\\times 10^{5}$ was measured (neglecting modeling uncertainties), with an inferred triple product of 1.9~$\\times~10^{17}$ $\\mathrm{m^{-3}}$ keV s from 0D modeling.",
+      "authors": [
+        "John L. Ball",
+        "Shon Mackie",
+        "Jacob G. van de Lindt",
+        "Willow Morrissey",
+        "Artur Perevalov",
+        "Zachary Short",
+        "Nicholas Schwartz",
+        "Timothy W. Koeth",
+        "Brian L. Beaudoin",
+        "Carlos A. Romero-Talamas",
+        "John Rice",
+        "R. Alex Tinguely"
+      ],
+      "published": "2025-05-29T03:42:51Z",
+      "published_date": "2025-05-29 03:42:51+00:00",
+      "updated": "2025-05-29T03:42:51Z",
+      "categories": [
+        "physics.plasm-ph"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2505.23047v1",
+      "url": "http://arxiv.org/abs/2505.23047v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 0.8,
+        "recency": 3.0,
+        "popularity": 0.8,
+        "quality": 1.6,
+        "recommendation": 4.4
+      },
+      "matched_keywords": [
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.00699v1",
+      "title": "Deep learning-based astronomical multimodal data fusion: A comprehensive review",
+      "summary": "With the rapid advancements in observational technologies and the widespread implementation of large-scale sky surveys, diverse electromagnetic wave data (e.g., optical and infrared) and non-electromagnetic wave data (e.g., gravitational waves) have become increasingly accessible. Astronomy has thus entered an unprecedented era of data abundance and complexity. Astronomers have long relied on unimodal data analysis to perceive the universe, but these efforts often provide only limited insights when confronted with the current massive and heterogeneous astronomical data. In this context, multimodal data fusion (MDF), as an emerging method, provides new opportunities to enhance the value of astronomical data and deepening the understanding of the universe by integrating information from different modalities. Recent progress in artificial intelligence (AI), particularly in deep learning (DL), has greatly accelerated the development of multimodal research in astronomy. Therefore, a timely review of this field is essential. This paper begins by discussing the motivation and necessity of astronomical MDF, followed by an overview of astronomical data sources and major data modalities. It then introduces representative DL models commonly used in astronomical multimodal studies, the general fusion process as well as various fusion strategies, emphasizing their characteristics, applicability, advantages, and limitations. Subsequently, the paper surveys existing astronomical multimodal studies and datasets. Finally, the discussion section synthesizes key findings, identifies potential challenges, and suggests promising directions for future research. By offering a structured overview and critical analysis, this review aims to inspire and guide researchers engaged in DL-based MDF in astronomy.",
+      "authors": [
+        "Wujun Shao",
+        "Dongwei Fan",
+        "Chenzhou Cui",
+        "Yunfei Xu",
+        "Shirui Wei",
+        "Xin Lyu"
+      ],
+      "published": "2026-02-28T15:14:30Z",
+      "published_date": "2026-02-28 15:14:30+00:00",
+      "updated": "2026-02-28T15:14:30Z",
+      "categories": [
+        "astro-ph.IM"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.00699v1",
+      "url": "http://arxiv.org/abs/2603.00699v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.6,
+        "recency": 3.0,
+        "popularity": 0.15,
+        "quality": 0.3,
+        "recommendation": 4.38
+      },
+      "matched_keywords": [
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2403.11614v4",
+      "title": "CRS-Diff: Controllable Remote Sensing Image Generation with Diffusion Model",
+      "summary": "The emergence of generative models has revolutionized the field of remote sensing (RS) image generation. Despite generating high-quality images, existing methods are limited in relying mainly on text control conditions, and thus do not always generate images accurately and stably. In this paper, we propose CRS-Diff, a new RS generative framework specifically tailored for RS image generation, leveraging the inherent advantages of diffusion models while integrating more advanced control mechanisms. Specifically, CRS-Diff can simultaneously support text-condition, metadata-condition, and image-condition control inputs, thus enabling more precise control to refine the generation process. To effectively integrate multiple condition control information, we introduce a new conditional control mechanism to achieve multi-scale feature fusion, thus enhancing the guiding effect of control conditions. To our knowledge, CRS-Diff is the first multiple-condition controllable RS generative model. Experimental results in single-condition and multiple-condition cases have demonstrated the superior ability of our CRS-Diff to generate RS images both quantitatively and qualitatively compared with previous methods. Additionally, our CRS-Diff can serve as a data engine that generates high-quality training data for downstream tasks, e.g., road extraction. The code is available at https://github.com/Sonettoo/CRS-Diff.",
+      "authors": [
+        "Datao Tang",
+        "Xiangyong Cao",
+        "Xingsong Hou",
+        "Zhongyuan Jiang",
+        "Junmin Liu",
+        "Deyu Meng"
+      ],
+      "published": "2024-03-18T09:44:44Z",
+      "published_date": "2024-03-18 09:44:44+00:00",
+      "updated": "2024-09-01T06:32:06Z",
+      "categories": [
+        "cs.CV"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2403.11614v4",
+      "url": "http://arxiv.org/abs/2403.11614v4",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.2,
+        "recency": 2.0,
+        "popularity": 0.8,
+        "quality": 1.6,
+        "recommendation": 4.27
+      },
+      "matched_keywords": [
+        "data",
+        "fusion"
+      ],
+      "is_classic": false
+    }
+  ]
+}

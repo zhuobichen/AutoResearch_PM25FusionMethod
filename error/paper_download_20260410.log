@@ -1,0 +1,49 @@
+Paper Search and Download Log - Session 2026-04-10
+=================================================
+
+SEARCH KEYWORDS USED:
+1. "PM2.5 CMAQ data fusion methodology 2024"
+2. "air quality spatial interpolation machine learning"
+3. "arXiv PM2.5 CMAQ data fusion deep learning 2025"
+4. "Kriging air quality deep learning 2024 2025 arxiv"
+5. "CMAQ model data assimilation neural network 2025 research paper"
+6. "arxiv 2604 PM2.5 OR air quality OR kriging OR CMAQ OR data fusion"
+7. "arxiv 2603 air quality OR atmospheric OR pollution deep learning"
+
+SEARCH RESULTS SUMMARY:
+- Web searches returned mostly non-academic results (Chinese news, general web content)
+- arXiv.org direct access was blocked due to network restrictions
+- Semantic Scholar / research database searches were not effective
+
+ISSUES ENCOUNTERED:
+1. Web search engine results dominated by Chinese news articles about PM2.5 rather than academic papers
+2. arXiv.org domain blocked for direct fetch operations
+3. Search queries with "site:arxiv.org" did not return expected academic paper results
+4. Limited success finding new papers beyond those already in paper_list.json
+
+EXISTING PAPERS STATUS:
+- Total papers in paper_list.json: 32
+- All papers in new_papers_to_download.json were already in paper_list.json (duplicates)
+- Papers directory contains approximately 40+ PDF files
+
+DEDUPLICATION STATUS:
+- Updated snapshot manager (round_1) with all 32 papers from paper_list.json
+- Snapshot manager now tracks 32 downloaded papers for deduplication
+
+NEW PAPERS FOUND: 0
+- No new papers found that meet the relevance criteria (score >= 3)
+- All potentially relevant papers were already in the existing collection
+
+NOTES:
+- The existing paper collection already contains comprehensive coverage of:
+  * PM2.5/CMAQ data fusion methodologies
+  * Spatial interpolation methods (kriging, machine learning)
+  * Deep learning approaches for air quality prediction
+  * Diffusion models for downscaling and forecasting
+  * Ensemble and hybrid models
+
+RECOMMENDATIONS:
+- Consider searching for papers from specific journals (JGR Atmospheres, Atmospheric Chemistry and Physics)
+- Try searching with Chinese academic search engines for 中文 papers
+- Consider Google Scholar API if available
+- Check Semantic Scholar API for programmatic access

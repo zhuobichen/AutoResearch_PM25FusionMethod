@@ -1,0 +1,7 @@
+This is a placeholder for the R2 comparison figure
+The figure should show:
+- CMAQ: -0.038
+- VNA: 0.800
+- aVNA: 0.794
+- eVNA: 0.810
+- RK-Huber-Poly: 0.8512

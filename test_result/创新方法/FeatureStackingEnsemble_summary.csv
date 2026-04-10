@@ -1,2 +1,2 @@
-method,best_submethod,R2,MAE,RMSE,MB
-FeatureStackingEnsemble,FeatureAug-Stacking(alpha=0.001),0.8552126531248867,6.986768420346178,10.926352458281,-6.4386715691426445e-15
+method,best_submethod,R2,MAE,RMSE,MB,R2_threshold,RMSE_threshold,MB_threshold,R2_pass,RMSE_pass,MB_pass,innovation_verified
+FeatureStackingEnsemble,FeatureAug-Stacking(alpha=0.001),0.8552126531248867,6.986768420346178,10.926352458281,-6.438671569142645e-15,0.8200000000000001,12.5159,0.0774,True,True,True,True

@@ -1,0 +1,13 @@
+{
+  "round": 1,
+  "created": "2026-04-10T16:31:37.815364",
+  "note": "开始第1次运行",
+  "parent": "round_0",
+  "downloaded_papers": [],
+  "analyzed_methods": [
+    "DeepAIR混合CNN_LSTM法"
+  ],
+  "method_fingerprints": [],
+  "best_method": "RK_Huber_Poly",
+  "best_r2": 0.8511750896318879
+}

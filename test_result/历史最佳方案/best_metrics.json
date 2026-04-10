@@ -1,12 +1,25 @@
 {
-  "method": "CSPRK",
+  "method": "RK_Huber_Poly",
   "round": 1,
   "date": "2026-04-10",
-  "metrics": {
-    "R2": 0.9135356539133156,
-    "MAE": 10.43567612681918,
-    "RMSE": 15.652997907935337,
-    "MB": 0.2926495294779537
+  "baseline": {
+    "eVNA": {
+      "R2": 0.81,
+      "RMSE": 12.5159,
+      "MB": 0.0774
+    }
   },
-  "note": "PolyEnsemble etc. Stacking methods excluded"
+  "metrics": {
+    "R2": 0.8511750896318879,
+    "MAE": 7.101451394401925,
+    "RMSE": 11.077651940997892,
+    "MB": 0.06061543730669716
+  },
+  "thresholds": {
+    "R2": 0.8200000000000001,
+    "RMSE": 12.5159,
+    "MB": 0.0774
+  },
+  "all_verified_methods_count": 2,
+  "note": "Innovation verification: R2 >= 0.8200, RMSE <= 12.5159, |MB| <= 0.0774. Excluded Stacking/Ensemble methods. Valid innovations: RK_Huber_Poly, RRK"
 }

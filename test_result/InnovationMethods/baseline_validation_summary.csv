@@ -1,0 +1,7 @@
+method,R2,MAE,RMSE,MB,Status
+VNA,0.7874,7.76,12.98,0.66,PASS (R2 in [0.70,0.95])
+eVNA,0.8094,7.88,12.37,-0.07,PASS (R2 in [0.65,0.95])
+aVNA,-2.8833,39.80,55.73,-6.52,FAIL (R2 < 0.65, bias calculation issue)
+
+Best Baseline: eVNA with R2=0.8094
+Innovation Criteria: R2 >= 0.8194, RMSE <= 12.37, |MB| <= 0.07
