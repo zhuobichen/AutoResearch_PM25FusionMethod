@@ -174,27 +174,25 @@ class TestVerifier:
                 'y_pred': test_df['CMAQ'].values
             })
 
-            # VNA/aVNA/eVNA预测 - 网格预测+提取方法
-            # 创建整个网格坐标
-            ny, nx = lon_cmaq.shape
-            X_grid_full = np.column_stack([lon_cmaq.ravel(), lat_cmaq.ravel()])
-
-            # 在整个网格上预测
-            zdf_grid = nn.predict(X_grid_full, njobs=4)
-            vna_grid = zdf_grid[:, 0]
-            vna_bias_grid = zdf_grid[:, 2]
-            vna_rn_grid = zdf_grid[:, 3]
-
-            # 在验证站点位置提取预测值（最近邻）
-            vna_pred = np.zeros(len(test_df))
-            vna_bias_pred = np.zeros(len(test_df))
-            vna_rn_pred = np.zeros(len(test_df))
+            # VNA/aVNA/eVNA预测 - 标准模式：直接对验证站点所在的CMAQ网格坐标预测
+            # 获取验证站点所在的CMAQ网格坐标
+            test_cmaq_lon = np.zeros(len(test_df))
+            test_cmaq_lat = np.zeros(len(test_df))
             for i, (_, row) in enumerate(test_df.iterrows()):
                 dist = np.sqrt((lon_cmaq - row['Lon'])**2 + (lat_cmaq - row['Lat'])**2)
                 idx = np.argmin(dist)
-                vna_pred[i] = vna_grid[idx]
-                vna_bias_pred[i] = vna_bias_grid[idx]
-                vna_rn_pred[i] = vna_rn_grid[idx]
+                ny, nx = lon_cmaq.shape
+                row_idx, col_idx = idx // nx, idx % nx
+                test_cmaq_lon[i] = lon_cmaq[row_idx, col_idx]
+                test_cmaq_lat[i] = lat_cmaq[row_idx, col_idx]
+
+            # 直接对验证站点所在的CMAQ网格坐标预测
+            X_test_grid = np.column_stack([test_cmaq_lon, test_cmaq_lat])
+            zdf_test = nn.predict(X_test_grid)
+
+            vna_pred = zdf_test[:, 0]
+            vna_bias_pred = zdf_test[:, 2]
+            vna_rn_pred = zdf_test[:, 3]
 
             results['VNA'].append({
                 'fold': fold_id,

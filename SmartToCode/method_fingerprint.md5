@@ -22,6 +22,9 @@ conservative_transport_mass_balance_v1 | Innovation_ConservativeTransport | 2026
 gradient_anisotropic_residual_kriging_v1 | Innovation_GradientAnisotropicKriging | 20260409
 local_bandwidth_gpr_v1 | Innovation_LocalKernelGPR | 20260409
 spatial_quantile_deviation_mapping_v1 | Innovation_SpatialQuantileMapping | 20260409
+spin_graph_kernel_kriging_v1 | Innovation_SPIN_GraphKernel_Kriging | 20260410
+bayesian_multisource_fusion_spde_v1 | Innovation_BayesianMultisourceFusion | 20260410
+corrdiff_residual_diffusion_v1 | Innovation_CorrDiff_Downscaling | 20260410
 
 # === 排除方法记录 ===
 # msef_method_fingerprint_v1 | MSEF | 20260405 | 排除原因: 加权集成，使用交叉验证学习权重

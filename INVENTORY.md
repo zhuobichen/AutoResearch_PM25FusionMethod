@@ -1,7 +1,7 @@
 # 项目盘点报告
 
 ## 生成时间
-2026-04-09
+2026-04-10 12:00
 
 ## 目录结构现状
 
@@ -11,7 +11,7 @@
 | PaperDownloadMd/ | 13 | 正常 | 论文清单、分析报告、搜索结果 |
 | LocalPaperLibrary/ | 13 | 正常 | 本地论文库（中文翻译版） |
 | MethodToSmart/ | 33 | 正常 | 方法文档，含7个新增(20260409) |
-| SmartToCode/ | 34 | 已整理 | 6创新+28复现，V1_前缀已规范化 |
+| SmartToCode/ | 40 | 已整理 | 9创新+31复现，新增3个SPIN等方法 |
 | CodeWorkSpace/ | 60+ | 正常 | 代码实现、基准方法、创新方法 |
 | test_result/ | 50+ | 正常 | 基准方法、创新方法、复现方法测试结果 |
 | paper_output/ | 9 | 正常 | 论文草稿、参考文献 |
@@ -57,9 +57,9 @@
 | 文献分析员_NeuroDDAF神经动态扩散平流场法_20260409.md | 符合规范 | 神经ODE |
 | 文献分析员_DDNet双深度网络PM25预报法_20260409.md | 符合规范 | 双网络 |
 
-### SmartToCode/ 文件清单（31个）
+### SmartToCode/ 文件清单（37个）
 
-#### 创新方法指令（6个）- 符合规范
+#### 创新方法指令（9个）- 符合规范
 
 | 文件 | 状态 |
 |------|------|
@@ -69,6 +69,9 @@
 | Innovation_PDEICNN.md | 符合规范 |
 | Innovation_PolyGPRAdapt.md | 符合规范 |
 | Innovation_ConservativeTransport.md | 符合规范 |
+| Innovation_SPIN_GraphKernel_Kriging.md | 符合规范 |
+| Innovation_BayesianMultisourceFusion.md | 符合规范 |
+| Innovation_CorrDiff_Downscaling.md | 符合规范 |
 
 #### 复现方法指令（25个）
 
@@ -102,6 +105,14 @@
 | ~~V1_BayesianSTK贝叶斯时空克里金法.md~~ | ⚠️ 待删除 | 请手动删除 |
 | ~~V1_NeuroDDAF神经动态扩散平流场法.md~~ | ⚠️ 待删除 | 请手动删除 |
 
+### 新实现方法（20260410）
+
+| 文件 | 方法名 | 创新点 |
+|------|--------|--------|
+| SPIN_GraphKernel_Kriging.py | SPIN-Kr 图核时空克里金法 | 图核距离融合欧氏+风向，SPDE潜在场 |
+| BMSF_Geostat.py | BMSF-Geostat 贝叶斯多源融合法 | 贝叶斯后验，Matérn协方差，多源融合 |
+| CorrDiff_Downscaling.py | CorrDiff-3km 残差修正扩散降尺度法 | 扩散模型高频残差学习，多路径采样 |
+
 ## 当前状态
 
 ### 统计摘要
@@ -111,8 +122,8 @@
 | 论文PDF总数 | ~100+ | PaperDownload/ |
 | PM2.5/CMAQ相关论文 | 30+ | 从paper_list.json筛选 |
 | 已分析方法文档 | 33个 | MethodToSmart/ |
-| 已有方案指令 | 34个 | SmartToCode/ (含新整理3个) |
-| 代码实现 | 60+ | CodeWorkSpace/ |
+| 已有方案指令 | 37个 | SmartToCode/ (含新整理3个) |
+| 代码实现 | 63+ | CodeWorkSpace/ (新增3个创新方法) |
 | 测试结果 | 50+ | test_result/ |
 
 ### 最佳测试结果

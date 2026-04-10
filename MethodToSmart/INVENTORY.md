@@ -1,6 +1,7 @@
 # 方法文档清单 (INVENTORY)
 
 生成时间: 2026-04-09
+最后更新: 2026-04-10
 
 ## 已有方法文档
 
@@ -47,18 +48,42 @@
 
 ## 待分析论文清单
 
-从paper_list.json中识别的PM2.5/CMAQ相关论文(已处理):
+从paper_list.json中识别的PM2.5/CMAQ相关论文(共21篇):
 
+### 已分析 (8篇) ✓
+1. TopoFlow (Physics-guided Neural Networks) - 2026 ✓
+2. GenDA (Generative Data Assimilation) - 2026 ✓
+3. Zeeman (Deep Learning CTM) - 2025 ✓
+4. EnsAI (Atmospheric Chemical Ensemble Emulator) - 2025 ✓
+5. AirFusion (Diffusion-based Probabilistic) - 2026 ✓
+6. NeuroDDAF (Neural Dynamic Diffusion-Advection) - 2026 ✓
+7. D-DNet (Dual Deep Neural Networks) - 2024 ✓
+8. CleanAir (Deep Learning CMAQ Emulator) - 2025 ✓
+
+### 待分析 (13篇) - 来自paper_list.json
 1. Physics-Guided Inductive Spatiotemporal Kriging (SPIN) - 2025
 2. Bayesian Multisource Fusion Model - 2025
-3. China Regional 3km Downscaling (CorrDiff) - 2025
-4. TopoFlow (Physics-guided Neural Networks) - 2026 ✓
-5. GenDA (Generative Data Assimilation) - 2026 ✓
-6. Zeeman (Deep Learning CTM) - 2025 ✓
-7. EnsAI (Atmospheric Chemical Ensemble Emulator) - 2025 ✓
-8. D-DNet (Dual Deep Neural Networks) - 2024 ✓
-9. AirFusion (Diffusion-based Probabilistic) - 2026 ✓
-10. NeuroDDAF (Neural Dynamic Diffusion-Advection) - 2026 ✓
+3. Geostatistical vs ML Comparison (PurpleAir sensors) - 2025
+4. CorrDiff China Regional 3km Downscaling - 2025
+5. GAN-based Extreme Geospatial Downscaling - 2024
+6. Indoor PM2.5 Forecasting (Australia sensors) - 2024
+7. Data/Decision Level AOD Fusion (Tehran) - 2023
+8. CNN-LSTM PM2.5 Prediction (Beijing) - 2025
+9. MSF-NNG Multi-source Spatiotemporal Fusion - 2023
+10. S-BPNN PM2.5 Estimation (China) - 2019
+11. Bidirectional LSTM PM2.5 (Southeast USA) - 2019
+12. Low-Cost Sensor Calibration - 2020
+13. Deep-AIR Hybrid CNN-LSTM - 2021
+
+### 待分析 (额外发现) - 来自paper_list.json续
+14. Diffusion-based Probabilistic Air Quality Forecasting - 2026
+15. Kriging-informed Conditional Diffusion (Sea Level) - 2024
+16. Physics-guided Diffusion for PDE Downscaling - 2024
+17. SmaAt-Krige-GNet Precipitation Nowcasting - 2025
+18. Spatial Interpolation UK Case Study - 2024
+19. Satellite-informed Sensor Placement Framework - 2024
+20. Tehran Spatial Temporal Patterns - 2024
+21. CMAQ-CNN Hybrid Ozone Forecasting - 2021
 
 ## 方法分类汇总
 

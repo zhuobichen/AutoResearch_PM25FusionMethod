@@ -1,0 +1,4 @@
+method,R2,delta,status
+SPIN-Kr,0.7351722508001222,-0.11672774919987783,[FAIL] Does not exceed baseline
+BMSF-Geostat,0.8524567351135321,0.0005567351135321585,[WARN] Improvement but insufficient
+CorrDiff-3km,0.8610868945952773,0.009186894595277328,[WARN] Improvement but insufficient
