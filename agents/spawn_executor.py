@@ -459,6 +459,76 @@ class SpawnExecutor:
 
         return result
 
+    def skip_phase1(self):
+        """
+        跳过 Phase 1（文献下载）
+        当论文已足够时使用
+        """
+        print("\n" + "="*60)
+        print("Phase 1: 跳过（论文已足够）")
+        print("="*60)
+
+        # 直接标记下载完成
+        for agent_id in ['dl_1', 'dl_2', 'dl_3']:
+            self.state['agents'][agent_id] = {
+                'role': 'literature_downloader',
+                'status': 'completed',
+                'completed_at': datetime.now().isoformat(),
+                'skipped': True
+            }
+        self._save_state()
+        print("  已跳过下载阶段，所有下载Agent标记为完成")
+
+    def run_all(self, skip_download: bool = False, max_iterations: int = 1):
+        """
+        自动运行完整工作流（多米诺骨牌式触发）
+
+        参数：
+            skip_download: 是否跳过下载阶段
+            max_iterations: 最大迭代次数（默认1，正常流程）
+
+        注意：实际 spawn 需要在 Claude Code 主会话中通过 Agent 工具执行
+        此方法只打印执行计划
+        """
+        print("\n" + "="*60)
+        print("多米诺骨牌式自动执行")
+        print("="*60)
+
+        if skip_download:
+            self.skip_phase1()
+        else:
+            result = self.phase1_download()
+            print("\n  [等待 dl_1, dl_2, dl_3 完成]")
+            print("  完成后执行: mark_completed('dl_1'), mark_completed('dl_2'), mark_completed('dl_3')")
+            return  # 需要手动触发
+
+        # Phase 2
+        result = self.phase2_analyze()
+        if not result:
+            print("  [错误] Phase 2 无法执行")
+            return
+        print("\n  [等待 analyzer 完成]")
+        print("  完成后执行: mark_completed('analyzer')")
+        return  # 需要手动触发
+
+    def get_status(self) -> Dict:
+        """获取当前工作流状态"""
+        status = {
+            'round': self.state.get('round', 0),
+            'agents': {},
+            'innovation_established': self.state.get('innovation_established', False)
+        }
+
+        for agent_id, info in self.state.get('agents', {}).items():
+            status['agents'][agent_id] = {
+                'role': info.get('role', ''),
+                'status': info.get('status', ''),
+                'completed_at': info.get('completed_at', ''),
+                'skipped': info.get('skipped', False)
+            }
+
+        return status
+
 
 def print_spawn_guide():
     """打印 Agent spawn 执行指南"""
