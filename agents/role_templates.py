@@ -298,6 +298,16 @@ opendataloader_pdf.convert(
 - 每个方法输出一个 .md 文件
 - 方法指纹无重复
 - 完成时报告：分析方法数量、输出文件列表
+
+## 完成后自动触发
+
+完成所有任务后，在命令行执行以下命令触发下一阶段：
+```
+python -c "from agents.spawn_executor import SpawnExecutor; SpawnExecutor('{project_root}').trigger_next()"
+```
+
+完成后退出的理由：
+exit_reason: "分析完成，方法文档已生成"
 """,
 
     'method_designer': """
@@ -423,6 +433,16 @@ def456...   eVNA          20260408
 - 创新方案数量：1-2个
 - 指纹库更新
 - 完成时报告：方案数量、新指纹数量
+
+## 完成后自动触发
+
+完成所有任务后，在命令行执行以下命令触发下一阶段：
+```
+python -c "from agents.spawn_executor import SpawnExecutor; SpawnExecutor('{project_root}').trigger_next()"
+```
+
+完成后退出的理由：
+exit_reason: "设计完成，方案指令已生成"
 """,
 
     'code_engineer': """
@@ -539,6 +559,16 @@ def calculate_metrics(y_true, y_pred):
 - 每个方法输出一个 .py 文件
 - 代码可直接运行
 - 完成时报告：实现方法数量、输出文件列表
+
+## 完成后自动触发
+
+完成所有任务后，在命令行执行以下命令触发下一阶段：
+```
+python -c "from agents.spawn_executor import SpawnExecutor; SpawnExecutor('{project_root}').trigger_next()"
+```
+
+完成后退出的理由：
+exit_reason: "实现完成，代码已生成"
 """,
 
     'test_verifier': """
@@ -681,6 +711,16 @@ test_result/
 - 所有方法完成十折验证
 - 生成 comparison_report.md
 - 完成时报告：各方法指标、创新是否成立
+
+## 完成后自动触发
+
+完成所有任务后，在命令行执行以下命令触发下一阶段：
+```
+python -c "from agents.spawn_executor import SpawnExecutor; SpawnExecutor('{project_root}').trigger_next()"
+```
+
+完成后退出的理由：
+exit_reason: "验证完成，测试结果已生成"
 """,
 
     'technical_writer': """
@@ -811,6 +851,13 @@ paper_output/
 - paper_output/paper.tex 完整
 - references.bib 包含所有引用
 - 完成时报告：论文页数、图表数量、引用数量
+
+## 完成标志
+
+论文写作已完成，整个工作流结束！
+
+完成后退出的理由：
+exit_reason: "论文写作完成"
 """,
 
 }

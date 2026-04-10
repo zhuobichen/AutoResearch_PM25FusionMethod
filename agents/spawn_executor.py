@@ -481,35 +481,82 @@ class SpawnExecutor:
 
     def run_all(self, skip_download: bool = False, max_iterations: int = 1):
         """
-        自动运行完整工作流（多米诺骨牌式触发）
-
-        参数：
-            skip_download: 是否跳过下载阶段
-            max_iterations: 最大迭代次数（默认1，正常流程）
-
-        注意：实际 spawn 需要在 Claude Code 主会话中通过 Agent 工具执行
-        此方法只打印执行计划
+        多米诺骨牌式自动执行
+        检查当前状态，自动执行可以继续的下一个 Phase
+        返回下一个 Agent 的 spawn 信息
         """
+        # Phase 0: 整理（如果还没做）
+        if not self.wait_and_check(['organizer']):
+            print("\n[Phase 0] 执行项目整理...")
+            return self.phase0_organize()
+
+        # Phase 1: 下载 或 跳过
+        if not self.wait_and_check(['dl_1']):
+            if skip_download:
+                self.skip_phase1()
+            else:
+                print("\n[Phase 1] 执行文献下载...")
+                return self.phase1_download()
+
+        # Phase 2: 分析
+        if not self.wait_and_check(['analyzer']):
+            print("\n[Phase 2] 执行文献分析...")
+            return self.phase2_analyze()
+
+        # Phase 3: 设计
+        if not self.wait_and_check(['designer']):
+            print("\n[Phase 3] 执行方案设计...")
+            return self.phase3_design()
+
+        # Phase 4: 代码
+        if not self.wait_and_check(['engineer']):
+            print("\n[Phase 4] 执行代码实现...")
+            return self.phase4_code()
+
+        # Phase 5: 测试
+        if not self.wait_and_check(['verifier']):
+            print("\n[Phase 5] 执行测试验证...")
+            return self.phase5_test()
+
+        # Phase 6: 写作（如果创新成立）
+        if self.state.get('innovation_established'):
+            if not self.wait_and_check(['writer']):
+                print("\n[Phase 6] 执行论文写作...")
+                return self.phase6_write()
+
+        # 所有 Phase 完成
         print("\n" + "="*60)
-        print("多米诺骨牌式自动执行")
+        print("所有 Phase 已完成！")
         print("="*60)
+        print(f"当前最佳方法: {self.state_tracker.get_current_state()['current_best_method']}")
+        print(f"R²: {self.state_tracker.get_current_state()['current_best_r2']:.4f}")
+        return None
 
-        if skip_download:
-            self.skip_phase1()
-        else:
-            result = self.phase1_download()
-            print("\n  [等待 dl_1, dl_2, dl_3 完成]")
-            print("  完成后执行: mark_completed('dl_1'), mark_completed('dl_2'), mark_completed('dl_3')")
-            return  # 需要手动触发
+    def trigger_next(self):
+        """
+        触发下一个可执行的 Phase
+        供外部调用（如在 Agent prompt 里调用 Bash 触发）
 
-        # Phase 2
-        result = self.phase2_analyze()
-        if not result:
-            print("  [错误] Phase 2 无法执行")
-            return
-        print("\n  [等待 analyzer 完成]")
-        print("  完成后执行: mark_completed('analyzer')")
-        return  # 需要手动触发
+        用法：
+          在 Agent prompt 末尾添加：
+          完成后退出的理由：
+          exit_reason: "任务完成"
+
+          然后在当前会话执行：
+          python -c "from agents.spawn_executor import SpawnExecutor; SpawnExecutor('.').trigger_next()"
+        """
+        result = self.run_all()
+        if result:
+            print("\n" + "="*60)
+            print("下一步 Agent 信息:")
+            print("="*60)
+            print(f"Agent ID: {result['agent_id']}")
+            print(f"Role: {result['role']}")
+            print(f"\nPrompt ({len(result['prompt'])} chars):")
+            print("-"*40)
+            print(result['prompt'][:500] + "..." if len(result['prompt']) > 500 else result['prompt'])
+            print("-"*40)
+        return result
 
     def get_status(self) -> Dict:
         """获取当前工作流状态"""
