@@ -10,89 +10,13 @@
     "RMSE": 11.05
   },
   "current_best_method": "RK-Poly",
-  "iteration": 2,
+  "iteration": 3,
   "max_iterations": 20,
-  "consecutive_no_improvement": 1,
+  "consecutive_no_improvement": 2,
   "max_consecutive_no_improvement": 5,
   "status": "converged",
   "target_improvement": 0.01,
   "accepted_mutations": [
-    {
-      "mutation_id": "mut_1_0",
-      "method_name": "ResidualKriging",
-      "description": "残差克里金方法",
-      "metric_before": {
-        "R2": 0.81,
-        "MAE": 7.5,
-        "RMSE": 11.0
-      },
-      "metric_after": {
-        "R2": 0.8273,
-        "MAE": 7.2,
-        "RMSE": 10.8
-      },
-      "status": "accepted",
-      "iteration": 1,
-      "failure_reason": "",
-      "code_diff": ""
-    },
-    {
-      "mutation_id": "mut_1_0",
-      "method_name": "ResidualKriging",
-      "description": "残差克里金方法",
-      "metric_before": {
-        "R2": 0.81,
-        "MAE": 7.5,
-        "RMSE": 11.0
-      },
-      "metric_after": {
-        "R2": 0.8273,
-        "MAE": 7.2,
-        "RMSE": 10.8
-      },
-      "status": "accepted",
-      "iteration": 1,
-      "failure_reason": "",
-      "code_diff": ""
-    },
-    {
-      "mutation_id": "mut_2_1",
-      "method_name": "PolyEnsemble",
-      "description": "多项式集成方法",
-      "metric_before": {
-        "R2": 0.8273,
-        "MAE": 7.2,
-        "RMSE": 10.8
-      },
-      "metric_after": {
-        "R2": 0.8523,
-        "MAE": 7.1,
-        "RMSE": 11.04
-      },
-      "status": "accepted",
-      "iteration": 2,
-      "failure_reason": "",
-      "code_diff": ""
-    },
-    {
-      "mutation_id": "mut_3_2",
-      "method_name": "SuperStackingEnsemble",
-      "description": "Ridge元学习器集成",
-      "metric_before": {
-        "R2": 0.8523,
-        "MAE": 7.1,
-        "RMSE": 11.04
-      },
-      "metric_after": {
-        "R2": 0.8571,
-        "MAE": 6.95,
-        "RMSE": 10.85
-      },
-      "status": "accepted",
-      "iteration": 3,
-      "failure_reason": "",
-      "code_diff": ""
-    },
     {
       "mutation_id": "mut_1_0",
       "method_name": "RK-Poly",
@@ -116,46 +40,8 @@
   "rejected_mutations": [
     {
       "mutation_id": "mut_2_1",
-      "method_name": "CSP-RK",
-      "description": "浓度分层多项式克里金",
-      "metric_before": {
-        "R2": 0.8273,
-        "MAE": 7.2,
-        "RMSE": 10.8
-      },
-      "metric_after": {
-        "R2": 0.852,
-        "MAE": 7.1,
-        "RMSE": 10.9
-      },
-      "status": "rejected",
-      "iteration": 2,
-      "failure_reason": "参数迁移性差，跨天平均Δ=-0.00003 << 0.01阈值",
-      "code_diff": ""
-    },
-    {
-      "mutation_id": "mut_4_3",
-      "method_name": "CSP-RK",
-      "description": "浓度分层多项式克里金",
-      "metric_before": {
-        "R2": 0.8571,
-        "MAE": 6.95,
-        "RMSE": 10.85
-      },
-      "metric_after": {
-        "R2": 0.8535,
-        "MAE": 7.07,
-        "RMSE": 10.99
-      },
-      "status": "rejected",
-      "iteration": 4,
-      "failure_reason": "参数迁移性差，1月整月平均Δ=-0.00003 << 0.01阈值",
-      "code_diff": ""
-    },
-    {
-      "mutation_id": "mut_2_1",
       "method_name": "SuperStackingEnsemble",
-      "description": "Ridge加权组合基础模型OOF预测",
+      "description": "",
       "metric_before": {
         "R2": 0.8519,
         "MAE": 7.09,
@@ -168,216 +54,119 @@
       },
       "status": "rejected",
       "iteration": 2,
-      "failure_reason": "权重组合无物理意义，+0.0052差距可能是运气，统计不显著",
+      "failure_reason": "权重组合无物理意义，+0.0052差距统计不显著",
+      "code_diff": ""
+    },
+    {
+      "mutation_id": "mut_3_2",
+      "method_name": "CSP-RK",
+      "description": "",
+      "metric_before": {
+        "R2": 0.8519,
+        "MAE": 7.09,
+        "RMSE": 11.05
+      },
+      "metric_after": {
+        "R2": 0.8535,
+        "MAE": 7.07,
+        "RMSE": 10.99
+      },
+      "status": "rejected",
+      "iteration": 3,
+      "failure_reason": "参数迁移性差，1月整月平均Δ≈-0.00003 << 0.01阈值",
       "code_diff": ""
     }
   ],
   "metric_history": [
     {
       "name": "R2",
-      "value": 0.8273,
-      "timestamp": "2026-04-10T09:00:35.672343",
-      "iteration": 1,
-      "method": "ResidualKriging"
-    },
-    {
-      "name": "MAE",
-      "value": 7.2,
-      "timestamp": "2026-04-10T09:00:35.672356",
-      "iteration": 1,
-      "method": "ResidualKriging"
-    },
-    {
-      "name": "RMSE",
-      "value": 10.8,
-      "timestamp": "2026-04-10T09:00:35.672363",
-      "iteration": 1,
-      "method": "ResidualKriging"
-    },
-    {
-      "name": "R2",
-      "value": 0.852,
-      "timestamp": "2026-04-10T09:00:35.675424",
-      "iteration": 2,
-      "method": "CSP-RK"
-    },
-    {
-      "name": "MAE",
-      "value": 7.1,
-      "timestamp": "2026-04-10T09:00:35.675435",
-      "iteration": 2,
-      "method": "CSP-RK"
-    },
-    {
-      "name": "RMSE",
-      "value": 10.9,
-      "timestamp": "2026-04-10T09:00:35.675441",
-      "iteration": 2,
-      "method": "CSP-RK"
-    },
-    {
-      "name": "R2",
-      "value": 0.8273,
-      "timestamp": "2026-04-10T09:01:59.726477",
-      "iteration": 1,
-      "method": "ResidualKriging"
-    },
-    {
-      "name": "MAE",
-      "value": 7.2,
-      "timestamp": "2026-04-10T09:01:59.726498",
-      "iteration": 1,
-      "method": "ResidualKriging"
-    },
-    {
-      "name": "RMSE",
-      "value": 10.8,
-      "timestamp": "2026-04-10T09:01:59.726506",
-      "iteration": 1,
-      "method": "ResidualKriging"
-    },
-    {
-      "name": "R2",
-      "value": 0.8523,
-      "timestamp": "2026-04-10T09:01:59.731381",
-      "iteration": 2,
-      "method": "PolyEnsemble"
-    },
-    {
-      "name": "MAE",
-      "value": 7.1,
-      "timestamp": "2026-04-10T09:01:59.731412",
-      "iteration": 2,
-      "method": "PolyEnsemble"
-    },
-    {
-      "name": "RMSE",
-      "value": 11.04,
-      "timestamp": "2026-04-10T09:01:59.731424",
-      "iteration": 2,
-      "method": "PolyEnsemble"
-    },
-    {
-      "name": "R2",
-      "value": 0.8571,
-      "timestamp": "2026-04-10T09:01:59.736286",
-      "iteration": 3,
-      "method": "SuperStackingEnsemble"
-    },
-    {
-      "name": "MAE",
-      "value": 6.95,
-      "timestamp": "2026-04-10T09:01:59.736307",
-      "iteration": 3,
-      "method": "SuperStackingEnsemble"
-    },
-    {
-      "name": "RMSE",
-      "value": 10.85,
-      "timestamp": "2026-04-10T09:01:59.736313",
-      "iteration": 3,
-      "method": "SuperStackingEnsemble"
-    },
-    {
-      "name": "R2",
-      "value": 0.8535,
-      "timestamp": "2026-04-10T09:01:59.741164",
-      "iteration": 4,
-      "method": "CSP-RK"
-    },
-    {
-      "name": "MAE",
-      "value": 7.07,
-      "timestamp": "2026-04-10T09:01:59.741177",
-      "iteration": 4,
-      "method": "CSP-RK"
-    },
-    {
-      "name": "RMSE",
-      "value": 10.99,
-      "timestamp": "2026-04-10T09:01:59.741184",
-      "iteration": 4,
-      "method": "CSP-RK"
-    },
-    {
-      "name": "R2",
       "value": 0.8519,
-      "timestamp": "2026-04-10T09:46:54.924150",
+      "timestamp": "2026-04-10T10:08:54.313720",
       "iteration": 1,
       "method": "RK-Poly"
     },
     {
       "name": "MAE",
       "value": 7.09,
-      "timestamp": "2026-04-10T09:46:54.924172",
+      "timestamp": "2026-04-10T10:08:54.313737",
       "iteration": 1,
       "method": "RK-Poly"
     },
     {
       "name": "RMSE",
       "value": 11.05,
-      "timestamp": "2026-04-10T09:46:54.924179",
+      "timestamp": "2026-04-10T10:08:54.313745",
       "iteration": 1,
       "method": "RK-Poly"
     },
     {
       "name": "R2",
       "value": 0.8571,
-      "timestamp": "2026-04-10T09:46:54.928957",
+      "timestamp": "2026-04-10T10:08:54.317295",
       "iteration": 2,
       "method": "SuperStackingEnsemble"
     },
     {
       "name": "MAE",
       "value": 6.95,
-      "timestamp": "2026-04-10T09:46:54.928969",
+      "timestamp": "2026-04-10T10:08:54.317307",
       "iteration": 2,
       "method": "SuperStackingEnsemble"
     },
     {
       "name": "RMSE",
       "value": 10.85,
-      "timestamp": "2026-04-10T09:46:54.928975",
+      "timestamp": "2026-04-10T10:08:54.317314",
       "iteration": 2,
       "method": "SuperStackingEnsemble"
+    },
+    {
+      "name": "R2",
+      "value": 0.8535,
+      "timestamp": "2026-04-10T10:08:54.320753",
+      "iteration": 3,
+      "method": "CSP-RK"
+    },
+    {
+      "name": "MAE",
+      "value": 7.07,
+      "timestamp": "2026-04-10T10:08:54.320766",
+      "iteration": 3,
+      "method": "CSP-RK"
+    },
+    {
+      "name": "RMSE",
+      "value": 10.99,
+      "timestamp": "2026-04-10T10:08:54.320771",
+      "iteration": 3,
+      "method": "CSP-RK"
     }
   ],
   "active_hypotheses": [],
   "failed_methods": [
     {
-      "method": "CSP-RK",
-      "reason": "参数迁移性差，跨天平均Δ=-0.00003 << 0.01阈值",
-      "iteration": 2,
-      "metrics": {
-        "R2": 0.852,
-        "MAE": 7.1,
-        "RMSE": 10.9
-      },
-      "timestamp": "2026-04-10T09:00:35.676383"
-    },
-    {
-      "method": "CSP-RK",
-      "reason": "参数迁移性差，1月整月平均Δ=-0.00003 << 0.01阈值",
-      "iteration": 4,
-      "metrics": {
-        "R2": 0.8535,
-        "MAE": 7.07,
-        "RMSE": 10.99
-      },
-      "timestamp": "2026-04-10T09:01:59.742561"
-    },
-    {
       "method": "SuperStackingEnsemble",
-      "reason": "权重组合无物理意义，+0.0052差距可能是运气，统计不显著",
+      "reason": "权重组合无物理意义，+0.0052差距统计不显著",
       "iteration": 2,
       "metrics": {
         "R2": 0.8571,
         "MAE": 6.95,
         "RMSE": 10.85
       },
-      "timestamp": "2026-04-10T09:46:54.931438"
+      "timestamp": "2026-04-10T10:08:54.318325"
+    },
+    {
+      "method": "CSP-RK",
+      "reason": "参数迁移性差，1月整月平均Δ≈-0.00003 << 0.01阈值",
+      "iteration": 3,
+      "metrics": {
+        "R2": 0.8535,
+        "MAE": 7.07,
+        "RMSE": 10.99
+      },
+      "timestamp": "2026-04-10T10:08:54.322196"
     }
   ],
-  "current_method": "SuperStackingEnsemble",
-  "current_mutation_id": "mut_2_1"
+  "current_method": "CSP-RK",
+  "current_mutation_id": "mut_3_2"
 }
