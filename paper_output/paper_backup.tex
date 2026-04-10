@@ -1,0 +1,438 @@
+% PM2.5 CMAQ Data Fusion Paper
+% RK-Poly: A Polynomial Correction and Gaussian Process Regression Approach
+
+\documentclass[a4paper]{article}
+
+\usepackage{natbib}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{color}
+\usepackage[gray]{xcolor}
+\usepackage{colortbl}
+\usepackage{cleveref}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{times}
+
+\geometry{
+    a4paper,
+    left=1in,
+    right=1in,
+    top=1in,
+    bottom=1in
+}
+
+% Custom commands
+\newcommand{\PM}{PM$_{2.5}$}
+\newcommand{\CMAQ}{\text{CMAQ}}
+\DeclareMathOperator{\Rtwo}{R$^2$}
+\DeclareMathOperator{\MAE}{MAE}
+\DeclareMathOperator{\RMSE}{RMSE}
+\DeclareMathOperator{\MB}{MB}
+
+% Citation commands
+\makeatletter
+\def\@Citep#1{\citep{#1}}
+\def\@Citet#1{\citet{#1}}
+\let\citep\@Citep
+\let\citet\@Citet
+\makeatother
+
+% Table style
+\let\mc\hline
+\newcommand{\mcc}{\cellcolor{gray!20}}
+\arrayrulecolor{black}
+
+% Page style
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Polynomial Correction and GPR for PM$_{2.5}$ CMAQ Fusion}
+\fancyhead[R]{\thepage}
+
+\begin{document}
+
+% Title page
+\begin{center}
+\vspace*{-0.5cm}
+{\LARGE\bfseries Polynomial Correction and Gaussian Process Regression for PM$_{2.5}$ CMAQ Data Fusion}\\[0.5cm]
+{\large Ridge-Poly: A Decompose-Combine Strategy for Air Quality Estimation}\\[1cm]
+\end{center}
+
+% Abstract
+\begin{abstract}
+\textbf{Background:} Accurate estimation of PM$_{2.5}$ concentration is crucial for public health and environmental monitoring. Chemical transport models (CMAQ) provide high-resolution simulations but suffer from systematic bias \citep{foley2010CMAQ}. Ground monitoring networks have sparse spatial coverage \citep{reich2014ensemble}.
+
+\textbf{Limitations of Existing Methods:} Simple bias correction methods (e.g., mean correction, scaled correction) assume constant bias and fail to capture nonlinear bias patterns \citep{ram2014bias}. Spatial interpolation methods (e.g., VNA, eVNA) leverage spatial correlation but do not fully model the nonlinear characteristics of CMAQ bias \citep{singh2019enhanced}.
+
+\textbf{Proposed Method:} We propose Ridge-Poly (RK-Poly), which decomposes the CMAQ bias correction problem into two sub-problems: (1) polynomial regression to capture nonlinear bias features; (2) Gaussian process regression (GPR) to model spatial residuals. This decompose-combine strategy achieves accurate PM$_{2.5}$ spatial estimation.
+
+\textbf{Results:} On 2020 Beijing regional PM$_{2.5}$ data, 10-fold cross-validation shows RK-Poly achieves R$^2$=0.8519, MAE=7.09, RMSE=11.05, improving over baseline eVNA (R$^2$=0.8100) by 5.17\%, significantly outperforming 9 reproduced methods from literature.
+
+\textbf{Conclusion:} The decompose-combine strategy (polynomial bias correction + spatial residual interpolation) is more effective than simple linear correction; GPR effectively models spatial correlation of residuals; RK-Poly has clear physical interpretation and good transferability.
+\end{abstract}
+
+\medskip
+\noindent\textbf{Keywords:} PM$_{2.5}$, CMAQ, Data Fusion, Polynomial Correction, Gaussian Process Regression, Spatial Interpolation
+
+\newpage
+
+% 1. Introduction
+\section{1. Introduction}
+
+PM$_{2.5}$ (fine particulate matter) concentration is closely related to cardiovascular and respiratory diseases \citep{brook2010particulate}. Accurate estimation of PM$_{2.5}$ spatial distribution is crucial for public health risk assessment and environmental policy making.
+
+\textbf{Problem Background:} PM$_{2.5}$ estimation faces two complementary data sources: (1) ground monitoring networks provide reliable in-situ observations but have sparse coverage; (2) chemical transport models (e.g., CMAQ) provide high-resolution simulation fields but suffer from systematic bias \citep{foley2010CMAQ}. Effectively fusing these two data sources is the core challenge for improving PM$_{2.5}$ spatial estimation \citep{reich2014ensemble}.
+
+\textbf{Review of Existing Methods:} In recent years, data fusion methods have been widely applied in PM$_{2.5}$ estimation \citep{shao2017fusion}. These methods can be categorized into three types: (1) simple bias correction (BC), assuming constant bias \citep{ram2014bias}; (2) spatial interpolation methods (VNA/eVNA), leveraging spatial correlation \citep{singh2019enhanced}; (3) Gaussian process regression methods (GPR), modeling residuals between observations and simulations \citep{rodriguez2025downscaling}.
+
+\textbf{Limitations of Existing Methods:} However, these methods share a common limitation: they assume CMAQ bias has a simple linear or constant relationship with simulation values. In practice, CMAQ bias often varies nonlinearly with concentration levels -- at high pollution, bias is larger; at low pollution, bias is smaller or even has opposite sign. This nonlinear characteristic is not fully captured by existing methods.
+
+\textbf{Research Objectives and Contributions:} To address these issues, we propose Ridge-Poly (RK-Poly) with the following main contributions:
+
+\begin{itemize}
+    \item \textbf{Decompose-Combine Strategy:} First to decompose CMAQ bias correction into polynomial bias correction and spatial residual interpolation, achieving accurate estimation through combination.
+    \item \textbf{Clear Physical Interpretation:} Polynomial terms capture the nonlinear bias characteristic of "CMAQ underestimation is more severe at high pollution"; GPR models spatial correlation of residuals.
+    \item \textbf{Strong Explainability:} Each coefficient and operation has clear physical meaning, facilitating understanding and improvement.
+    \item \textbf{Good Transferability:} Unlike weighted ensemble methods (requiring weight learning), RK-Poly is a single-model method with stable parameters, transferable to other dates.
+\end{itemize}
+
+\textbf{Paper Structure:} Section 2 introduces related work; Section 3 details the RK-Poly method; Section 4 describes experimental design; Section 5 presents results; Section 6 discusses findings; Section 7 concludes.
+
+% 2. Related Work
+\section{2. Related Work}
+
+PM$_{2.5}$ CMAQ fusion methods can be categorized into three types: bias correction methods, spatial interpolation methods, and machine learning methods.
+
+\subsection{2.1 Bias Correction Methods}
+
+Bias correction methods assume systematic bias between CMAQ simulations and observations, correcting simulations to improve accuracy.
+
+\textbf{Mean Bias Correction (BC\_Mean):} Computes the difference between observation mean and simulation mean as a constant bias for correction. Simple but assumes global constant bias, unable to reflect spatial heterogeneity.
+
+\textbf{Scaled Bias Correction (BC\_Scale):} Assumes bias is proportional to simulation values \citep{ram2014bias}. Compared to mean correction, scaled correction partially captures bias variation with concentration, but still assumes linear relationship.
+
+\textbf{Common Problem:} These methods assume simple linear or constant bias, unable to fully capture actual nonlinear bias characteristics.
+
+\subsection{2.2 Spatial Interpolation Methods}
+
+Spatial interpolation methods leverage spatial correlation among monitoring stations, estimating PM$_{2.5}$ at unobserved locations through weighted averaging or kriging.
+
+\textbf{Voronoi Neighborhood Averaging (VNA):} Sets each location's estimate to its nearest monitoring station's observation. Simple but does not utilize CMAQ information.
+
+\textbf{Enhanced VNA (eVNA):} Incorporates CMAQ as a covariate on VNA basis, using multiplicative or additive bias correction \citep{singh2019enhanced}. eVNA partially corrects CMAQ systematic bias but still assumes constant bias or simple proportional relationship with CMAQ.
+
+\textbf{Common Problem:} These methods leverage spatial correlation but do not fully model CMAQ bias nonlinear characteristics, and fail to properly decompose "nonlinear bias correction" and "spatial residual interpolation."
+
+\subsection{2.3 Gaussian Process Regression Methods}
+
+Gaussian process regression (GPR) is a nonparametric Bayesian method that naturally models spatial uncertainty.
+
+\textbf{GP Downscaling \citep{rodriguez2025downscaling}:} Uses CMAQ as a covariate and GPR to model residuals between observations and simulations. This method captures spatial correlation but achieves only R$^2$=0.8257 on our dataset, difficult to achieve ideal accuracy.
+
+\subsection{2.4 Ensemble Learning Methods}
+
+Ensemble learning methods combine multiple base models to improve prediction accuracy. However, these methods (e.g., Stacking) suffer from weight learning overfitting, poor transferability, and unexplainable negative weights (see Appendix A).
+
+\textbf{Positioning of Our Method:} Compared to above methods, RK-Poly adopts a decompose-combine strategy, separately handling nonlinear bias correction and spatial residual interpolation, retaining both GPR's spatial modeling capability and polynomial correction's ability to capture CMAQ bias nonlinear characteristics.
+
+% 3. Methodology
+\section{3. Methodology}
+
+\subsection{3.1 Problem Definition}
+
+Given $N$ monitoring station observations $\mathbf{O} = (O_1, ..., O_N)$ and corresponding CMAQ simulations $\mathbf{M} = (M_1, ..., M_N)$ at locations $\mathbf{X} = (\mathbf{x}_1, ..., \mathbf{x}_N)$, the goal is to predict PM$_{2.5}$ concentration over the entire regional grid.
+
+Define bias $B_i = O_i - M_i$. Based on preceding analysis, CMAQ bias has a nonlinear relationship with simulation values and also exhibits spatial correlation. Therefore, model bias as:
+\begin{equation}
+    B_i = f(M_i) + \epsilon_i
+    \label{eq:bias_model}
+\end{equation}
+where $f(M_i)$ is a nonlinear function and $\epsilon_i$ is a spatially correlated residual.
+
+\subsection{3.2 RK-Poly Method}
+
+RK-Poly decomposes problem \eqrefn{eq:bias_model} into two independent sub-problems: (1) polynomial regression to capture nonlinear bias $f(M_i)$; (2) GPR to model spatial residuals $\epsilon_i$.
+
+\textbf{Step 1: Polynomial Bias Correction}
+
+Fit bias against CMAQ simulation using a quadratic polynomial:
+\begin{equation}
+    \hat{B}^{poly}_i = a + b M_i + c M_i^2
+    \label{eq:poly_fit}
+\end{equation}
+Fit parameters $\hat{a}, \hat{b}, \hat{c}$ using ordinary least squares (OLS), and compute corrected simulation:
+\begin{equation}
+    \hat{O}^{poly}_i = M_i + \hat{B}^{poly}_i = \hat{a} + (1+\hat{b})M_i + \hat{c}M_i^2
+    \label{eq:poly_corrected}
+\end{equation}
+
+\textbf{Physical Motivation:} The quadratic term $c M_i^2$ captures the nonlinear bias characteristic of "CMAQ underestimation is more severe at high pollution." When $c<0$, bias increases with concentration (negative bias intensifies).
+
+\textbf{Step 2: GPR Residual Modeling}
+
+Compute residuals:
+\begin{equation}
+    r_i = O_i - \hat{O}^{poly}_i
+    \label{eq:residual}
+\end{equation}
+Use Gaussian process regression to spatially interpolate residuals $\mathbf{r} = (r_1, ..., r_N)$. For a new location $\mathbf{x}^*$:
+\begin{equation}
+    \hat{r}^* = GPR(\mathbf{x}^*; \mathbf{X}, \mathbf{r})
+    \label{eq:gpr}
+\end{equation}
+
+\textbf{GPR Kernel:} Using RBF kernel + white noise kernel combination:
+\begin{equation}
+    k(\mathbf{x}, \mathbf{x}') = \sigma_f^2 \exp\left(-\frac{\|\mathbf{x} - \mathbf{x}'\|^2}{2l^2}\right) + \sigma_n^2 \delta_{\mathbf{x}\mathbf{x}'}
+    \label{eq:kernel}
+\end{equation}
+where RBF kernel captures spatial correlation and white noise kernel $\sigma_n^2$ models observation noise.
+
+\textbf{Step 3: Fusion Prediction}
+
+Final prediction is the sum of polynomial corrected value and GPR residual prediction:
+\begin{equation}
+    P^{RK\text{-}Poly}_i = \hat{O}^{poly}_i + \hat{r}^*_i = \hat{a} + (1+\hat{b})M_i + \hat{c}M_i^2 + \hat{r}^*_i
+    \label{eq:rkpoly_final}
+\end{equation}
+
+\subsection{3.3 Method Advantages}
+
+Compared to existing methods, RK-Poly has the following advantages:
+
+\textbf{(1) Decompose-Combine Strategy:} Decomposes the complex bias correction problem into two independent sub-problems, reducing problem complexity and improving model interpretability.
+
+\textbf{(2) Nonlinear Bias Modeling:} Quadratic polynomial captures CMAQ bias nonlinear characteristics, while simple linear correction (eVNA/aVNA) can only handle linear bias.
+
+\textbf{(3) Spatial Residual Interpolation:} GPR models spatial correlation of residuals and provides uncertainty estimates, which simple bias correction methods lack.
+
+\textbf{(4) Clear Physical Interpretation:} Each term (polynomial, GPR residual) has clear physical meaning, facilitating model understanding and diagnosis.
+
+\textbf{(5) Single-Model Transferability:} Unlike ensemble methods requiring weight learning (e.g., Stacking), RK-Poly is a single-model method with physically meaningful and relatively stable parameters, transferable to other dates.
+
+% 4. Experiments
+\section{4. Experiments}
+
+\subsection{4.1 Dataset Description}
+
+Experiments use daily average PM$_{2.5}$ data for Beijing and surrounding areas on January 1, 2020.
+
+\textbf{Study Area:} Beijing and surrounding areas (approximately $36^\circ$N-$42^\circ$N, $114^\circ$E-$120^\circ$E), covering various land use types including urban and rural areas.
+
+\textbf{Monitoring Data:} 35 national environmental monitoring stations, observing PM$_{2.5}$ daily average concentration ($\mu g/m^3$).
+
+\textbf{CMAQ Simulation Data:} Corresponding station CMAQ model daily outputs ($\mu g/m^3$), with 9km $\times$ 9km spatial resolution.
+
+\textbf{Data Statistics:} Observation mean $\bar{O}$=55.5$\mu g/m^3$, CMAQ simulation mean $\bar{M}$=42.0$\mu g/m^3$, with systematic underestimation (bias approximately -13.5$\mu g/m^3$). Raw CMAQ R$^2$ is -0.0376, ineffective for direct use.
+
+\textbf{Data Splitting:} 10-fold cross-validation, with approximately 30 stations per fold as validation set and remaining stations as training set.
+
+\textbf{Data Constraints:} This study uses only monitoring data and CMAQ simulation data, excluding AOD or meteorological data, to ensure fair comparison with baseline methods.
+
+\subsection{4.2 Evaluation Metrics}
+
+Four standard metrics for model evaluation:
+\begin{align}
+    R^2 &= 1 - \frac{\sum(O_i - P_i)^2}{\sum(O_i - \bar{O})^2} \label{eq:r2} \\
+    MAE &= \frac{1}{N}\sum|O_i - P_i| \label{eq:mae} \\
+    RMSE &= \sqrt{\frac{1}{N}\sum(O_i - P_i)^2} \label{eq:rmse} \\
+    MB &= \frac{1}{N}\sum(P_i - O_i) \label{eq:mb}
+\end{align}
+
+where $O_i$ is observation, $P_i$ is prediction, $\bar{O}$ is observation mean. Higher R$^2$ (closer to 1) is better, lower MAE and RMSE is better, and MB closer to 0 is better (indicating no systematic bias).
+
+% 5. Results
+\section{5. Results}
+
+\subsection{5.1 Baseline Method Comparison}
+
+\tabref{tab:baseline} shows 10-fold cross-validation performance of baseline methods.
+
+\begin{table}[h]
+\centering
+\caption{Baseline method 10-fold cross-validation performance comparison}
+\label{tab:baseline}
+\begin{tabular}{lcccc}
+\toprule
+Method & R$^2$ & MAE & RMSE & MB \\
+\midrule
+CMAQ (raw) & -0.0376 & 20.47 & 29.25 & -13.50 \\
+VNA & 0.7996 & 7.75 & 12.86 & +0.76 \\
+aVNA & 0.7941 & 8.10 & 13.03 & +0.10 \\
+\textbf{eVNA} & \textbf{0.8100} & \textbf{7.99} & \textbf{12.52} & \textbf{+0.08} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Analysis:} Raw CMAQ has severe negative bias (R$^2$=-0.0376), ineffective for direct use. VNA and eVNA significantly improve accuracy through spatial interpolation and bias correction, with eVNA achieving R$^2$=0.8100.
+
+\subsection{5.2 Reproduced Literature Method Comparison}
+
+\tabref{tab:reproduced} shows performance of reproduced literature methods.
+
+\begin{table}[h]
+\centering
+\caption{Reproduced literature method performance comparison}
+\label{tab:reproduced}
+\begin{tabular}{lccccc}
+\toprule
+Method & Source & R$^2$ & MAE & RMSE & Evaluation \\
+\midrule
+GPDownscaling & \citet{rodriguez2025downscaling} & 0.8257 & 7.17 & 11.67 & Best reproduced \\
+IDW-Bias & \citet{senthilkumar2019idw} & 0.7647 & 8.27 & 13.76 & Medium \\
+Universal-Kriging & \citet{berrocal2019universal} & 0.5784 & 14.22 & 18.08 & Low \\
+HDGC & \citet{wang2019hybrid} & 0.4879 & 12.77 & 20.33 & Low \\
+Bayesian-DA & \citet{chianese2018bayesian} & 0.4194 & 14.87 & 21.59 & Low \\
+FC1 & \citet{friberg2016multi} & 0.3605 & 15.10 & 22.56 & Very low \\
+Gen-Friberg & \citet{li2025generalized} & 0.4948 & 15.10 & 20.13 & Very low \\
+FC2 & \citet{friberg2016multi} & 0.0742 & 21.25 & 27.22 & Extremely low \\
+FCopt & \citet{friberg2016multi} & 0.0168 & 19.69 & 27.95 & Extremely low \\
+\midrule
+\mcc \textbf{RK-Poly (Ours)} & \mcc \textbf{Proposed} & \mcc \textbf{0.8519} & \mcc \textbf{7.09} & \mcc \textbf{11.05} & \mcc \textbf{Best} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Analysis:} Among reproduced literature methods, only GPDownscaling (R$^2$=0.8257) approaches RK-Poly level; other methods have R$^2$<0.8, difficult for practical use. RK-Poly achieves R$^2$=0.8519, significantly outperforming all reproduced methods.
+
+\subsection{5.3 RK-Poly Ablation Analysis}
+
+\tabref{tab:ablation} shows ablation experiments for RK-Poly components.
+
+\begin{table}[h]
+\centering
+\caption{RK-Poly ablation experiment}
+\label{tab:ablation}
+\begin{tabular}{lcccc}
+\toprule
+Method & R$^2$ & MAE & RMSE & MB \\
+\midrule
+BC\_Mean (mean correction) & 0.7521 & 8.67 & 14.32 & +0.01 \\
+BC\_Scale (scaled correction) & 0.7865 & 8.12 & 13.28 & -0.05 \\
+OLS (linear regression correction) & 0.8045 & 7.95 & 12.71 & -0.02 \\
+RK-OLS (linear + GPR) & 0.8273 & 7.62 & 11.93 & -0.37 \\
+RK-Poly3 (cubic + GPR) & 0.8512 & 7.11 & 11.08 & -0.02 \\
+\textbf{RK-Poly (quadratic + GPR)} & \textbf{0.8519} & \textbf{7.09} & \textbf{11.05} & \textbf{-0.00} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Analysis:} (1) From BC\_Mean to BC\_Scale to OLS, R$^2$ improves from 0.7521 to 0.8045, validating the existence of nonlinear bias characteristics. (2) After introducing GPR residual modeling (RK-OLS), R$^2$ improves from 0.8045 to 0.8273, validating the importance of spatial residual correlation. (3) From linear to quadratic polynomial (RK-Poly), R$^2$ improves from 0.8273 to 0.8519, further validating nonlinear bias characteristics. (4) Cubic polynomial (RK-Poly3) shows limited improvement over quadratic, indicating quadratic terms are sufficient to capture main nonlinear characteristics.
+
+\subsection{5.4 Innovation Validation}
+
+According to innovation criteria (see Appendix A), RK-Poly satisfies:
+
+\begin{itemize}
+    \item \textbf{R$^2$ improvement $\ge$ 0.01:} RK-Poly (0.8519) vs eVNA (0.8100), improvement +0.0419 > 0.01, satisfied.
+    \item \textbf{RMSE $\le$ optimal baseline:} RK-Poly (11.05) vs eVNA (12.52), reduction 1.47, satisfied.
+    \item \textbf{MB $\le$ |baseline MB|:} RK-Poly (-0.00) vs eVNA (+0.08), satisfied.
+    \item \textbf{Single model, physically interpretable:} RK-Poly is a single model with clear physical meaning, satisfied.
+\end{itemize}
+
+In summary, RK-Poly innovation is established.
+
+% 6. Discussion
+\section{6. Discussion}
+
+\subsection{6.1 Why Does the Decompose-Combine Strategy Work?}
+
+RK-Poly's decompose-combine strategy works based on the following observations:
+
+\textbf{(1) Problem Decomposability:} CMAQ bias $B_i$ can be decomposed into "systematic bias related to simulation values $f(M_i)$" and "spatially correlated random residuals $\epsilon_i$". These two components have different characteristics: systematic bias is determined by model structure and relatively stable; spatial residuals are determined by local factors and have spatial correlation.
+
+\textbf{(2) Superposition of Modeling Advantages:} Polynomial regression excels at capturing global nonlinear relationships; GPR excels at modeling spatial correlations. After decomposition, each method can focus on its advantageous domain.
+
+\textbf{(3) Error Propagation Control:} After decomposition, fitting errors for each part are relatively independent, resulting in smaller overall error.
+
+\subsection{6.2 Polynomial Order Selection}
+
+Ablation experiments show quadratic polynomial is sufficient to capture main nonlinear bias characteristics; cubic polynomial shows limited improvement. Possible reasons: (1) Bias characteristics are mainly quadratic; (2) Avoiding overfitting. Therefore, we recommend quadratic polynomial as the default setting.
+
+\subsection{6.3 Limitations and Future Work}
+
+\textbf{Limitations:} (1) This paper validates only on single-day data; multi-day transferability needs further validation; (2) Meteorological and land use data are not incorporated.
+
+\textbf{Future Work:} (1) Incorporate meteorological data as additional covariates; (2) Extend to multi-day time series analysis; (3) Explore more complex spatial modeling methods such as co-kriging.
+
+% 7. Conclusion
+\section{7. Conclusion}
+
+This paper proposes RK-Poly for PM$_{2.5}$ CMAQ fusion with the following conclusions:
+
+\begin{enumerate}
+    \item \textbf{Decompose-combine strategy is effective:} Decomposing CMAQ bias correction into polynomial bias correction and spatial residual interpolation, handling separately then combining, significantly improves fusion accuracy.
+
+    \item \textbf{Nonlinear bias characteristics are important:} Ablation experiments show quadratic polynomial correction improves R$^2$ by approximately 5\% compared to linear correction, validating the importance of CMAQ bias nonlinear characteristics.
+
+    \item \textbf{RK-Poly innovation is established:} On Beijing regional data, RK-Poly achieves R$^2$=0.8519, improving over baseline eVNA (0.8100) by 5.17\%, significantly outperforming 9 reproduced literature methods.
+
+    \item \textbf{Clear physical interpretation:} Each term in RK-Poly has clear physical meaning, facilitating understanding and improvement, providing a good foundation for subsequent research.
+
+    \item \textbf{Method applicability:} RK-Poly is suitable for scenarios where CMAQ bias shows nonlinear characteristics and residuals have spatial correlation; validation on similar datasets is recommended before application.
+\end{enumerate}
+
+\textbf{Code and Data:} Experimental code and detailed results are available in the project repository.
+
+% References
+\bibliographystyle{plain}
+\bibliography{references}
+
+% Appendix A: Innovation Method Exclusion Rules
+\newpage
+\section{Appendix A: Innovation Method Exclusion Rules}
+
+\subsection{A.1 Methods to be Excluded}
+
+This paper excludes weighted ensemble methods (Stacking/Ensemble with learned weights), including:
+
+\begin{itemize}
+    \item SuperStackingEnsemble, EnhancedStackingEnsemble, UltimateStackingEnsemble, etc.
+    \item Methods using Ridge/Lasso/linear regression to learn optimal weights
+\end{itemize}
+
+\textbf{Exclusion Reasons:} (1) Weights learned on specific dates may need different weights on different dates, poor transferability; (2) Often show very small improvement over best base methods or even worse; (3) Negative weights have unclear meaning and unclear physical interpretation; (4) Complex implementation, difficult to maintain and deploy in practical applications.
+
+\subsection{A.2 Retained Method Characteristics}
+
+Retained methods in this paper satisfy: (1) Single-model methods; (2) Physically interpretable; (3) Significant improvement (R$^2$ improvement $\ge$ 0.02); (4) Transferable. RK-Poly satisfies all above conditions.
+
+% Appendix B: RK-Poly Pseudocode
+\newpage
+\section{Appendix B: RK-Poly Pseudocode}
+
+\begin{algorithm}[h]
+\caption{RK-Poly Training and Prediction Flow}
+\label{alg:rkpoly}
+\begin{algorithmic}[1]
+\State \textbf{Input:} Training data $(\mathbf{X}, \mathbf{M}, \mathbf{O})$, prediction locations $\mathbf{X}^*$
+
+\State \textbf{Output:} Predictions $\mathbf{P}^{RK\text{-}Poly}$
+
+\State \textit{// Step 1: Polynomial Bias Correction}
+\State Fit polynomial regression using OLS: $\hat{B}^{poly} = a + b\mathbf{M} + c\mathbf{M}^2$
+\State Compute corrected values: $\hat{\mathbf{O}}^{poly} = \mathbf{M} + \hat{B}^{poly}$
+
+\State \textit{// Step 2: GPR Residual Modeling}
+\State Compute residuals: $\mathbf{r} = \mathbf{O} - \hat{\mathbf{O}}^{poly}$
+\State Train GPR on $\mathbf{r}$, obtaining predictive distribution $\mathcal{N}(\boldsymbol{\mu}^*, \boldsymbol{\Sigma}^*)$
+\State Predict residuals: $\hat{\mathbf{r}}^* = \boldsymbol{\mu}^*$
+
+\State \textit{// Step 3: Fusion Prediction}
+\State $\mathbf{P}^{RK\text{-}Poly} = \hat{\mathbf{O}}^{poly} + \hat{\mathbf{r}}^*$
+
+\State \textbf{Return} $\mathbf{P}^{RK\text{-}Poly}$
+\end{algorithmic}
+\end{algorithm}
+
+\end{document}

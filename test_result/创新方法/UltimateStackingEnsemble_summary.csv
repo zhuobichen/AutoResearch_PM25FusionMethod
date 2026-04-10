@@ -1,0 +1,2 @@
+method,best_submethod,R2,MAE,RMSE,MB
+UltimateStackingEnsemble,Stacking-Ridge(alpha=0.001),0.8571109586106482,6.949251916424148,10.85448847912274,-9.38234861729163e-14

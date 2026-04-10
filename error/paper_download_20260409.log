@@ -1,0 +1,50 @@
+[2026-04-09 15:05:00] Paper Search and Download Log - Session 2
+=================================================
+
+SEARCH KEYWORDS USED:
+- "PM2.5 CMAQ data fusion methodology"
+- Search via paper-finder skill: arXiv API + Semantic Scholar API
+
+SEARCH RESULTS SUMMARY:
+- arXiv: 200 papers found
+- Semantic Scholar: 29 papers found (rate limited)
+- Total unique papers after dedup: 229
+- Top 20 papers scored and filtered
+
+NEW PAPERS ADDED TO paper_list.json (Score >= 3) - Session 2:
+
+1. "A hyperlocal hybrid data fusion near-road PM2.5 and NO2 annual risk and environmental justice assessment across the United States" (Score: 4)
+   - dedup_key: 4c32420cc613dc6a
+   - doi: 10.1371/journal.pone.0286406
+   - PDF: PaperDownload/Hyperlocal_Hybrid_Data_Fusion_PM25_NO2_USA.pdf (4.5MB) - SUCCESS
+
+2. "Spatio-temporal data fusion of censored threshold exceedances" (Score: 3)
+   - dedup_key: 52544c8ba49193df
+   - arxiv_id: 2504.20268
+   - PDF: PaperDownload/2504.20268_Spatio-temporal_Data_Fusion_Censored_Exceedances.pdf (11.5MB) - SUCCESS
+
+ISSUES ENCOUNTERED:
+
+Failed Downloads (No Open Access PDF):
+1. DOI 10.1016/j.envres.2016.07.012 - ScienceDirect paywall (HBM+CMAQ for PM2.5 health)
+2. DOI 10.1016/j.jenvman.2018.12.060 - Elsevier paywall (PRD health benefit)
+3. DOI 10.3390/rs9030221 - MDPI access denied (Fusing AOD+CMAQ for PM2.5 China)
+4. DOI 10.62051/ijgem.v6n3.25 - No open PDF available
+5. DOI 10.1021/acs.est.9b01117 - ACS paywall (Ensemble DL + CMAQ for PM2.5)
+
+Network Timeout:
+1. arXiv 2603.06724 - Connection severely throttled, repeated timeouts
+
+NOTES:
+- Existing paper_list.json already contained 28 papers (from previous session)
+- 2 new papers added in this session
+- Total papers now: 30 (all with score>=3)
+- Dedup keys computed using MD5(title + authors)[:16]
+- paper_list.json updated with all dedup keys
+- INVENTORY.md updated
+- arXiv downloads extremely slow (~15KB/s due to throttling)
+
+COMPLETION STATUS: SUCCESS
+- Downloaded/identified papers >= 2: YES (2 new PDFs + 30 total)
+- paper_list.json exists and contains all paper info: YES
+- INVENTORY.md updated: YES

@@ -1,0 +1,2 @@
+method,ridge_alpha,elastic_alpha,elastic_l1,ridge_weight,en_weight,R2,MAE,RMSE,MB
+MultiLevelStackingEnsemble,0.0001,0.001,0.8,1.0,0.0,0.857148136944038,6.950667880861405,10.853076271296992,-2.0172845653491584e-13

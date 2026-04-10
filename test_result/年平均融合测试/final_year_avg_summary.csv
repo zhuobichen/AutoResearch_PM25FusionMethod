@@ -1,0 +1,12 @@
+method,R2,MAE,RMSE,MB
+MultiScaleGWR,0.6111,4.27,9.45,-0.07
+V6-Ensemble-V1,0.5803,4.29,9.82,-0.02
+OptimizedTripleEnsemble,0.5794,4.29,9.83,
+AdaptiveTripleEnsemble,0.5792,4.29,9.83,
+V6-Ensemble-V4,0.5791,4.28,9.84,
+TripleEnsemble,0.5785,4.3,9.84,
+VNA (baseline),0.57,4.35,9.94,0.37
+eVNA (baseline),0.5694,4.52,9.95,-0.15
+RK-Poly (baseline),0.5686,5.0,9.96,-0.02
+aVNA (baseline),0.5663,4.49,9.98,-0.16
+ResidualKriging (baseline),0.5605,5.1,10.05,-0.0

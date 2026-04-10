@@ -1,0 +1,28 @@
+# 方法指纹库 (method_fingerprint.md5)
+# 格式: md5_hash | method_name | date
+# 生成时间: 2026-04-09
+
+# === 已有方法指纹 ===
+
+# === 复现方法指纹 ===
+# (已存在于复现方法指令目录中，此处记录摘要)
+# V1_DDNet: ddnet_v1_prednet_danet_dual_system
+# V1_BayesianSTK: bayesian_stk_spatiotemporal_kriging_mcmc
+# V1_NeuroDDAF: neuroddaf_v1_physics_informed_diffusion_advection
+
+# === 创新方法指纹 ===
+ddnet_v1_prednet_danet_dual_system | V1_DDNet | 20260409
+hybrid_evna_avna_fingerprint | HybridEAVNA | 20260405
+residual_kriging_adaptive_variogram_v1 | ResidualKriging | 20260405
+physicicnn_pde_hard_constraint_v1 | Innovation_PDEICNN | 20260409
+polygpr_adapt_atmospheric_stability_v1 | Innovation_PolyGPRAdapt | 20260409
+bayesian_stk_spatiotemporal_kriging_mcmc | V1_BayesianSTK | 20260409
+neuroddaf_v1_physics_informed_diffusion_advection | V1_NeuroDDAF | 20260409
+conservative_transport_mass_balance_v1 | Innovation_ConservativeTransport | 20260409
+gradient_anisotropic_residual_kriging_v1 | Innovation_GradientAnisotropicKriging | 20260409
+local_bandwidth_gpr_v1 | Innovation_LocalKernelGPR | 20260409
+spatial_quantile_deviation_mapping_v1 | Innovation_SpatialQuantileMapping | 20260409
+
+# === 排除方法记录 ===
+# msef_method_fingerprint_v1 | MSEF | 20260405 | 排除原因: 加权集成，使用交叉验证学习权重
+# stacking_ensemble_fingerprint | Stacking | - | 排除原因: 使用Ridge元学习器，权重学习
