@@ -1,0 +1,12 @@
+{
+  "method": "CSPRK",
+  "round": 1,
+  "date": "2026-04-10",
+  "metrics": {
+    "R2": 0.9135356539133156,
+    "MAE": 10.43567612681918,
+    "RMSE": 15.652997907935337,
+    "MB": 0.2926495294779537
+  },
+  "note": "PolyEnsemble etc. Stacking methods excluded"
+}

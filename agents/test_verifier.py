@@ -241,23 +241,30 @@ class TestVerifier:
     def verify_innovation(self, innovation_metrics, benchmark_metrics):
         """
         验证创新是否成立
-        条件：R²提升≥0.01 且 RMSE≤最优基准
+        条件：R²提升≥0.01 且 RMSE≤最优基准 且 |MB|≤基准最优
         """
         # 找到最优基准
         best_r2 = max(b['R2'] for b in benchmark_metrics.values())
         best_rmse = min(b['RMSE'] for b in benchmark_metrics.values())
+        best_mb_abs = min(abs(b['MB']) for b in benchmark_metrics.values())
 
         r2_improvement = innovation_metrics['R2'] - best_r2
         rmse_improvement = best_rmse - innovation_metrics['RMSE']  # 负值表示变差
+        innovation_mb_abs = abs(innovation_metrics['MB'])
+        mb_ok = innovation_mb_abs <= best_mb_abs
 
-        innovation_ok = r2_improvement >= 0.01 and innovation_metrics['RMSE'] <= best_rmse
+        innovation_ok = r2_improvement >= 0.01 and innovation_metrics['RMSE'] <= best_rmse and mb_ok
 
         return {
             'innovation_ok': innovation_ok,
             'r2_improvement': r2_improvement,
             'rmse_improvement': rmse_improvement,
+            'mb_improvement': best_mb_abs - innovation_mb_abs,
             'best_benchmark_r2': best_r2,
-            'best_benchmark_rmse': best_rmse
+            'best_benchmark_rmse': best_rmse,
+            'best_benchmark_mb_abs': best_mb_abs,
+            'innovation_mb_abs': innovation_mb_abs,
+            'mb_ok': mb_ok
         }
 
     def generate_comparison_report(self, all_metrics, innovation_verification=None):
@@ -281,7 +288,8 @@ class TestVerifier:
 ## 二、创新验证
 
 - R²提升：{innovation_verification['r2_improvement']:.4f} {'≥ 0.01 ✓' if innovation_verification['r2_improvement'] >= 0.01 else '< 0.01 ✗'}
-- RMSE相比最优基准：{'≤ 0 ✓' if innovation_verification['rmse_improvement'] >= 0 else '> 0 ✗'}
+- RMSE相比最优基准：{innovation_verification['rmse_improvement']:.2f} {'✓' if innovation_verification['rmse_improvement'] >= 0 else '✗'}
+- |MB|：{innovation_verification['innovation_mb_abs']:.2f}，基准最优：{innovation_verification['best_benchmark_mb_abs']:.2f} {'✓' if innovation_verification['mb_ok'] else '✗'}
 - 创新结论：**{'成立' if innovation_verification['innovation_ok'] else '不足'}**
 """
 
