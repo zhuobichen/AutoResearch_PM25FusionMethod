@@ -142,7 +142,10 @@ ROLE_TEMPLATES = {
    - 4分：高度相关
    - 3分：部分相关，可参考
    - 1-2分：不相关，过滤掉
-4. 下载评分>=3的论文PDF到 {project_root}/PaperDownload/
+4. 下载论文时直接按分数分文件夹：
+   - 评分5的PDF → {project_root}/PaperDownload/score_5/
+   - 评分4的PDF → {project_root}/PaperDownload/score_4/
+   - 评分3的PDF → {project_root}/PaperDownload/score_3/
 5. 生成论文清单到 {project_root}/PaperDownloadMd/paper_list.json
 
 ## 【去重机制】（必须执行）
@@ -157,7 +160,10 @@ dedup_key = hashlib.md5(f"{{title}}{{authors}}".encode()).hexdigest()[:16]
 
 ## 输出文件
 
-- PDF文件目录：{project_root}/PaperDownload/
+- PDF文件目录（按评分分类）：
+  - {project_root}/PaperDownload/score_5/（5分论文）
+  - {project_root}/PaperDownload/score_4/（4分论文）
+  - {project_root}/PaperDownload/score_3/（3分论文）
 - 清单JSON：{project_root}/PaperDownloadMd/paper_list.json
 
 清单JSON格式：
@@ -172,7 +178,7 @@ dedup_key = hashlib.md5(f"{{title}}{{authors}}".encode()).hexdigest()[:16]
       "score": 5,
       "dedup_key": "abc123def456",
       "abstract": "摘要...",
-      "pdf_file": "PaperDownload/paper1.pdf",
+      "pdf_file": "PaperDownload/score_5/paper1.pdf",
       "download_status": "success"
     }}
   ]

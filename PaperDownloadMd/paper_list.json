@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-10 16:52:56",
+  "generated_at": "2026-04-11 12:15:00",
   "search_keywords": [
     "PM2.5 CMAQ data fusion methodology",
     "PM2.5 CMAQ model output downscaling kriging data fusion",
@@ -10,7 +10,8 @@
     "ground monitoring stations satellite data PM2.5 fusion deep learning",
     "PM2.5 CMAQ data fusion methodology (search session 2026-04-09)",
     "PM2.5 CMAQ data fusion methodology 2024 (search session 2026-04-10)",
-    "air quality spatial interpolation machine learning (search session 2026-04-10)"
+    "air quality spatial interpolation machine learning (search session 2026-04-10)",
+    "PM2.5 CMAQ data fusion kriging interpolation (search session 2026-04-11)"
   ],
   "papers": [
     {
@@ -368,13 +369,38 @@
       "arxiv_id": "2503.12367",
       "dedup_key": "235e3ff7f9bfd475",
       "source": "arXiv"
+    },
+    {
+      "title": "Spatio-Temporal Forecasting of PM2.5 via Spatial-Diffusion guided Encoder-Decoder Architecture",
+      "authors": "Malay Pandey, Vaishali Jain, Nimit Godhani, Sachchida Nand Tripathi, Piyush Rai",
+      "year": 2024,
+      "score": 4,
+      "abstract": "In many problem settings that require spatio-temporal forecasting, the values in the time-series not only exhibit spatio-temporal correlations but are also influenced by spatial diffusion across locations. One such example is forecasting the concentration of fine particulate matter (PM2.5) in the atmosphere which is influenced by many complex factors, the most important ones being diffusion due to meteorological factors as well as transport across vast distances over a period of time. We present a novel Spatio-Temporal Graph Neural Network architecture, that specifically captures these dependencies to forecast the PM2.5 concentration. Our model is based on an encoder-decoder architecture where the encoder and decoder parts leverage gated recurrent units (GRU) augmented with a graph neural network (TransformerConv) to account for spatial diffusion.",
+      "pdf_file": "PaperDownload/2412.13935_Spatial_Diffusion_Encoder_Decoder_PM25.pdf",
+      "download_status": "success",
+      "arxiv_id": "2412.13935",
+      "dedup_key": "fc31fcb5a0ac87c4",
+      "source": "arXiv"
+    },
+    {
+      "title": "Augmenting Ground-Level PM2.5 Prediction via Kriging-Based Pseudo-Label Generation",
+      "authors": "Lei Duan, Ziyang Jiang, David Carlson",
+      "year": 2024,
+      "score": 4,
+      "abstract": "Fusing abundant satellite data with sparse ground measurements constitutes a major challenge in climate modeling. To address this, we propose a strategy to augment the training dataset by introducing unlabeled satellite images paired with pseudo-labels generated through a spatial interpolation technique known as ordinary kriging, thereby making full use of the available satellite data resources. We show that the proposed data augmentation strategy helps enhance the performance of the state-of-the-art convolutional neural network-random forest (CNN-RF) model by a reasonable amount, resulting in a noteworthy improvement in spatial correlation and a reduction in prediction error.",
+      "pdf_file": "PaperDownload/2401.08061_Kriging_Pseudo_Label_PM25.pdf",
+      "download_status": "success",
+      "arxiv_id": "2401.08061",
+      "dedup_key": "4736c4f35a29f8a8",
+      "source": "arXiv"
     }
   ],
   "new_papers_added": {
-    "count": 21,
-    "download_date": "2026-04-09 15:45:00",
+    "count": 23,
+    "download_date": "2026-04-11 12:15:00",
     "highly_relevant": 14,
     "partially_relevant": 7,
-    "new_from_web_search": 2
+    "new_from_web_search": 2,
+    "arXiv_search_session_2026-04-11": 2
   }
 }

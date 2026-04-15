@@ -1,0 +1,10 @@
+{
+  "name": "paper_compiler",
+  "description": "将LaTeX论文源码编译为PDF，包含完整的交叉引用、文献引用处理、格式规范化。当用户要求编译论文、生成PDF、LaTeX转PDF时触发。",
+  "version": "1.0.0",
+  "author": "Research Team",
+  "requires": ["xelatex", "bibtex"],
+  "latex_editor": "default",
+  "output_format": "pdf",
+  "citation_style": "super"
+}

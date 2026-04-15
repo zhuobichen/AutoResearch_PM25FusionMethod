@@ -1,0 +1,2 @@
+method,stage1_n_days,stage1_r2,stage1_rmse,stage1_mb,stage1_abs_mb,stage1_r2_pass,stage1_rmse_pass,stage1_mb_pass,stage1_pass,stage2_n_days,stage2_r2,stage2_rmse,stage2_mb,stage2_abs_mb,stage2_pass,stage3_n_days,stage3_r2,stage3_rmse,stage3_mb,stage3_abs_mb,stage3_pass,stage4_n_days,stage4_r2,stage4_rmse,stage4_mb,stage4_abs_mb,stage4_pass,all_stages_pass
+RRK,5,0.8943132529845166,14.709576468756428,0.06955232295774774,0.06955232295774774,True,False,True,False,0,,,,,False,0,,,,,False,0,,,,,False,False

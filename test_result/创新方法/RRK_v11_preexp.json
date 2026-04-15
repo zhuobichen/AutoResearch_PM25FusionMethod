@@ -1,0 +1,29 @@
+{
+  "method": "RK_OLS_Poly",
+  "stage": "pre_exp",
+  "stage_name": "预实验(5天)",
+  "baseline": {
+    "VNA": {
+      "R2": 0.8941,
+      "RMSE": 16.42,
+      "MB": 0.76
+    }
+  },
+  "threshold": {
+    "R2": 0.9041,
+    "RMSE": 16.42,
+    "MB": 0.76
+  },
+  "metrics": {
+    "R2": 0.9144280854239388,
+    "MAE": 9.623116663991114,
+    "RMSE": 14.764275305689072,
+    "MB": 0.19592023662005748
+  },
+  "判定": {
+    "R2_pass": true,
+    "RMSE_pass": true,
+    "MB_pass": true,
+    "innovation_verified": true
+  }
+}

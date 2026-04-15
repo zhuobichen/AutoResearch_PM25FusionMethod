@@ -1,0 +1,29 @@
+{
+  "method": "RK_OLS_Poly",
+  "stage": "pre_exp",
+  "note": "GPR on CMAQ grid coords (aligned with VNA)",
+  "baseline": {
+    "VNA": {
+      "R2": 0.8941,
+      "RMSE": 16.42,
+      "MB": 0.76
+    }
+  },
+  "threshold": {
+    "R2": 0.9041,
+    "RMSE": 16.42,
+    "MB": 0.76
+  },
+  "metrics": {
+    "R2": 0.901758960408644,
+    "MAE": 10.22794191654322,
+    "RMSE": 15.819508459942176,
+    "MB": 0.04835782917520354
+  },
+  "判定": {
+    "R2_pass": false,
+    "RMSE_pass": true,
+    "MB_pass": true,
+    "innovation_verified": false
+  }
+}
