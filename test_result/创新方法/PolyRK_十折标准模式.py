@@ -3,7 +3,7 @@
 PolyRK 十折交叉验证 - 标准模式
 ===============================
 按照十折交叉验证架构文档：
-- 训练：9折监测站(Lon, Lat) + CMAQ值，GPR用监测站坐标
+- 训练：9折监测站对应的CMAQ网格坐标（方式2b：不聚合）
 - 预测：对1折站点所在的CMAQ网格坐标预测
 """
 
@@ -71,7 +71,7 @@ def get_cmaq_grid_coord(lon, lat, lon_grid, lat_grid):
 
 
 def ten_fold_poly_rk(selected_day, poly_degree=2):
-    """标准模式十折验证 - GPR用监测站坐标训练，预测用CMAQ网格坐标"""
+    """标准模式十折验证 - 方式2b：训练用CMAQ网格坐标（不聚合），预测用CMAQ网格坐标"""
     monitor_df = pd.read_csv(MONITOR_FILE)
     fold_df = pd.read_csv(FOLD_FILE)
 
@@ -130,8 +130,13 @@ def ten_fold_poly_rk(selected_day, poly_degree=2):
         ols.fit(m_train_poly, y_train)
         residual_ols = y_train - ols.predict(m_train_poly)
 
-        # GPR训练：使用监测站坐标（方式1）
-        X_train = train_df[['Lon', 'Lat']].values
+        # ========== GPR训练：方式2b（不聚合）==========
+        train_cmaq_coords = []
+        for _, row in train_df.iterrows():
+            cmaq_lon, cmaq_lat = get_cmaq_grid_coord(row['Lon'], row['Lat'], lon_cmaq, lat_cmaq)
+            train_cmaq_coords.append([cmaq_lon, cmaq_lat])
+        X_train = np.array(train_cmaq_coords)
+        # =============================================
 
         gpr = GaussianProcessRegressor(kernel=kernel, n_restarts_optimizer=2, alpha=0.1, normalize_y=True)
         gpr.fit(X_train, residual_ols)
@@ -221,8 +226,8 @@ def run_stage_validation(stage_name, start_date, end_date, poly_degree=2):
 def main():
     sep = "=" * 70
     print(sep)
-    print("PolyRK All Stages - 标准模式")
-    print("GPR训练: 监测站(Lon,Lat) | 预测: CMAQ网格坐标")
+    print("PolyRK All Stages - 标准模式（方式2b）")
+    print("GPR训练: CMAQ网格坐标(不聚合) | 预测: CMAQ网格坐标")
     print(sep)
 
     stages = {
