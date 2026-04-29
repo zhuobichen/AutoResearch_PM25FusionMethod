@@ -1,266 +1,207 @@
-# 项目盘点报告
+# PM2.5 CMAQ融合方法自动研究系统 - 项目清单
 
-## 生成时间
-2026-04-10 12:00
-
-## 目录结构现状
-
-| 目录 | 文件数 | 状态 | 说明 |
-|------|--------|------|------|
-| PaperDownload/ | ~100+ | 正常 | 论文PDF，包含相关和不相关论文 |
-| PaperDownloadMd/ | 13 | 正常 | 论文清单、分析报告、搜索结果 |
-| LocalPaperLibrary/ | 13 | 正常 | 本地论文库（中文翻译版） |
-| MethodToSmart/ | 33 | 正常 | 方法文档，含7个新增(20260409) |
-| SmartToCode/ | 40 | 已整理 | 9创新+31复现，新增3个SPIN等方法 |
-| CodeWorkSpace/ | 60+ | 正常 | 代码实现、基准方法、创新方法 |
-| test_result/ | 50+ | 正常 | 基准方法、创新方法、复现方法测试结果 |
-| paper_output/ | 9 | 正常 | 论文草稿、参考文献 |
-
-## 前人遗留文件处理
-
-### MethodToSmart/ 文件清单（33个）
-
-| 文件 | 处理结果 | 备注 |
-|------|----------|------|
-| 文献分析员_VNA方法.md | 符合规范 | 基础方法 |
-| 文献分析员_eVNA方法.md | 符合规范 | 基础方法 |
-| 文献分析员_aVNA方法.md | 符合规范 | 基础方法 |
-| 文献分析员_Downscaler方法.md | 符合规范 | 基础方法 |
-| 文献分析员_FC1克里金插值法.md | 符合规范 | 复现方法 |
-| 文献分析员_FC2尺度CMAQ法.md | 符合规范 | 复现方法 |
-| 文献分析员_FCopt优化融合法.md | 符合规范 | 复现方法 |
-| 文献分析员_贝叶斯数据同化法.md | 符合规范 | 复现方法 |
-| 文献分析员_GP降尺度法.md | 符合规范 | 复现方法 |
-| 文献分析员_CleanAir深度学习CMAQ替代法.md | 符合规范 | 深度学习 |
-| 文献分析员_HDGC监测偏差检测法.md | 符合规范 | 复现方法 |
-| 文献分析员_KNNSINDy缺失数据填补法.md | 符合规范 | 辅助方法 |
-| 文献分析员_AQNet时空神经网络法.md | 符合规范 | 深度学习 |
-| 文献分析员_通用克里金PM25映射法.md | 符合规范 | 复现方法 |
-| 文献分析员_GenFriberg广义融合法.md | 符合规范 | 复现方法 |
-| 文献分析员_IDW偏差加权融合法.md | 符合规范 | 复现方法 |
-| 文献分析员_CRNNSpatiotemporalPM25法.md | 符合规范 | 深度学习 |
-| 文献分析员_Stacking集成学习方法.md | 符合规范 | 集成方法 |
-| 文献分析员_RF残差克里金校正法.md | 符合规范 | 克里金类 |
-| 文献分析员_GWR地理加权回归法.md | 符合规范 | 回归方法 |
-| 文献分析员_BayesianSpaceTimeKriging法.md | 符合规范 | 贝叶斯 |
-| 文献分析员_LUR土地使用回归法.md | 符合规范 | 回归方法 |
-| 文献分析员_MLE最优插值法.md | 符合规范 | 最优插值 |
-| 文献分析员_Cokriging共克里金法.md | 符合规范 | 共克里金 |
-| 文献分析员_论文分析方法总结.md | 符合规范 | 分析指南 |
-| 文献分析员_论文分析报告.md | 符合规范 | 分析报告 |
-| **新增文件(20260409)** | | |
-| 文献分析员_TopoFlow地形感知神经网络法_20260409.md | 符合规范 | 物理引导 |
-| 文献分析员_Zeeman深度学习化学传输模型法_20260409.md | 符合规范 | DL-CTM |
-| 文献分析员_GenDA生成式数据同化法_20260409.md | 符合规范 | 扩散同化 |
-| 文献分析员_EnsAI大气化学集合生成法_20260409.md | 符合规范 | U-Net集合 |
-| 文献分析员_AirFusion扩散概率空气质量预报法_20260409.md | 符合规范 | 扩散预报 |
-| 文献分析员_NeuroDDAF神经动态扩散平流场法_20260409.md | 符合规范 | 神经ODE |
-| 文献分析员_DDNet双深度网络PM25预报法_20260409.md | 符合规范 | 双网络 |
-
-### SmartToCode/ 文件清单（37个）
-
-#### 创新方法指令（9个）- 符合规范
-
-| 文件 | 状态 |
-|------|------|
-| Innovation_HybridEAVNA.md | 符合规范 |
-| Innovation_MSEF.md | 符合规范 |
-| Innovation_ResidualKriging.md | 符合规范 |
-| Innovation_PDEICNN.md | 符合规范 |
-| Innovation_PolyGPRAdapt.md | 符合规范 |
-| Innovation_ConservativeTransport.md | 符合规范 |
-| Innovation_SPIN_GraphKernel_Kriging.md | 符合规范 |
-| Innovation_BayesianMultisourceFusion.md | 符合规范 |
-| Innovation_CorrDiff_Downscaling.md | 符合规范 |
-
-#### 复现方法指令（25个）
-
-| 文件 | 状态 | 备注 |
-|------|------|------|
-| OMA方法_观测模型聚合.md | 符合规范 | |
-| SMA方法_统计模型聚合.md | 符合规范 | |
-| MMA方法_混合模型聚合.md | 符合规范 | |
-| QuantileMapping方法_分位数映射.md | 符合规范 | |
-| SpatialKriging方法_空间克里金偏差校正.md | 符合规范 | |
-| ODI方法_观测偏差指示器融合.md | 符合规范 | |
-| BiasCorrection方法_简单偏差校正家族.md | 符合规范 | |
-| EnsembleMean方法_集合平均.md | 符合规范 | |
-| OptimumInterpolation方法_最优插值.md | 符合规范 | |
-| DiffusionSmoothing方法_扩散平滑.md | 符合规范 | |
-| STK方法_时空克里金.md | 符合规范 | |
-| 华北多源融合方法_纯监测CMAQ.md | 符合规范 | |
-| BayesianDA方法_贝叶斯数据同化法.md | 符合规范 | |
-| GPDownscaling方法_GP降尺度法.md | 符合规范 | |
-| HDGC方法_HDGC监测偏差检测法.md | 符合规范 | |
-| UniversalKriging方法_通用克里金PM25映射法.md | 符合规范 | |
-| IDWBias方法_IDW偏差加权融合法.md | 符合规范 | |
-| GenFriberg方法_GenFriberg广义融合法.md | 符合规范 | |
-| FC1方法_FC1克里金插值法.md | 符合规范 | |
-| FC2方法_FC2尺度CMAQ法.md | 符合规范 | |
-| FCopt方法_FCopt优化融合法.md | 符合规范 | |
-| DDNet方法_双深度神经网络法.md | ✅ 已整理 | 原V1_前缀已规范化 |
-| BayesianSTK方法_贝叶斯时空克里金法.md | ✅ 已整理 | 原V1_前缀已规范化 |
-| NeuroDDAF方法_神经动态扩散平流场法.md | ✅ 已整理 | 原V1_前缀已规范化 |
-| ~~V1_DDNet双深度神经网络法.md~~ | ⚠️ 待删除 | 请手动删除 |
-| ~~V1_BayesianSTK贝叶斯时空克里金法.md~~ | ⚠️ 待删除 | 请手动删除 |
-| ~~V1_NeuroDDAF神经动态扩散平流场法.md~~ | ⚠️ 待删除 | 请手动删除 |
-
-### 新实现方法（20260410）
-
-| 文件 | 方法名 | 创新点 |
-|------|--------|--------|
-| SPIN_GraphKernel_Kriging.py | SPIN-Kr 图核时空克里金法 | 图核距离融合欧氏+风向，SPDE潜在场 |
-| BMSF_Geostat.py | BMSF-Geostat 贝叶斯多源融合法 | 贝叶斯后验，Matérn协方差，多源融合 |
-| CorrDiff_Downscaling.py | CorrDiff-3km 残差修正扩散降尺度法 | 扩散模型高频残差学习，多路径采样 |
-
-## 当前状态
-
-### 统计摘要
-
-| 类别 | 数量 | 备注 |
-|------|------|------|
-| 论文PDF总数 | ~100+ | PaperDownload/ |
-| PM2.5/CMAQ相关论文 | 30+ | 从paper_list.json筛选 |
-| 已分析方法文档 | 33个 | MethodToSmart/ |
-| 已有方案指令 | 37个 | SmartToCode/ (含新整理3个) |
-| 代码实现 | 63+ | CodeWorkSpace/ (新增3个创新方法) |
-| 测试结果 | 50+ | test_result/ |
-
-### 最佳测试结果
-
-| 指标 | 数值 | 备注 |
-|------|------|------|
-| **最佳R²** | 0.8519 | RK-Poly（真正有物理意义） |
-| **最佳MAE** | 7.09 | |
-| **最佳RMSE** | 11.05 | |
-| **基准eVNA R²** | 0.8100 | |
-| **R²提升幅度** | +0.0419 (+5.17%) | vs eVNA基准 |
-
-### Top 方法排名（含排除说明）
-
-| 排名 | 方法 | R² | MAE | RMSE | 类别 | 状态 |
-|------|------|-----|------|------|------|------|
-| 1 | RK-Poly | 0.8519 | 7.09 | 11.05 | 创新 | ✅ 有效（有物理机制） |
-| 2 | PolyEnsemble | 0.8523 | 7.10 | 11.04 | 创新 | ✅ 有效（集成多项式） |
-| 3 | SuperStackingEnsemble | 0.8571 | 6.95 | 10.85 | 创新 | ❌ 排除（权重碰运气） |
-| 4 | UltimateStackingEnsemble | 0.8571 | 6.95 | 10.85 | 创新 | ❌ 排除（权重碰运气） |
-| 5 | EnhancedStackingEnsemble | 0.8569 | 6.96 | 10.86 | 创新 | ❌ 排除（权重碰运气） |
-
-### 排除方法说明
-
-**Stacking 类方法（应排除）**：
-- **问题本质**：只是基础模型 OOF 预测的 Ridge 加权组合
-- **为什么是运气**：Ridge 权重在单日数据上调优，换一天权重全变
-- **效果差距**：R²=0.8571 vs RK-Poly=0.8519，仅 +0.0052，统计上不显著
-- **物理意义**：权重 (2.93, -0.94, -1.00...) 无法解释
-
-**真正有价值的方法**：
-- RK-Poly：多项式校正 + GPR 空间插值，有清晰物理机制
-- PolyEnsemble：多形式多项式的集成，有可解释的结构
-
-### 创新验证结论
-- **有效最佳方法**: RK-Poly R²=0.8519 vs eVNA R²=0.8100
-- **有效提升**: +0.0419 > 0.01阈值 ✅
-- **Stacking 类方法**: 应排除，不计入创新
-
-## 待整理文件
-
-### 已完成整理（3个）
-
-| 状态 | 原文件名 | 新文件名 |
-|------|----------|----------|
-| ✅ 已创建 | - | DDNet方法_双深度神经网络法.md |
-| ✅ 已创建 | - | BayesianSTK方法_贝叶斯时空克里金法.md |
-| ✅ 已创建 | - | NeuroDDAF方法_神经动态扩散平流场法.md |
-
-### 待手动删除（3个）
-
-由于bash权限限制，以下原文件需要手动删除：
-
-| 文件 | 操作 |
-|------|------|
-| SmartToCode/复现方法指令/V1_DDNet双深度神经网络法.md | 请手动删除 |
-| SmartToCode/复现方法指令/V1_BayesianSTK贝叶斯时空克里金法.md | 请手动删除 |
-| SmartToCode/复现方法指令/V1_NeuroDDAF神经动态扩散平流场法.md | 请手动删除 |
-
-## 待继续工作
-
-### 按优先级排序
-
-#### 高优先级
-
-1. **论文写作** - paper_output/已有tex草稿
-   - 状态: 待继续写作
-   - 创新方法已验证成功 (R²=0.8571)
-   - 建议: 基于test_result/FINAL_REPORT_COMPLETE.md撰写论文
-
-2. **删除旧的不规范文件** - SmartToCode/复现方法指令/
-   - 3个V1_前缀文件需手动删除（已创建规范文件替代）
-
-#### 中优先级
-
-1. **继续分析剩余论文**
-   - 从paper_list.json中还有高相关度论文未分析
-   - 建议继续分析Physics-Guided Inductive Spatiotemporal Kriging等
-
-2. **新方法方案生成**
-   - 为TopoFlow、GenDA、Zeeman等新增方法文档生成对应的方案指令
-
-#### 低优先级
-
-1. **代码优化**
-   - 现有创新方法已饱和（连续5轮无突破）
-   - 可考虑引入外部数据（气象、土地利用）提升
-
-## 工作流状态
-
-| Phase | 状态 | 完成度 |
-|-------|------|--------|
-| Phase 0: 整体整理 | ✅ 完成 | 100% |
-| Phase 1: 文献下载 | ✅ 完成 | 100% |
-| Phase 2: 文献分析 | ✅ 完成 | 100% |
-| Phase 3: 方案设计 | ✅ 完成 | 100% |
-| Phase 4: 代码实现 | ✅ 完成 | 100% |
-| Phase 5: 测试验证 | ✅ 完成 | 100% |
-
-### 多阶段验证状态
-
-| 阶段 | 验证内容 | 状态 | 结果 |
-|------|----------|------|------|
-| 预实验(5天) | 2020-01-01~05 | ⏸️ 待验证 | 5天平均R²提升需≥0.01 |
-| 第一阶段 | 1月整月验证 | ❌ 未通过 | 平均Δ≈-0.00003 << 0.01阈值 |
-| 第二阶段 | 7月整月验证 | ⏸️ 未执行 | - |
-| 第三阶段 | 12月整月验证 | ⏸️ 未执行 | - |
-
-### CSP-RK 验证失败分析
-
-**失败原因**: 参数对日期敏感，非真正建模
-
-CSP-RK 通过浓度分层（T1=35, T2=75）为每天独立拟合 OLS 参数：
-- 单日预实验：R²=0.8535 vs RK-Poly=0.8519，Δ=+0.0016 ✅
-- 1月前3天：仅1/3天CSP胜出，平均Δ≈-0.00003 ❌
-
-**本质问题**：
-| 方案 | 问题 |
-|------|------|
-| 只跑一天预实验调参 | 参数只对那一天有效，其他天用同样参数结果变差 |
-| 从第一天就跑全部天数 | 太贵，失去了预实验的意义 |
-
-**两阶段参数策略**（未来方法设计应遵循）：
-1. 物理初始化 → 用物理意义赋"合理初值"
-2. 有限数据验证 → 在1-2天微调后验证跨天泛化能力
-
-**第5个隐性维度**：跨日期一致性（参数不剧烈震荡）
-
-### 最佳方法（截至当前）
-
-| 方法 | R² | MAE | RMSE | 验证状态 |
-|------|-----|------|------|----------|
-| SuperStackingEnsemble | 0.8571 | 6.95 | 10.85 | ✅ 已验证 |
-| RK-Poly | 0.8519 | 7.09 | 11.05 | ✅ 基准 |
-| CSP-RK | 0.8535 | 7.07 | 10.99 | ❌ 第一阶段淘汰 |
+> 生成时间: 2026-04-21
+> 整理版本: v2.0
 
 ---
 
-*本报告由项目整理专家自动生成*
-*盘点时间: 2026-04-09*
+## 一、根目录结构（整理后）
+
+```
+E:\CodeProject\ClaudeRoom\Data_Fusion_AutoResearch\
+├── CLAUDE.md                    # Claude Code项目说明
+├── INVENTORY.md                 # 项目总清单（本文件）
+├── run_pipeline.py              # 工作流启动脚本
+├── .claude/                     # Claude Code配置
+├── .git/                        # Git版本控制
+├── .gitignore
+├── .agent_state.json
+│
+├── PaperDownload/               # 论文PDF文件
+├── PaperDownloadMd/             # 论文清单、分析报告
+├── LocalPaperLibrary/           # 本地原始论文库
+├── MethodToSmart/               # 文献分析员输出（方法分析文档）
+├── SmartToCode/                 # 方案设计师输出（实现指令）
+├── Code/                        # 参考代码（Downscaler/VNAeVNAaVNA）
+├── CodeWorkSpace/               # 工作区代码
+│   ├── 基准方法代码/            # VNA/eVNA/aVNA变体
+│   ├── 复现方法代码/            # 复现方法实现
+│   ├── 新融合方法代码/          # 创新方法实现
+│   ├── 年均融合方法/            # 年均数据融合方法
+│   └── 改造后VNA_eVNA_aVNA/     # 改造后VNA系列方法
+├── test_data/                   # 测试数据
+├── test_result/                 # 测试结果
+│   ├── 基准方法/                # 基准方法验证结果
+│   ├── 创新方法/                # 创新方法验证结果
+│   ├── 历史/                    # 历史验证结果
+│   ├── snapshots/              # 状态快照
+│   ├── InnovationMethods/       # 创新方法代码
+│   ├── legacy_tests/           # 历史测试脚本（已归档）
+│   └── 代码实现报告.md          # 代码实现清单
+├── Innovation/                  # 已确认创新方法
+│   ├── success/                 # 验证通过的方法
+│   │   ├── AdvancedRK/          # AdvancedRK（R²=0.9162，最优）
+│   │   ├── PolyRK/              # PolyRK（R²=0.9105，核心创新）
+│   │   └── RobustRK/            # RobustRK
+│   └── failed/                  # 验证失败的方法
+│       ├── ARK_OLS/
+│       ├── CGARK/
+│       ├── GARK/
+│       ├── MSAGARK/
+│       ├── PG-STGAT/
+│       └── VCFFM/
+├── paper_output/                # 论文输出
+│   ├── paper.tex                # 论文主文件
+│   ├── paper.pdf                # 编译后PDF
+│   ├── references.bib           # 参考文献
+│   ├── figures/                 # 论文图表
+│   └── README.md                # 项目说明（由根目录迁移）
+├── agents/                       # Agent模块
+│   ├── spawn_executor.py        # Agent spawn执行器
+│   ├── role_templates.py       # 角色prompt模板
+│   ├── workflow_orchestrator.py
+│   ├── research_state_tracker.py
+│   └── ...
+├── error/                        # 错误日志
+│   ├── diagnosis_*.md           # 诊断报告
+│   ├── *.log                    # 运行日志
+│   └── temp_*.txt               # 临时文件（已归档）
+├── skills/                       # Claude Code Skills
+├── 文档拆分/                     # 项目文档拆分
+│   ├── 01_项目概览与核心原则.md
+│   ├── 02_创新判定规范.md
+│   ├── 03_Agent_Spawn工作流.md
+│   ├── 04_输出与快照规范.md
+│   ├── 05_运行与异常处理.md
+│   ├── 06_系统目录结构.md
+│   ├── PM2.5_CMAQ融合方法自动研究全流程文档_v11_agent_spawn.md
+│   └── 十折交叉验证架构文档.md
+└── LizhuoChen/                   # 用户个人代码（保留）
+```
+
+---
+
+## 二、本次整理记录
+
+### 2.1 移至正确位置的文件
+
+| 原位置 | 新位置 | 原因 |
+|--------|--------|------|
+| 根目录/*.log | error/ | 禁止根目录放日志文件 |
+| 根目录/temp_*.txt | error/ | 禁止根目录放临时文件 |
+| 根目录/README.md | paper_output/ | 禁止根目录放独立文档 |
+| 根目录/十折交叉验证架构文档.md | 文档拆分/ | 禁止根目录放架构文档 |
+| 根目录/PM2.5_CMAQ融合方法..._v11_agent_spawn.md | 文档拆分/ | 禁止根目录放独立文档 |
+| CodeWorkSpace/*_验证.py (14个) | test_result/legacy_tests/ | 禁止根目录放测试脚本 |
+| CodeWorkSpace/代码实现报告.md | test_result/ | 禁止根目录放报告文件 |
+
+### 2.2 删除的目录
+
+| 目录 | 原因 |
+|------|------|
+| CodeWorkSpace/WorkDocument/ | 空目录，已删除 |
+
+---
+
+## 三、目录完整性检查
+
+| 必需目录 | 状态 | 说明 |
+|----------|------|------|
+| PaperDownload/ | ✅ 存在 | 论文PDF |
+| PaperDownloadMd/ | ✅ 存在 | 论文清单 |
+| LocalPaperLibrary/ | ✅ 存在 | 本地论文库 |
+| MethodToSmart/ | ✅ 存在 | 文献分析 |
+| SmartToCode/ | ✅ 存在 | 方案设计 |
+| Code/ | ✅ 存在 | 参考代码 |
+| CodeWorkSpace/ | ✅ 存在 | 工作区代码 |
+| test_data/ | ✅ 存在 | 测试数据 |
+| test_result/ | ✅ 存在 | 测试结果 |
+| Innovation/ | ✅ 存在 | 已确认创新 |
+| paper_output/ | ✅ 存在 | 论文输出 |
+| agents/ | ✅ 存在 | Agent模块 |
+| error/ | ✅ 存在 | 错误日志 |
+| .claude/ | ✅ 存在 | Claude配置 |
+| 文档拆分/ | ✅ 存在 | 项目文档 |
+
+**禁止在根目录的文件类型**（本次已清理）：
+- 临时文件（temp_*.txt）
+- 日志文件（*.log）
+- 测试脚本（*_验证.py, *十折*.py, test_*.py）
+- 独立文档（*.md, *架构文档.md, *排除.md）
+- 报告文件（comparison_report.md, 代码实现报告.md）
+
+---
+
+## 四、核心方法清单
+
+### 4.1 基准方法（Baseline）
+
+| 方法 | 目录 | 说明 |
+|------|------|------|
+| VNA | Code/VNAeVNAaVNA/ | Voronoi Neighbor Average |
+| eVNA | Code/VNAeVNAaVNA/ | 乘法偏差校正 |
+| aVNA | Code/VNAeVNAaVNA/ | 加法偏差校正 |
+| Downscaler | Code/Downscaler/ | MCMC降尺度 |
+
+### 4.2 已确认创新方法（Innovation/success/）
+
+| 方法 | stage1 R² | stage2 R² | stage3 R² | 状态 |
+|------|-----------|-----------|-----------|------|
+| **AdvancedRK** | 0.9162 | 0.8526 | 0.9129 | ✅ 4/4通过（最优） |
+| **PolyRK** | 0.9105 | 0.8474 | 0.9060 | ✅ 4/4通过（核心） |
+| RobustRK | ~0.91 | - | - | 部分验证 |
+
+### 4.3 验证失败方法（Innovation/failed/）
+
+| 方法 | 失败原因 |
+|------|----------|
+| GARK | IDW类无明确优势 |
+| CGARK | IDW类无明确优势 |
+| MSAGARK | IDW类无明确优势 |
+| PG-STGAT | 图网络路线验证失败 |
+| VCFFM | 验证失败 |
+| ARK_OLS | 验证失败 |
+| BayesianVariationalFusion | 验证失败 |
+
+### 4.4 排除方法（不测试）
+
+| 方法 | 排除原因 |
+|------|----------|
+| PSK | 样条校正无实质创新 |
+| CSPRK | 浓度分层不合理 |
+| Stacking类 | 加权集成，迁移性差 |
+
+---
+
+## 五、基准阈值（VNA方法）
+
+| 阶段 | 时间范围 | R² > | RMSE ≤ | \|MB\| ≤ |
+|------|----------|-------|--------|----------|
+| pre_exp | 2020-01-01~05 | 0.8907 | 16.68 | 0.70 |
+| stage1 | 2020-01 | 0.9034 | 16.48 | 0.50 |
+| stage2 | 2020-07 | 0.8408 | 5.05 | 0.05 |
+| stage3 | 2020-12 | 0.9031 | 12.20 | 0.42 |
+
+---
+
+## 六、快速命令
+
+```bash
+# 查看项目状态
+python run_pipeline.py --status
+
+# 运行基准方法多阶段验证
+python test_result/基准方法/validate_baseline_multistage.py
+
+# 运行创新方法十折验证
+python test_result/创新方法/PolyRK_十折标准模式.py
+python test_result/创新方法/AdvancedRK_十折标准模式.py
+
+# 运行所有创新方法验证
+python test_result/创新方法/validate_all_methods.py
+```
+
+---
+
+*本清单由项目整理智能体自动生成*
+*整理时间: 2026-04-21*

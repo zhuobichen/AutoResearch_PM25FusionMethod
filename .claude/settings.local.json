@@ -79,7 +79,13 @@
       "Bash(mkdir -p \"E:/CodeProject/ClaudeRoom/Data_Fusion_AutoResearch/CodeWorkSpace/WorkDocument\")",
       "mcp__MiniMax__web_search",
       "Bash(node generate_report.js)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(xelatex paper.tex -interaction=nonstopmode)",
+      "Bash(xelatex report.tex)",
+      "Bash(xelatex -interaction=nonstopmode report.tex)",
+      "Bash(xelatex:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)"
     ],
     "deny": [
       "Bash(rm:*)",

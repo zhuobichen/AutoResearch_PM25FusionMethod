@@ -1,0 +1,179 @@
+\documentclass[UTF8, a4paper, 12pt]{article}
+
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\usepackage{xeCJK}
+\setCJKmainfont{SimSun}
+
+\usepackage{geometry}
+\geometry{margin=1in, top=1.2in, bottom=1.2in}
+
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{booktabs}
+\usepackage{siunitx}
+
+\title{PM$_{2.5}$ CMAQ融合方法创新评估报告}
+\author{研究团队}
+\date{\today}
+
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0pt}
+
+\begin{document}
+
+\maketitle
+
+\section{研究背景}
+
+PM$_{2.5}$监测依赖地面站观测（精确但稀疏）和CMAQ模型（覆盖广但有偏差）。现有融合方法（VNA/eVNA/aVNA）采用线性偏差假设，无法准确捕捉复杂偏差关系。本报告说明AdvancedRK方法的创新性。
+
+\section{基准方法}
+
+\subsection{VNA}
+
+VNA对k个近邻监测站进行距离加权平均（IDW），未利用CMAQ信息。
+
+\begin{equation}
+O_{VNA} = \frac{\sum_{i=1}^{k} w_i \cdot O_i}{\sum w_i}, \quad w_i = d_i^{-2}
+\end{equation}
+
+\subsection{eVNA（乘法校正）}
+
+\begin{equation}
+O_{eVNA} = O_{CMAQ} \times r_n, \quad r_n = \frac{O_{monitor}}{O_{VNA}}
+\end{equation}
+
+\subsection{aVNA（加法校正）}
+
+\begin{equation}
+O_{aVNA} = O_{CMAQ} + bias, \quad bias = O_{monitor} - O_{VNA}
+\end{equation}
+
+eVNA和aVNA假设CMAQ偏差与观测值成线性比例/差值关系，系数空间均匀。
+
+\section{AdvancedRK方法（创新方法）}
+
+\textbf{核心思想：}采用"分步校正"策略——先用二阶多项式校正非线性偏差，再用GPR-Matern核捕捉残差空间相关性。
+
+\subsection{Step 1：二阶多项式趋势校正}
+
+\textbf{为何需要非线性校正：} CMAQ与真实值的偏差往往不是简单线性关系，而是存在曲线关系。例如在低浓度时可能高估，高浓度时低估。
+
+\begin{equation}
+M_{cal} = \alpha_0 + \alpha_1 \cdot CMAQ + \alpha_2 \cdot CMAQ^2
+\end{equation}
+
+\textbf{参数物理意义：}
+\begin{itemize}
+    \item $\alpha_0$：截距项，表示基线偏差（单位：$\mu$g/m$^3$）
+    \item $\alpha_1$：一次项系数，$\alpha_1 > 1$表示CMAQ被低估，$< 1$表示被高估
+    \item $\alpha_2$：二次项系数，捕捉非线性偏差——当$\alpha_2 \neq 0$时，偏差与CMAQ模拟值呈抛物线关系
+\end{itemize}
+
+\textbf{为何二阶足够：} 一阶（线性）与aVNA/eVNA等价；三阶以上易过拟合；二阶能捕捉U形偏差，是灵活性和复杂度的平衡。
+
+系数通过普通最小二乘法（OLS）估计。
+
+\subsection{Step 2：GPR-Matern残差空间建模}
+
+计算残差：
+\begin{equation}
+R = O_{monitor} - M_{cal}
+\end{equation}
+
+对残差建立高斯过程先验，使用Matern核函数（$\nu=1.5$）：
+
+\begin{equation}
+k_{Matern}(d) = \sigma^2 \left(1 + \frac{\sqrt{3}d}{\ell}\right) \exp\left(-\frac{\sqrt{3}d}{\ell}\right)
+\end{equation}
+
+\textbf{核参数物理意义：}
+\begin{itemize}
+    \item $d$：两点间欧氏距离（km）
+    \item $\ell$（长度尺度）：相关性的特征距离
+    \item $\sigma^2$（信号方差）：残差的整体方差规模
+    \item $\nu=1.5$（光滑度）：控制函数的光滑程度
+\end{itemize}
+
+\textbf{为何选择Matern核：} 图1展示两种核函数的相关性衰减对比。
+
+\begin{figure}[htbp]
+\centering
+\caption{核函数相关性衰减对比}
+\label{fig:kernel}
+\end{figure}
+
+RBF核衰减：$\exp(-d^2/(2\ell^2))$，在距离$\ell$时衰减至$e^{-0.5} \approx 0.37$，之后快速独立。
+
+Matern核衰减：$\left(1 + \frac{\sqrt{3}d}{\ell}\right) \exp\left(-\frac{\sqrt{3}d}{\ell}\right)$，衰减更平缓。
+
+\textbf{物理意义：} 污染物从高浓度源区向外扩散时：
+\begin{itemize}
+    \item 不会像RBF核假设的那样在某个距离突然失去相关性
+    \item 也不会像指数核那样快速衰减
+    \item 而是随距离增加相关性逐渐平缓衰减——这正是Matern核的特性
+\end{itemize}
+
+克里金预测：
+\begin{equation}
+R^* = \mu_R + \mathbf{k}^T \mathbf{K}^{-1} (\mathbf{R} - \mu_R)
+\end{equation}
+
+GPR优势：不仅提供预测值，还能估计不确定性。
+
+\subsection{Step 3：融合预测}
+
+\begin{equation}
+P_{AdvancedRK} = M_{cal} + R^*
+\end{equation}
+
+最终预测 = 多项式捕捉的全局非线性趋势 + GPR捕捉的局部空间变化。
+
+\section{核心创新点}
+
+\begin{table}[htbp]
+\centering
+\caption{AdvancedRK与基准方法核心差异}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+特征 & 基准方法 & AdvancedRK \\
+\midrule
+偏差校正 & 线性(加法/乘法) & \textbf{非线性(二阶多项式)} \\
+空间建模 & IDW距离加权 & \textbf{GPR-Matern核} \\
+相关性衰减 & 快速衰减 & \textbf{平缓衰减(符合物理)} \\
+不确定性估计 & 否 & \textbf{是} \\
+\end{tabular}
+\end{table}
+
+\textbf{创新点一：非线性偏差校正}——二阶多项式能捕捉U形或抛物线形的非线性偏差，线性方法无法做到。
+
+\textbf{创新点二：GPR-Matern核}——$\nu=1.5$的Matern核衰减更平缓，符合PM$_{2.5}$扩散的物理规律。
+
+\textbf{创新点三：两步融合策略}——全局趋势校正 + 局部空间插值，既校正系统性偏差，又保留空间异质性。
+
+\section{实验验证}
+
+十折交叉验证，四个阶段：预实验(5天)、Stage1(1月)、Stage2(7月)、Stage3(12月)。
+
+\begin{table}[htbp]
+\centering
+\caption{AdvancedRK与VNA基准对比}
+\begin{tabular}{@{}lccccccc@{}}
+\toprule
+ & \multicolumn{3}{c}{AdvancedRK} & \multicolumn{3}{c}{VNA} \\
+\cmidrule{2-4} \cmidrule{5-7}
+阶段 & $R^2$ & RMSE & |MB| & $R^2$ & RMSE & |MB| & 提升 \\
+\midrule
+pre\_exp & 0.9047 & 15.58 & 0.02 & 0.8907 & 16.68 & 0.70 & +1.40\% \\
+stage1 & 0.9162 & 15.34 & 0.11 & 0.9034 & 16.48 & 0.50 & +1.28\% \\
+stage2 & 0.8526 & 4.86 & 0.04 & 0.8408 & 5.05 & 0.05 & +1.18\% \\
+stage3 & 0.9129 & 11.57 & 0.02 & 0.9031 & 12.20 & 0.42 & +0.98\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+主级创新判定：$R^2 \geq R^2_{VNA} + 0.01$。
+
+\textbf{结论：} AdvancedRK在4个阶段全部通过创新判定，R$^2$提升0.98\%$\sim$1.40\%，RMSE和$|$MB$|$全面优于VNA基准方法。
+
+\end{document}

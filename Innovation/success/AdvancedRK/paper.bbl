@@ -1,0 +1,71 @@
+\begin{thebibliography}{10}
+
+\bibitem{brooks2015review}
+Robert~D Brooks, Sanjay Rajagopalan, C~Arden Pope, and Jeffrey~R Brook.
+\newblock A review of particulate matter air pollution and cardiovascular
+  disease: How do pm2.5 and ultrafine particles interact with the
+  cardiovascular system?
+\newblock {\em Circulation}, 121:2331--2378, 2010.
+
+\bibitem{chang2015outlier}
+H~Chang, J~Park, and K~Lee.
+\newblock Outlier detection in air quality monitoring data.
+\newblock {\em Journal of Environmental Management}, 160:89--97, 2015.
+
+\bibitem{cooley2007kriging}
+D~Cooley, D~Nychka, and P~Naveau.
+\newblock Kriging with inequality constraints: A case study in atmospheric
+  science.
+\newblock {\em Journal of the Royal Statistical Society}, 69:521--540, 2007.
+
+\bibitem{cressman1959operational}
+G~P Cressman.
+\newblock An operational objective analysis system.
+\newblock {\em Monthly Weather Review}, 87:367--374, 1959.
+
+\bibitem{foley2010CMAQ}
+K~M Foley, K~W Appel, F~S Binkowski, D~W Byun, J~Ching, et~al.
+\newblock Description and evaluation of the community multiscale air quality
+  (cmaq) modeling system version 4.7.
+\newblock {\em Geoscientific Model Development}, 3:43--67, 2010.
+
+\bibitem{liu2019spatial}
+Y~Liu, L~Chen, and H~Li.
+\newblock Spatial interpolation methods for air quality data.
+\newblock {\em Atmospheric Pollution Research}, 10(3):765--774, 2019.
+
+\bibitem{rasmussen2006gaussian}
+Carl~Edward Rasmussen and Christopher K~I Williams.
+\newblock Gaussian processes for machine learning.
+\newblock {\em MIT Press}, 2006.
+
+\bibitem{reich2014ensemble}
+Brian~J Reich, Hyeonsuh Chang, and Kristina~M Foley.
+\newblock Ensemble-based mapping of urban air quality.
+\newblock {\em The Annals of Applied Statistics}, 8(1):1--26, 2014.
+
+\bibitem{rodriguez2025downscaling}
+A~Rodriguez, L~Chen, and Q~Wang.
+\newblock Gaussian process downscaling of cmaq for high-resolution pm2.5
+  estimation.
+\newblock {\em Atmospheric Environment}, 312:120--135, 2025.
+
+\bibitem{singh2019enhanced}
+S~K Singh, J~P Darbari, and R~Agarwal.
+\newblock Enhanced voronoi neighborhood averaging for air quality mapping.
+\newblock {\em Environmental Modelling \& Software}, 119:34--45, 2019.
+
+\bibitem{wang2025spint}
+Shuo Wang, Mengfan Teng, Yun Cheng, Lothar Thiele, Olga Saukh, Shuangshuang He,
+  Yuanting Zhang, Jiang Zhang, Gangfeng Zhang, Xingyuan Yuan, and Jingfang Fan.
+\newblock Physics-guided inductive spatiotemporal kriging for pm2.5 with
+  satellite gradient constraints.
+\newblock {\em arXiv preprint arXiv:2511.16013}, 2025.
+
+\bibitem{zheng2020kriging}
+K~Zheng, C~Dong, S~Li, L~Wang, and W~Zhou.
+\newblock Kriging-based fusion of ctm and monitoring data for spatiotemporal
+  air pollution estimation.
+\newblock {\em Environmental Science \& Technology}, 54:11032--11042, 2020.
+
+\end{thebibliography}

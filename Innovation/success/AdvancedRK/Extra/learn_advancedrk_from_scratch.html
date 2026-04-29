@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdvancedRK 完全入门指南 - 从零理解PM2.5数据融合</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fafaf9;
+            --surface: #ffffff;
+            --primary: #0369a1;
+            --primary-light: #0ea5e9;
+            --accent: #f59e0b;
+            --accent-warm: #ea580c;
+            --text: #1c1917;
+            --text-muted: #78716c;
+            --border: #e7e5e4;
+            --code-bg: #292524;
+            --success: #15803d;
+            --warning: #b45309;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Source Sans 3', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            font-size: 17px;
+        }
+        .progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 4px; background: var(--border); z-index: 1000; }
+        .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); width: 0%; transition: width 0.3s ease; }
+        .hero { background: linear-gradient(160deg, #0c4a6e 0%, #0369a1 40%, #0284c7 100%); color: white; padding: 100px 24px 80px; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 L100 50 L50 100 L0 50Z' fill='none' stroke='%23ffffff' stroke-width='0.5' opacity='0.1'/%3E%3C/svg%3E"); background-size: 80px 80px; }
+        .hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+        .hero-badge { display: inline-block; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 6px 14px; border-radius: 50px; font-size: 13px; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.25); }
+        h1 { font-family: 'Noto Serif SC', serif; font-size: 48px; font-weight: 700; line-height: 1.2; margin-bottom: 20px; }
+        .hero-subtitle { font-size: 20px; opacity: 0.95; max-width: 600px; }
+        .hero-meta { margin-top: 32px; display: flex; gap: 24px; font-size: 14px; opacity: 0.9; }
+        .nav-container { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .nav { max-width: 800px; margin: 0 auto; display: flex; gap: 4px; padding: 12px 24px; overflow-x: auto; scrollbar-width: none; }
+        .nav::-webkit-scrollbar { display: none; }
+        .nav a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 13px; padding: 8px 14px; border-radius: 8px; white-space: nowrap; transition: all 0.2s; }
+        .nav a:hover { background: var(--primary); color: white; }
+        .nav a.active { background: var(--primary); color: white; }
+        .container { max-width: 800px; margin: 0 auto; padding: 48px 24px 80px; }
+        .chapter { margin-bottom: 64px; }
+        .chapter-header { margin-bottom: 32px; padding-bottom: 20px; border-bottom: 2px solid var(--border); }
+        .chapter-num { font-size: 12px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+        h2 { font-family: 'Noto Serif SC', serif; font-size: 32px; font-weight: 700; margin-bottom: 12px; }
+        .chapter-desc { font-size: 17px; color: var(--text-muted); }
+        .card { background: var(--surface); border-radius: 16px; padding: 28px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border: 1px solid var(--border); margin-bottom: 20px; }
+        .card.info { border-left: 4px solid var(--primary); }
+        .card.success { border-left: 4px solid var(--success); }
+        .card.warning { border-left: 4px solid var(--warning); }
+        .card.highlight { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-color: var(--accent); }
+        h3 { font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+        h3 .icon { width: 28px; height: 28px; background: var(--primary); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; flex-shrink: 0; }
+        .formula { background: var(--code-bg); color: #d6d3d1; border-radius: 12px; padding: 24px 28px; font-family: 'Courier New', monospace; font-size: 16px; line-height: 2; margin: 20px 0; position: relative; overflow-x: auto; }
+        .formula::before { content: '公式'; position: absolute; top: -10px; left: 16px; background: var(--accent); color: var(--code-bg); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; font-family: 'Source Sans 3', sans-serif; }
+        .diagram { background: linear-gradient(180deg, #f5f5f4 0%, #e7e5e4 100%); border-radius: 16px; padding: 40px 24px; margin: 24px 0; text-align: center; }
+        .diagram-box { display: inline-block; background: var(--surface); border: 2px solid var(--primary); border-radius: 12px; padding: 16px 24px; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .diagram-arrow { display: inline-block; margin: 0 12px; font-size: 24px; color: var(--primary); vertical-align: middle; }
+        .diagram-text { font-size: 14px; color: var(--text-muted); margin-top: 16px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; }
+        th { background: var(--primary); color: white; padding: 14px 16px; text-align: left; font-weight: 600; }
+        th:first-child { border-radius: 8px 0 0 0; }
+        th:last-child { border-radius: 0 8px 0 0; }
+        td { padding: 12px 16px; border-bottom: 1px solid var(--border); }
+        tr:nth-child(even) { background: #fafaf9; }
+        tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+        tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+        ul, ol { padding-left: 24px; margin: 12px 0; }
+        li { margin-bottom: 10px; }
+        .quote { background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border-radius: 16px; padding: 28px; margin: 24px 0; position: relative; font-size: 18px; font-style: italic; }
+        .quote::before { content: '"'; position: absolute; top: 8px; left: 20px; font-size: 64px; color: var(--primary); opacity: 0.2; font-family: Georgia, serif; line-height: 1; }
+        .quote p { position: relative; z-index: 1; padding-left: 16px; }
+        .quote cite { display: block; margin-top: 16px; font-size: 14px; color: var(--text-muted); font-style: normal; }
+        .key-point { display: flex; gap: 14px; padding: 18px; background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border-left: 4px solid var(--success); border-radius: 0 12px 12px 0; margin: 20px 0; }
+        .key-point .icon { font-size: 20px; flex-shrink: 0; }
+        .key-point p { margin: 0; color: #065f46; }
+        .step-indicator { display: flex; align-items: center; gap: 12px; margin: 24px 0; }
+        .step-circle { width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 18px; flex-shrink: 0; }
+        .step-content h4 { font-size: 17px; font-weight: 600; margin-bottom: 4px; }
+        .step-content p { font-size: 14px; color: var(--text-muted); margin: 0; }
+        .analogy { background: #fefce8; border: 1px solid #fde047; border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .analogy-title { font-weight: 700; color: #a16207; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        code { background: #f5f5f4; padding: 2px 8px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.9em; color: #c7254e; }
+        pre { background: var(--code-bg); color: #d6d3d1; padding: 20px; border-radius: 10px; overflow-x: auto; font-size: 14px; line-height: 1.7; margin: 16px 0; }
+        pre code { background: none; padding: 0; color: inherit; }
+        .summary-box { background: linear-gradient(135deg, #1c1917 0%, #292524 100%); color: white; border-radius: 20px; padding: 40px; margin: 48px 0; }
+        .summary-box h3 { font-size: 24px; margin-bottom: 24px; color: white; }
+        .summary-box ul { list-style: none; padding: 0; }
+        .summary-box li { padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: flex-start; gap: 12px; font-size: 16px; }
+        .summary-box li:last-child { border: none; }
+        .summary-box li::before { content: '→'; color: var(--accent); font-weight: bold; }
+        footer { background: var(--text); color: #a8a29e; padding: 48px 24px; text-align: center; font-size: 14px; }
+        @media (max-width: 640px) {
+            h1 { font-size: 32px; }
+            h2 { font-size: 26px; }
+            .hero { padding: 60px 20px 60px; }
+            .container { padding: 32px 16px 60px; }
+            .diagram-box { display: block; margin: 12px 0; }
+            .diagram-arrow { display: block; margin: 12px 0; transform: rotate(90deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar"><div class="progress-bar-fill" id="progress"></div></div>
+
+    <header class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">从零开始 · 循序渐进</span>
+            <h1>AdvancedRK 完全入门指南</h1>
+            <p class="hero-subtitle">假设你什么都不知道，从PM2.5监测讲起，逐步理解AdvancedRK的每一个细节。</p>
+            <div class="hero-meta">
+                <span>📖 预计阅读时间：40分钟</span>
+                <span>🎯 学习目标：能向他人清晰解释AdvancedRK</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav-container">
+        <div class="nav">
+            <a href="#ch1">认识PM2.5</a>
+            <a href="#ch2">CMAQ模型</a>
+            <a href="#ch3">融合问题</a>
+            <a href="#ch4">基准方法</a>
+            <a href="#ch5">线性回归</a>
+            <a href="#ch6">空间插值</a>
+            <a href="#ch7">GPR</a>
+            <a href="#ch8">AdvancedRK</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- 第一章：认识PM2.5 -->
+        <section id="ch1" class="chapter">
+            <div class="chapter-header">
+                <div class="chapter-num">第一章</div>
+                <h2>认识PM2.5：什么是空气质量监测？</h2>
+                <p class="chapter-desc">先理解我们正在解决的问题是什么。</p>
+            </div>
+
+            <div class="card info">
+                <h3><span class="icon">🌬️</span>什么是PM2.5？</h3>
+                <p>PM2.5是指<strong>直径小于2.5微米的颗粒物</strong>（如灰尘、烟雾、酸雨颗粒等）。它能深入肺部，进入血液，导致哮喘、心脏病、肺癌等健康问题。</p>
+                <ul style="margin-top: 16px;">
+                    <li>PM2.5浓度越高，空气质量越差，对健康危害越大</li>
+                    <li>PM2.5的浓度单位是 <code>μg/m³</code>（微克/立方米）</li>
+                    <li>世界卫生组织建议：日均浓度应低于25 μg/m³</li>
+                </ul>
+            </div>
+
+            <div class="card info">
+                <h3><span class="icon">📍</span>如何监测PM2.5？</h3>
+                <p>目前有两种主要方式：</p>
+                <div class="diagram">
+                    <div class="diagram-box">🏭 CMAQ模型</div>
+                    <span class="diagram-arrow">|</span>
+                    <div class="diagram-box">🛰️ 卫星遥感</div>
+                    <span class="diagram-arrow">|</span>
+                    <div class="diagram-box">🏠 地面监测站</div>
+                    <p class="diagram-text">两种监测方式各有优缺点</p>
+                </div>
+                <table>
+                    <tr><th>方式</th><th>优点</th><th>缺点</th></tr>
+                    <tr><td><strong>地面监测站</strong></td><td>数据精确（专业仪器测量）</td><td>站点稀少，全国只有几百个</td></tr>
+                    <tr><td><strong>CMAQ模型</strong></td><td>覆盖全国，每个位置都能算</td><td>计算结果有误差，和真实值不完全一致</td></tr>
+                </table>
+            </div>
+
+            <div class="quote">
+                <p>想象一下：地面监测站就像是用精密天平称重量（准确但只有几个点），而CMAQ模型就像是用尺子估算重量（有系统性误差但覆盖全区域）。</p>
+            </div>
+
+            <div class="key-point">
+                <span class="icon">🎯</span>
+                <p><strong>核心问题</strong>：我们能不能结合两者的优点——用地面监测站的精确数据来<strong>校正</strong>CMAQ模型的结果，得到又准确又完整的PM2.5分布图？</p>
+            </div>
+        </section>
+
+        <!-- 第二章：CMAQ模型 -->
+        <section id="ch2" class="chapter">
+            <div class="chapter-header">
+                <div class="chapter-num">第二章</div>
+                <h2>CMAQ模型：它是怎么工作的？</h2>
+                <p class="chapter-desc">理解为什么CMAQ模型的结果会有误差。</p>
+            </div>
+
+            <div class="card info">
+                <h3><span class="icon">🔬</span>什么是CMAQ模型？</h3>
+                <p><strong>CMAQ</strong>（Community Multiscale Air Quality）是美国环保署开发的大气化学传输模型。它模拟大气中化学物质的产生、传输、转化和清除过程，从而计算出PM2.5的浓度。</p>
+                <div class="analogy">
+                    <div class="analogy-title">🔧 打个比方</div>
+                    <p>想象你用天气预报模型预测明天的温度。它需要输入：今天的温度、风速、湿度、气压...然后通过复杂的物理公式计算。模型越准确，预测越接近真实。</p>
+                </div>
+                <ul style="margin-top: 16px;">
+                    <li>输入：排放源数据、气象条件、地形等</li>
+                    <li>处理：大气化学动力学方程、污染物传输方程</li>
+                    <li>输出：每个网格点的PM2.5浓度预测值</li>
+                </ul>
+            </div>
+
+            <div class="card warning">
+                <h3><span class="icon">⚠️</span>CMAQ的误差来源</h3>
+                <p>模型结果和真实值之间总会有差距，主要原因：</p>
+                <ul>
+                    <li><strong>排放源不确定性</strong>：工厂、汽车、扬尘...真实的排放量很难精确统计</li>
+                    <li><strong>气象模拟误差</strong>：风场、温度场的微小误差会放大</li>
+                    <li><strong>化学机理简化</strong>：真实的大气化学极其复杂，必须简化</li>
+                    <li><strong>地形影响</strong>：山谷、高楼的局地影响难以精确模拟</li>
+                </ul>
+                <div class="key-point">
+                    <span class="icon">📊</span>
+                    <p><strong>关键发现</strong>：CMAQ的误差不是随机噪声，而是有<strong>规律可循</strong>的。例如：低浓度时可能高估，高浓度时可能低估。</p>
+                </div>
+            </div>
+
+            <div class="card info">
+                <h3><span class="icon">🗺️</span>CMAQ的网格输出</h3>
+                <p>CMAQ把全国划分成网格（每个格子约4km×4km），每个格子都有一个预测值。但监测站只有几百个，如何用这几百个准确数据来校正全图的预测值？这就是数据融合要解决的问题。</p>
+            </div>
+        </section>
+
+        <!-- 第三章：数据融合的问题 -->
+        <section id="ch3" class="chapter">
+            <div class="chapter-header">
+                <div class="chapter-num">第三章</div>
+                <h2>数据融合：我们想要什么？</h2>
+                <p class="chapter-desc">理解"融合"的目标和挑战。</p>
+            </div>
+
+            <div class="card info">
+                <h3><span class="icon">🎯</span>数据融合的目标</h3>
+                <p>我们想要一张<strong>完整又准确</strong>的PM2.5地图：</p>
+                <ul>
+                    <li><strong>准确</strong>：每个点的值都要接近真实值（参考地面监测站）</li>
+                    <li><strong>完整</strong>：不是只有监测站附近准，而是全国每个地方都要准</li>
+                </ul>
+                <div class="key-point">
+                    <span class="icon">💡</span>
+                    <p>类比：你想知道明天全国每个城市的温度。监测站提供的是"真实温度"，但城市太少；CMAQ模型提供的是"预测温度"，覆盖全但有误差。融合就是：用真实温度来校正预测温度。</p>
+                </div>
+            </div>
+
+            <div class="card warning">
+                <h3><span class="icon">⚠️</span>融合的核心困难</h3>
+                <p>困难在于：CMAQ的偏差不是常数，而是与多种因素有关：</p>
+                <ul>
+                    <li>偏差和CMAQ预测值本身可能呈<strong>非线性关系</strong>（低浓度高估、高浓度低估）</li>
+                    <li>偏差在不同位置有不同的<strong>空间结构</strong>（顺风方向影响更远）</li>
+                    <li>不同季节的偏差规律可能不同</li>
+                </ul>
+                <p style="margin-top: 16px;">AdvancedRK的解决方案：用<strong>两步分工</strong>来处理这两个问题。</p>
+            </div>
+
+            <div class="card success">
+                <h3><span class="icon">🚀</span>AdvancedRK的思路：两步走</h3>
+                <div class="step-indicator">
+                    <div class="step-circle">1</div>
+                    <div class="step-content">
+                        <h4>第一步：多项式校正</h4>
+                        <p>处理"CMAQ偏差和浓度的关系是非线性的"这个问题</p>
+                    </div>
+                </div>
+                <div class="step-indicator">
+                    <div class="step-circle">2</div>
+                    <div class="step-content">
+                        <h4>第二步：GPR空间建模</h4>
+                        <p>处理"校正后仍然有局部空间差异"这个问题</p>
+                    </div>
+                </div>
+                <div class="key-point">
+                    <span class="icon">🔑</span>
+                    <p><strong>核心洞察</strong>：与其用一个复杂模型同时处理两个问题，不如用两个简单的专业模型各司其职。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第四章：基准方法详解 -->
+        <section id="ch4" class="chapter">
+            <div class="chapter-header">
+                <div class="chapter-num">第四章</div>
+                <h2>基准方法：VNA / eVNA / aVNA / Downscaler</h2>
+                <p class="chapter-desc">理解AdvancedRK对比的基准方法是什么，它们各自有什么特点。</p>
+            </div>
+
+            <div class="card info">
+                <h3><span class="icon">🗺️</span>VNA（Voronoi Neighbor Averaging）</h3>
+                <p><strong>核心思想</strong>：对每个预测点，找离它最近的k个监测站，用距离加权平均估算值。</p>
+                <div class="formula">
+                    VNA(s) = Σᵢ wᵢ(s) · Oᵢ / Σᵢ wᵢ(s)
+                    其中 wᵢ(s) = dᵢ(s)⁻²（距离的平方反比）
+                </div>
+                <p style="margin-top: 16px;"><strong>关键参数</strong>：</p>
+                <ul>
+                    <li>k：近邻数量（默认30，EPA标准）</li>
+                    <li>power：距离权重指数（默认-2，即1/d²）</li>
+                    <li>method：邻居选择方法（nearest/voronoi/laplace）</li>
+                </ul>
+                <div class="analogy">
+                    <div class="analogy-title">🧭 形象理解</div>
+                    <p>就像在一张地图上，你站在某个位置，最近的30个朋友告诉你他们那边的温度，你根据距离远近加权平均，猜出你这里的温度。</p>
+                </div>
+                <p style="margin-top: 16px;"><strong>局限</strong>：VNA直接用监测站的观测值，不利用CMAQ模型的预测值。所以当预测点远离监测站时，预测质量会急剧下降。</p>
+            </div>
+
+            <div class="card info">
+                <h3><span class="icon">📐</span>eVNA（enhanced VNA，比例校正）</h3>
+                <p><strong>核心思想</strong>：假设CMAQ模型值和真实值之间存在比例关系，用监测站的比值来校正。</p>
+                <div class="formula">
+                    r = O_monitor / O_model（在校正监测站处）
+                    eVNA(s) = O_model(s) × r（推广到全网格）
+                </div>
+                <p style="margin-top: 16px;"><strong>代码实现</strong>（来自core.py）：</p>
+                <pre><code>@staticmethod
+def compute_evna(model_values, vna_rn):
+    return model_values * vna_rn</code></pre>
+                <div class="key-point">
+                    <span class="icon">⚠️</span>
+                    <p><strong>局限</strong>：假设比例r是常数。但如果CMAQ在低浓度时偏高10%，高浓度时偏高20%，这个假设就不成立。</p>
+                </div>
+            </div>
+
+            <div class="card info">
+                <h3><span class="icon">➕</span>aVNA（additive VNA，加法校正）</h3>
+                <p><strong>核心思想</strong>：假设CMAQ模型值和真实值之间存在固定的偏移量，用监测站的偏差来校正。</p>
+                <div class="formula">
+                    b = O_monitor − O_model（在校正监测站处）
+                    aVNA(s) = O_model(s) + b（推广到全网格）
+                </div>
+                <p style="margin-top: 16px;"><strong>代码实现</strong>（来自core.py）：</p>
+                <pre><code>@staticmethod
+def compute_avna(model_values, vna_bias):
+    return model_values + vna_bias</code></pre>
+                <div class="key-point">
+                    <span class="icon">⚠️</span>
+                    <p><strong>局限</strong>：假设偏差b是常数。但如果CMAQ在北京偏差+5，在上海偏差-3，这个假设就不成立。</p>
+                </div>
+            </div>
+
+            <div class="card success">
+                <h3><span class="icon">🎲</span>Downscaler（MCMC downscaling）</h3>
+                <p><strong>核心思想</strong>：用MCMC（马尔可夫链蒙特卡洛）方法迭代校正模型输出。</p>
+                <div class="step-indicator">
+                    <div class="step-circle">1</div>
+                    <div class="step-content">
+                        <h4>初始化</h4>
+                        <p>用CMAQ模型值作为初始猜测</p>
+                    </div>
+                </div>
+                <div class="step-indicator">
+                    <div class="step-circle">2</div>
+                    <div class="step-content">
+                        <h4>迭代校正</h4>
+                        <p>根据监测站数据计算偏差，逐步调整网格值</p>
+                    </div>
+                </div>
+                <div class="step-indicator">
+                    <div class="step-circle">3</div>
+                    <div class="step-content">
+                        <h4>收敛</h4>
+                        <p>迭代2500次后得到稳定结果</p>
+                    </div>
+                </div>
+                <div class="analogy">
+                    <div class="analogy-title">🔧 打个比方</div>
+                    <p>想象你调收音机：先随便转到一个频道（初始值），然后根据听到的清晰度微调旋钮（迭代校正），直到找到最清晰的频道（收敛）。</p>
+                </div>
+                <p style="margin-top: 16px;"><strong>特点</strong>：需要全网格CMAQ数据作为输入，输出全网格校正结果，计算复杂度高，但能捕捉复杂的空间结构。</p>
+            </div>
+
+            <div class="card highlight">
+                <h3><span class="icon">📊</span>四种方法对比总结</h3>
+                <table>
+                    <tr><th>方法</th><th>偏差假设</th><th>空间建模</th><th>输出范围</th></tr>
+                    <tr><td><strong>VNA</strong></td><td>无（直接用监测站值）</td><td>k近邻IDW加权</td><td>全网格</td></tr>
+                    <tr><td><strong>eVNA</strong></td><td>比例常数（r_n）</td><td>k近邻IDW加权</td><td>全网格</td></tr>
+                    <tr><td><strong>aVNA</strong></td><td>偏移常数（bias）</td><td>k近邻IDW加权</td><td>全网格</td></tr>
+                    <tr><td><strong>Downscaler</strong></td><td>迭代学习（非线性）</td><td>MCMC空间建模</td><td>全网格</td></tr>
+                    <tr><td><strong>AdvancedRK</strong></td><td>多项式（非线性）</td><td>GPR-Matern核</td><td>全网格</td></tr>
+                </table>
+                <div class="key-point">
+                    <span class="icon">🔑</span>
+                    <p><strong>核心区别</strong>：AdvancedRK用二阶多项式捕捉CMAQ偏差的非线性关系（不是常数比例或偏移），用GPR-Matern核做精细的空间建模（不是简单的距离加权）。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第五章：线性回归基础 -->
+        <section id="ch5" class="chapter">
+            <div class="chapter-header">
+                <div class="chapter-num">第五章</div>
+                <h2>线性回归基础：理解多项式校正的原理</h2>
+                <p class="chapter-desc">理解什么是"拟合"和"校正"——AdvancedRK第一步的数学基础。</p>
+            </div>
+
+            <div class="card info">
+                <h3><span class="icon">📈</span>什么是线性回归？</h3>
+                <p>假设你有一些数据点，你想找到一条"最适合"的直线来描述它们的关系。</p>
+                <div class="diagram">
+                    <div style="font-family: monospace; font-size: 14px; text-align: left; padding: 20px;">
+                        <div style="color: #78716c;">y = α₀ + α₁·x</div>
+                        <div style="margin-top: 16px; color: var(--text-muted); font-size: 13px;">
+                            例子：如果 x=50（PM2.5的CMAQ预测值）<br>
+                            那么预测的 y = α₀ + α₁×50<br><br>
+                            但真实值可能是 y = 55（监测站的值）
+                        </div>
+                    </div>
+                </div>
+                <p><strong>回归的任务</strong>：找到最佳的 α₀ 和 α₁，使得预测值和真实值最接近。</p>
+            </div>
+
+            <div class="card info">
+                <h3><span class="icon">📊</span>从1阶到2阶：多项式的升级</h3>
+                <p><strong>1阶（线性）</strong>：y = α₀ + α₁·x</p>
+                <div style="background: #f5f5f4; padding: 20px; border-radius: 8px; margin: 16px 0; font-family: monospace; font-size: 14px; text-align: center;">
+                    📈 一条直线
+                </div>
+                <p style="margin-top: 24px;"><strong>2阶（二次）</strong>：y = α₀ + α₁·x + α₂·x²</p>
+                <div style="background: #f5f5f4; padding: 20px; border-radius: 8px; margin: 16px 0; font-family: monospace; font-size: 14px; text-align: center;">
+                    📈 一条曲线（抛物线）<br>
+                    <span style="font-size: 12px; color: var(--text-muted);">可以弯腰！</span>
+                </div>
+                <div class="analogy">
+                    <div class="analogy-title">🎯 形象理解</div>
+                    <p>想象你在拟合一个U形曲线（两头高中间低）。如果只用直线，永远拟合不好；但如果允许弯曲，就能很好地拟合。</p>
+                </div>
+            </div>
+
+            <div class="card warning">
+                <h3><span class="icon">⚠️</span>为什么不能无限增加阶数？</h3>
+                <p>理论上，3阶、4阶、10阶多项式可以拟合更复杂的曲线。但有一个问题：<strong>过拟合</strong>——曲线穿过每个点，但在新数据上表现很差。</p>
+                <p style="margin-top: 16px;">消融实验证明：<strong>有GPR时，多项式阶数的影响很小（差异<0.003）</strong>，二阶是最佳平衡点。</p>
+            </div>
+
+            <div class="card success">
+                <h3><span class="icon">🔧</span>多项式校正的代码逻辑</h3>
+                <pre><code># 输入：CMAQ预测值 m，真实值 y
+poly = PolynomialFeatures(degree=2)
+m_poly = poly.fit_transform(m.reshape(-1, 1))  # 变成 [m, m²]
+ols = LinearRegression().fit(m_poly, y)
+y_poly = ols.predict(m_poly)  # 多项式预测
+residual = y - y_poly  # 计算残差</code></pre>
+                <p style="margin-top: 16px;">简单说：<strong>找到一条最佳曲线，描述"CMAQ预测值"和"真实值"之间的非线性关系。</strong></p>
+            </div>
+        </section>
+
+        <!-- 第六章：空间插值基础 -->
+        <section id="ch6" class="chapter">
+            <div class="chapter-header">
+                <div class="chapter-num">第六章</div>
+                <h2>空间插值基础：为什么需要GPR？</h2>
+                <p class="chapter-desc">理解什么是"距离加权"和"空间相关性"——AdvancedRK第二步的物理基础。</p>
+            </div>
+
+            <div class="card info">
+                <h3><span class="icon">📍</span>什么是空间插值？</h3>
+                <p>你知道了A点和B点的值，想估算C点的值。这就是<strong>空间插值</strong>。</p>
+                <div class="diagram">
+                    <div class="diagram-box">A点<br><span style="font-size:12px">浓度=50</span></div>
+                    <span class="diagram-arrow">←</span>
+                    <div class="diagram-box" style="border-color: var(--accent);">C点（要估算）</div>
+                    <span class="diagram-arrow">→</span>
+                    <div class="diagram-box">B点<br><span style="font-size:12px">浓度=70</span></div>
+                </div>
+                <p style="margin-top: 16px;">C点应该接近50还是70？取决于<strong>距离</strong>和<strong>方向</strong>。</p>
+            </div>
+
+            <div class="card info">
+                <h3><span class="icon">⚖️</span>最简单的插值：距离反比加权（IDW）</h3>
+                <p><strong>核心思想</strong>：离目标点越近的点，对目标点影响越大。</p>
+                <div class="formula">
+                    估算值 = Σ( 监测值_i / 距离_i ) / Σ( 1 / 距离_i )
+                </div>
+                <p style="margin-top: 16px;">VNA/eVNA/aVNA都使用这种IDW加权方式。优点是简单，缺点是没有考虑"空间相关性"——它假设所有方向都一样，但实际上PM2.5扩散有方向性（随风向）。</p>
+            </div>
+
+            <div class="card warning">
+                <h3><span class="icon">🌬️</span>为什么需要GPR？（高斯过程回归）</h3>
+                <p>IDW的问题：它假设"距离越近越像"，但实际情况更复杂：</p>
+                <ul>
+                    <li>污染物扩散有方向性（顺风方向影响更远）</li>
+                    <li>地形会改变扩散路径（山谷、河谷）</li>
+                    <li>不同季节扩散规律不同</li>
+                </ul>
+                <div class="quote">
+                    <p>IDW就像是用"所有人的平均身高"来估算某个人的身高——考虑了距离，但没有考虑其他可能相关的因素。</p>
+                </div>
+                <div class="key-point">
+                    <span class="icon">💡</span>
+                    <p><strong>GPR的优势</strong>：它能学习数据的"相关性结构"——不是简单地说"越近越像"，而是说"在这个方向上相关性衰减更慢，在那个方向上衰减更快"。</p>
+                </div>
+            </div>
+
+            <div class="card success">
+                <h3><span class="icon">🔗</span>核函数的作用</h3>
+                <p>GPR用<strong>核函数</strong>来描述"空间相关性"的结构。核函数就像测量两个点之间"有多像"的尺子。</p>
+                <div class="diagram" style="display: flex; gap: 40px; justify-content: center; flex-wrap: wrap;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">RBF核</div>
+                        <div style="background: #fef2f2; padding: 16px; border-radius: 8px; font-size: 13px;">快速衰减<br>→ 超过某距离就"不像"</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">Matern核</div>
+                        <div style="background: #ecfdf5; padding: 16px; border-radius: 8px; font-size: 13px;">平缓衰减<br>→ 逐渐远离，逐渐"不像"</div>
+                    </div>
+                </div>
+                <p style="margin-top: 16px;">Matern核的平缓衰减更符合PM2.5扩散的物理规律：污染物不会在某处突然从"有影响"变成"无影响"，而是逐渐衰减。</p>
+            </div>
+        </section>
+
+        <!-- 第七章：高斯过程回归 -->
+        <section id="ch7" class="chapter">
+            <div class="chapter-header">
+                <div class="chapter-num">第七章</div>
+                <h2>高斯过程回归（GPR）：它能做什么？</h2>
+                <p class="chapter-desc">理解为什么GPR是空间建模的好工具。</p>
+            </div>
+
+            <div class="card info">
+                <h3><span class="icon">📊</span>GPR的基本思想</h3>
+                <p><strong>核心假设</strong>：我们想预测的"残差"（校正后的误差）服从某种<strong>空间相关的随机过程</strong>。</p>
+                <div class="analogy">
+                    <div class="analogy-title">🎲 打个比方</div>
+                    <p>想象你在一片草地上扔了一堆小球，每个小球落地后会留下一个"高度"。如果你在几个位置知道了小球的高度，你能不能猜测其他位置的高度？GPR的答案：可以！相邻的位置高度应该差不多，但有一定随机性。这叫"空间平滑"。</p>
+                </div>
+                <div class="formula">
+                    R*(s*) = μ + kᵀK⁻¹(R − μ)
+
+                    其中：
+                    • μ：残差的均值（通常取0）
+                    • kᵢ = κ(s*, sᵢ)：新位置s*与训练点sᵢ的核函数值
+                    • Kᵢⱼ = κ(sᵢ, sⱼ)：训练点之间的核函数矩阵
+                </div>
+            </div>
+
+            <div class="card success">
+                <h3><span class="icon">✨</span>GPR的两大优势</h3>
+                <div class="step-indicator">
+                    <div class="step-circle">1</div>
+                    <div class="step-content">
+                        <h4>预测 + 不确定性估计</h4>
+                        <p>不只是给一个数字，而是同时告诉你"这个数字有多可靠"</p>
+                    </div>
+                </div>
+                <div class="step-indicator">
+                    <div class="step-circle">2</div>
+                    <div class="step-content">
+                        <h4>自动学习核函数参数</h4>
+                        <p>不需要手动设置"距离衰减有多快"，数据会告诉你</p>
+                    </div>
+                </div>
+                <pre style="margin-top: 24px;"><code># GPR的输出
+pred_mean, pred_std = gpr.predict(X_test, return_std=True)
+
+# pred_mean: 预测值
+# pred_std: 标准差（不确定性）
+# 标准差大 → 预测不可靠（附近监测站稀疏）
+# 标准差小 → 预测可靠（附近监测站密集）</code></pre>
+            </div>
+
+            <div class="card warning">
+                <h3><span class="icon">⚙️</span>稀疏矩阵：加速计算的关键</h3>
+                <p>标准的GPR复杂度是 <strong>O(n³)</strong>（n是训练点数），如果n很大，计算会非常慢。</p>
+                <p style="margin-top: 16px;"><strong>稀疏近似的思想</strong>：</p>
+                <ul>
+                    <li>核函数 κ(d) 描述"距离为d的两个点有多像"</li>
+                    <li>当距离很远时，κ(d) ≈ 0（几乎不像）</li>
+                    <li>设定一个阈值，小于阈值的直接当0处理</li>
+                </ul>
+                <div class="diagram" style="display: flex; gap: 40px; justify-content: center; flex-wrap: wrap;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">稠密矩阵（1000×1000）</div>
+                        <div style="background: #fef2f2; padding: 16px; border-radius: 8px; font-size: 13px;">
+                            100万个数字<br>
+                            计算量：O(n³)
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">稀疏矩阵（~1%密度）</div>
+                        <div style="background: #ecfdf5; padding: 16px; border-radius: 8px; font-size: 13px;">
+                            只有1万个数字不是0<br>
+                            计算量：大幅降低
+                        </div>
+                    </div>
+                </div>
+                <p style="margin-top: 16px;">以SparseKrig为例：设定阈值0.01后，核矩阵只保留约0.45%的非零元素。远距离的点对之间相关性几乎为0，直接当0处理，完全合理。</p>
+                <div class="key-point">
+                    <span class="icon">💡</span>
+                    <p><strong>类比</strong>：想象你在做一个1000×1000的拼图（100万块）。稀疏方法只保留最重要的1万块，其他99万块直接扔掉——反正它们的影响微乎其微。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第八章：AdvancedRK完整理解 -->
+        <section id="ch8" class="chapter">
+            <div class="chapter-header">
+                <div class="chapter-num">第八章</div>
+                <h2>AdvancedRK完整理解</h2>
+                <p class="chapter-desc">整合所有知识，理解AdvancedRK的每个细节。</p>
+            </div>
+
+            <div class="card success">
+                <h3><span class="icon">🏗️</span>AdvancedRK的完整流程</h3>
+                <div class="step-indicator">
+                    <div class="step-circle">0</div>
+                    <div class="step-content">
+                        <h4>输入：CMAQ预测值 + 监测站真实值</h4>
+                        <p>我们用监测站的真实值来"训练"模型</p>
+                    </div>
+                </div>
+                <div class="step-indicator">
+                    <div class="step-circle">1</div>
+                    <div class="step-content">
+                        <h4>Step 1：二阶多项式校正</h4>
+                        <p>学习"CMAQ值"和"真实值"的非线性关系</p>
+                    </div>
+                </div>
+                <div class="step-indicator">
+                    <div class="step-circle">2</div>
+                    <div class="step-content">
+                        <h4>Step 2：GPR-Matern空间建模</h4>
+                        <p>学习残差的空间分布规律</p>
+                    </div>
+                </div>
+                <div class="step-indicator">
+                    <div class="step-circle">=</div>
+                    <div class="step-content">
+                        <h4>输出：最终预测值</h4>
+                        <p>多项式校正 + GPR空间调整</p>
+                    </div>
+                </div>
+                <div class="formula" style="margin-top: 24px;">
+                    P = M_cal + R* = (α₀ + α₁·CMAQ + α₂·CMAQ²) + GPR(Lon, Lat)
+                </div>
+            </div>
+
+            <div class="card info">
+                <h3><span class="icon">🔬</span>消融实验验证</h3>
+                <table>
+                    <tr><th>实验</th><th>对比方案</th><th>结论</th></tr>
+                    <tr><td>Step 1 Only</td><td>只用多项式，不做空间建模</td><td>R²只有0.29~0.45，完全失效</td></tr>
+                    <tr><td>跳过多项式</td><td>直接用GPR，跳过Step 1</td><td>R²下降2.9%~9.1%</td></tr>
+                    <tr><td>核函数对比</td><td>Matern(1.5) vs RBF vs RF</td><td>Matern(1.5)最优（平均R²=0.8472）</td></tr>
+                    <tr><td>多项式阶数</td><td>1阶 vs 2阶 vs 3阶</td><td>有GPR时，差异<0.003，2阶最优</td></tr>
+                </table>
+                <div class="key-point">
+                    <span class="icon">🔑</span>
+                    <p><strong>核心结论</strong>：GPR是核心创新（贡献大部分性能），多项式是辅助（捕捉全局趋势），Matern(1.5)核最符合物理。</p>
+                </div>
+            </div>
+
+            <div class="card highlight">
+                <h3><span class="icon">📋</span>完整代码对照</h3>
+                <pre><code># AdvancedRK 伪代码
+
+# ========== Step 1: 多项式校正 ==========
+poly = PolynomialFeatures(degree=2)
+m_poly = poly.fit_transform(m.reshape(-1, 1))
+ols = LinearRegression().fit(m_poly, y)
+y_poly = ols.predict(m_poly)
+residual = y - y_poly
+
+# ========== Step 2: GPR空间建模 ==========
+kernel = Matern(nu=1.5) + WhiteKernel()
+gpr = GaussianProcessRegressor(kernel=kernel).fit(X, residual)
+residual_pred = gpr.predict(X_new)
+
+# ========== 最终预测 ==========
+y_final = y_poly_new + residual_pred</code></pre>
+            </div>
+
+            <div class="card warning">
+                <h3><span class="icon">🎤</span>如何向他人讲解？（三个层次）</h3>
+                <p style="margin-top: 20px;"><strong>层次1：30秒电梯演讲</strong></p>
+                <div class="quote" style="font-size: 16px;">
+                    <p>AdvancedRK是一种PM2.5数据融合方法。它用二阶多项式捕捉CMAQ模型的非线性偏差，用Matern核的高斯过程回归捕捉空间变化。两步分工，精确又完整。</p>
+                </div>
+                <p style="margin-top: 20px;"><strong>层次2：1分钟解释</strong></p>
+                <p>VNA/eVNA/aVNA假设偏差是常数（eVNA是比例常数，aVNA是偏移常数），无法捕捉非线性关系。AdvancedRK用二阶多项式捕捉偏差与CMAQ值的非线性关系，用GPR-Matern核代替简单的距离加权。</p>
+                <p style="margin-top: 20px;"><strong>层次3：5分钟详细讲解</strong></p>
+                <p>从问题背景讲起：为什么需要融合、现有方法的问题（VNA无偏差校正、eVNA/aVNA假设偏差常数、Downscaler计算复杂）、两步框架的设计、各步骤的原理、核函数的选择、不确定性估计能力、实验验证结果。</p>
+            </div>
+        </section>
+
+        <!-- 总结 -->
+        <section>
+            <div class="summary-box">
+                <h3>🎯 学习成果检验</h3>
+                <ul>
+                    <li><strong>理解问题</strong>：CMAQ模型有系统性偏差，需要校正</li>
+                    <li><strong>理解方案</strong>：两步分工——多项式（非线性）+ GPR（空间）</li>
+                    <li><strong>理解创新</strong>：二阶多项式捕捉全局趋势，Matern核符合物理规律</li>
+                    <li><strong>理解验证</strong>：消融实验证明每步都有贡献，4/4阶段通过主级创新</li>
+                    <li><strong>能够讲解</strong>：可以从30秒到5分钟不同层次讲解AdvancedRK</li>
+                </ul>
+            </div>
+            <div class="quote">
+                <p>记住一个比喻：线性方法 = 用直尺量曲线；AdvancedRK = 用曲线板量曲线 + 高精度定位。</p>
+                <p style="margin-top: 16px;">这样你就能向任何人解释：为什么AdvancedRK比传统方法更好。</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>AdvancedRK 完全入门指南</p>
+        <p style="margin-top: 8px; opacity: 0.6;">从零开始 · 循序渐进 · 理解本质</p>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress').style.width = scrolled + '%';
+        });
+        const sections = document.querySelectorAll('.chapter');
+        const navLinks = document.querySelectorAll('.nav a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdvancedRK 学习指南 - 如何向他人讲解PM2.5数据融合方法</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #f8f9fb;
+            --color-surface: #ffffff;
+            --color-primary: #0ea5e9;
+            --color-primary-dark: #0284c7;
+            --color-secondary: #64748b;
+            --color-accent: #f59e0b;
+            --color-accent-warm: #ef4444;
+            --color-text: #1e293b;
+            --color-text-muted: #64748b;
+            --color-border: #e2e8f0;
+            --color-code-bg: #1e293b;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.7;
+            font-size: 17px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0c4a6e 0%, #0ea5e9 50%, #38bdf8 100%);
+            color: white;
+            padding: 80px 24px 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 56px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .hero-subtitle {
+            font-size: 22px;
+            opacity: 0.95;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .hero-meta {
+            margin-top: 40px;
+            display: flex;
+            gap: 32px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        .nav-container {
+            background: var(--color-surface);
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            gap: 8px;
+            padding: 16px 24px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav a {
+            color: var(--color-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .nav a:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: 64px;
+        }
+
+        .section-header {
+            margin-bottom: 32px;
+        }
+
+        .section-number {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        h2 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 16px;
+        }
+
+        .section-desc {
+            font-size: 18px;
+            color: var(--color-text-muted);
+            max-width: 700px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--color-border);
+            margin-bottom: 24px;
+        }
+
+        .card-highlight {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-color: #f59e0b;
+        }
+
+        .card-accent {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-color: var(--color-primary);
+        }
+
+        .card h3 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card h3 .icon {
+            width: 32px;
+            height: 32px;
+            background: var(--color-primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+        }
+
+        /* Formula Box */
+        .formula-box {
+            background: var(--color-code-bg);
+            color: #e2e8f0;
+            border-radius: var(--radius-md);
+            padding: 24px 32px;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            line-height: 2;
+            margin: 24px 0;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .formula-box::before {
+            content: '公式';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--color-accent);
+            color: var(--color-code-bg);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Source Sans 3', sans-serif;
+        }
+
+        /* Flow Diagram */
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 40px 20px;
+            background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
+            border-radius: var(--radius-lg);
+            margin: 32px 0;
+            flex-wrap: wrap;
+        }
+
+        .flow-step {
+            background: var(--color-surface);
+            border: 2px solid var(--color-primary);
+            border-radius: var(--radius-md);
+            padding: 20px 28px;
+            text-align: center;
+            min-width: 160px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .flow-step h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 8px;
+        }
+
+        .flow-step p {
+            font-size: 13px;
+            color: var(--color-text-muted);
+            margin: 0;
+        }
+
+        .flow-arrow {
+            font-size: 28px;
+            color: var(--color-primary);
+            font-weight: bold;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 15px;
+        }
+
+        .comparison-table th {
+            background: var(--color-primary);
+            color: white;
+            padding: 16px 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table th:first-child {
+            border-radius: var(--radius-sm) 0 0 0;
+        }
+
+        .comparison-table th:last-child {
+            border-radius: 0 var(--radius-sm) 0 0;
+        }
+
+        .comparison-table td {
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .comparison-table tr:last-child td:first-child {
+            border-radius: 0 0 0 var(--radius-sm);
+        }
+
+        .comparison-table tr:last-child td:last-child {
+            border-radius: 0 0 var(--radius-sm) 0;
+        }
+
+        /* Key Point */
+        .key-point {
+            display: flex;
+            gap: 16px;
+            padding: 20px;
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border-left: 4px solid #10b981;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            margin: 24px 0;
+        }
+
+        .key-point .icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .key-point p {
+            margin: 0;
+            color: #065f46;
+        }
+
+        /* Warning Point */
+        .warning-point {
+            display: flex;
+            gap: 16px;
+            padding: 20px;
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border-left: 4px solid var(--color-accent-warm);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            margin: 24px 0;
+        }
+
+        .warning-point .icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .warning-point p {
+            margin: 0;
+            color: #991b1b;
+        }
+
+        /* List Styling */
+        ul, ol {
+            padding-left: 24px;
+            margin: 16px 0;
+        }
+
+        li {
+            margin-bottom: 12px;
+        }
+
+        li::marker {
+            color: var(--color-primary);
+        }
+
+        /* Code Block */
+        code {
+            background: #f1f5f9;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #c7254e;
+        }
+
+        pre {
+            background: var(--color-code-bg);
+            color: #e2e8f0;
+            padding: 24px;
+            border-radius: var(--radius-md);
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            margin: 24px 0;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+
+        /* Quote */
+        .quote {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            margin: 32px 0;
+            position: relative;
+        }
+
+        .quote::before {
+            content: '"';
+            position: absolute;
+            top: 16px;
+            left: 24px;
+            font-size: 72px;
+            color: var(--color-primary);
+            opacity: 0.3;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .quote p {
+            font-size: 20px;
+            font-style: italic;
+            color: var(--color-text);
+            position: relative;
+            z-index: 1;
+            padding-left: 20px;
+        }
+
+        .quote cite {
+            display: block;
+            margin-top: 16px;
+            font-size: 14px;
+            color: var(--color-text-muted);
+            font-style: normal;
+        }
+
+        /* Step Cards */
+        .step-container {
+            display: grid;
+            gap: 24px;
+        }
+
+        .step-card {
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--color-border);
+        }
+
+        .step-header {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            color: white;
+            padding: 20px 28px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .step-header h3 {
+            margin: 0;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .step-body {
+            padding: 28px;
+        }
+
+        /* Summary Box */
+        .summary-box {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            margin: 48px 0;
+        }
+
+        .summary-box h3 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .summary-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .summary-box li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .summary-box li:last-child {
+            border-bottom: none;
+        }
+
+        .summary-box li::before {
+            content: '✓';
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--color-text);
+            color: #94a3b8;
+            padding: 48px 24px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 36px;
+            }
+
+            h2 {
+                font-size: 28px;
+            }
+
+            .hero {
+                padding: 60px 20px 80px;
+            }
+
+            .nav {
+                padding: 12px 16px;
+            }
+
+            .container {
+                padding: 32px 16px 60px;
+            }
+
+            .flow-diagram {
+                flex-direction: column;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+
+            .comparison-table {
+                font-size: 13px;
+            }
+
+            .comparison-table th, .comparison-table td {
+                padding: 10px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <header class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">PM₂.₅ 数据融合方法</span>
+            <h1>AdvancedRK 学习指南</h1>
+            <p class="hero-subtitle">如何本质地理解并向他人讲解这个创新的PM₂.₅校正方法。从问题出发，理解本质，掌握向他人解释的能力。</p>
+            <div class="hero-meta">
+                <span>🕐 预计阅读时间：25分钟</span>
+                <span>📚 需要基础：线性回归 + 空间插值概念</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="nav">
+            <a href="#problem">问题背景</a>
+            <a href="#framework">两步框架</a>
+            <a href="#step1">Step 1 多项式</a>
+            <a href="#step2">Step 2 GPR</a>
+            <a href="#kernel">核函数选择</a>
+            <a href="#explain">如何讲解</a>
+            <a href="#summary">核心要点</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Section 1: Problem Background -->
+        <section id="problem">
+            <div class="section-header">
+                <div class="section-number">第一章</div>
+                <h2>问题背景：数据融合的矛盾</h2>
+                <p class="section-desc">理解AdvancedRK解决什么问题，是讲解的基础。</p>
+            </div>
+
+            <div class="card">
+                <h3><span class="icon">⚖️</span>核心矛盾</h3>
+                <p>PM₂.₅监测面临一个基本矛盾：</p>
+                <ul>
+                    <li><strong>地面监测站数据</strong>：精度高，但空间覆盖稀疏（全国只有几百个站点）</li>
+                    <li><strong>CMAQ模型数据</strong>：覆盖完整（全国网格），但存在系统性偏差</li>
+                </ul>
+                <p style="margin-top: 16px;">数据融合的目标：<strong>结合两者优点</strong>，生成既精确又完整的高分辨率PM₂.₅数据。</p>
+            </div>
+
+            <div class="quote">
+                <p>AdvancedRK的本质：先用数学公式捕捉CMAQ的偏差规律，再用空间插值填补细节。</p>
+            </div>
+
+            <div class="card card-accent">
+                <h3><span class="icon">📊</span>现有方法的局限</h3>
+                <p>VNA/eVNA/aVNA方法的核心假设：<strong>CMAQ与真实值之间的偏差是线性的</strong>。</p>
+                <div class="formula-box">
+                    eVNA假设: O_true = O_CMAQ × r（比例关系）
+                </div>
+                <p>这个假设的问题：</p>
+                <ul>
+                    <li><strong>非线性偏差</strong>：实际中偏差往往与CMAQ模拟值呈曲线关系（低浓度高估、高浓度低估）</li>
+                    <li><strong>空间异质性</strong>：偏差系数在不同位置可能不同，而不是常数</li>
+                </ul>
+            </div>
+
+            <div class="key-point">
+                <span class="icon">💡</span>
+                <p><strong>核心洞察</strong>：AdvancedRK通过<strong>两步分工</strong>解决这个矛盾——第一步用多项式处理非线性，第二步用GPR处理空间细节。</p>
+            </div>
+        </section>
+
+        <!-- Section 2: Two-Step Framework -->
+        <section id="framework">
+            <div class="section-header">
+                <div class="section-number">第二章</div>
+                <h2>两步框架：分工与专业化</h2>
+                <p class="section-desc">理解AdvancedRK如何将复杂问题分解为两个简单步骤。</p>
+            </div>
+
+            <div class="flow-diagram">
+                <div class="flow-step">
+                    <h4>原始CMAQ</h4>
+                    <p>模型预测值</p>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">
+                    <h4>Step 1</h4>
+                    <p>二阶多项式校正</p>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">
+                    <h4>Step 2</h4>
+                    <p>GPR空间建模</p>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">
+                    <h4>最终预测</h4>
+                    <p>多项式 + GPR</p>
+                </div>
+            </div>
+
+            <div class="formula-box">
+                P = M_cal + R* = (α₀ + α₁·CMAQ + α₂·CMAQ²) + GPR(Lon, Lat)
+            </div>
+
+            <div class="card">
+                <h3><span class="icon">🔍</span>为什么需要分步？</h3>
+                <p>想象你要教一个学生完成两道不同的任务：</p>
+                <ul>
+                    <li><strong>不分工</strong>：让学生同时学习"CMAQ偏差规律"+"空间变化规律"→ 学习难度翻倍</li>
+                    <li><strong>分工</strong>：先让数学老师教多项式，再让地理老师教空间插值→ 专业化降难度</li>
+                </ul>
+                <div class="key-point">
+                    <span class="icon">📈</span>
+                    <p>实验数据：跳过多项式直接用GPR，R²下降<strong>2.9%~9.1%</strong>。说明分工策略确实有效。</p>
+                </div>
+            </div>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>方法</th>
+                        <th>处理CMAQ偏差</th>
+                        <th>处理空间变化</th>
+                        <th>效果</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>VNA/eVNA/aVNA</td>
+                        <td>线性（常数或比例）</td>
+                        <td>简单距离加权</td>
+                        <td>R² ≈ 0.90</td>
+                    </tr>
+                    <tr>
+                        <td>AdvancedRK</td>
+                        <td>非线性（二阶多项式）</td>
+                        <td>GPR-Matern核</td>
+                        <td>R² ≈ 0.92</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Section 3: Step 1 Polynomial -->
+        <section id="step1">
+            <div class="section-header">
+                <div class="section-number">第三章</div>
+                <h2>Step 1：二阶多项式趋势校正</h2>
+                <p class="section-desc">捕捉CMAQ偏差的全局非线性趋势。</p>
+            </div>
+
+            <div class="step-container">
+                <div class="step-card">
+                    <div class="step-header">
+                        <span class="step-number">1</span>
+                        <h3>二阶多项式</h3>
+                    </div>
+                    <div class="step-body">
+                        <div class="formula-box">
+                            M_cal = α₀ + α₁·CMAQ + α₂·CMAQ²
+                        </div>
+                        <p>其中：</p>
+                        <ul>
+                            <li><strong>α₀</strong>（截距）：基线偏差</li>
+                            <li><strong>α₁</strong>（一次项）：如果 >1 表示CMAQ被低估，<1表示被高估</li>
+                            <li><strong>α₂</strong>（二次项）：捕捉非线性程度，α₂ ≠ 0 时说明偏差呈抛物线模式</li>
+                        </ul>
+                        <div class="key-point">
+                            <span class="icon">⚡</span>
+                            <p><strong>关键</strong>：当 α₂ ≠ 0 时，表示存在非线性偏差——这是AdvancedRK区别于线性方法的关键。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-highlight">
+                <h3><span class="icon">🎯</span>为什么选择二阶？</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>阶数</th>
+                            <th>效果</th>
+                            <th>问题</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>一阶（线性）</td>
+                            <td>与VNA/eVNA/aVNA等价</td>
+                            <td>无法捕捉非线性</td>
+                        </tr>
+                        <tr>
+                            <td><strong>二阶</strong></td>
+                            <td>灵活性和复杂度的平衡</td>
+                            <td>能捕捉U形偏差</td>
+                        </tr>
+                        <tr>
+                            <td>三阶及以上</td>
+                            <td>训练数据上表现好</td>
+                            <td>容易过拟合，新数据表现差</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="margin-top: 16px;">消融实验证明：有GPR时，多项式阶数差异<strong><0.003</strong>，二阶是最佳平衡。</p>
+            </div>
+
+            <div class="warning-point">
+                <span class="icon">⚠️</span>
+                <p><strong>常见误解</strong>：认为"阶数越高越精确"。实际上，三阶以上在真实预测时效果会下降，因为过拟合了训练数据的噪声。</p>
+            </div>
+        </section>
+
+        <!-- Section 4: Step 2 GPR -->
+        <section id="step2">
+            <div class="section-header">
+                <div class="section-number">第四章</div>
+                <h2>Step 2：GPR-Matern残差空间建模</h2>
+                <p class="section-desc">用高斯过程回归捕捉残差的局部空间变化。</p>
+            </div>
+
+            <div class="step-card" style="margin-bottom: 24px;">
+                <div class="step-header">
+                    <span class="step-number">2</span>
+                    <h3>高斯过程回归 (GPR)</h3>
+                </div>
+                <div class="step-body">
+                    <p><strong>核心思想</strong>：假设目标函数（残差）服从高斯过程先验，通过观测数据更新后验分布进行预测。</p>
+                    <ul style="margin-top: 16px;">
+                        <li>提供预测值<strong>和</strong>不确定性估计</li>
+                        <li>核参数通过最大化边际似然自动确定</li>
+                        <li>能捕捉复杂的空间相关性结构</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><span class="icon">📐</span>克里金预测公式</h3>
+                <div class="formula-box">
+                    R*(s*) = μ_R + kᵀK⁻¹(R - μ_R)
+                </div>
+                <p>其中：</p>
+                <ul>
+                    <li><strong>k</strong>：新位置与所有训练点的协方差向量</li>
+                    <li><strong>K</strong>：训练点之间的协方差矩阵</li>
+                    <li><strong>R</strong>：训练点的残差</li>
+                </ul>
+                <div class="key-point">
+                    <span class="icon">💡</span>
+                    <p><strong>本质理解</strong>：这本质上是"距离加权平均"的推广——权重由核函数确定，而不是简单的反距离。</p>
+                </div>
+            </div>
+
+            <div class="card card-accent">
+                <h3><span class="icon">🔗</span>GPR还能输出什么？</h3>
+                <p>除了预测值，GPR还能输出<strong>预测不确定性（标准差）</strong>：</p>
+                <pre><code>pred_mean, pred_std = gpr.predict(X_test, return_std=True)</code></pre>
+                <ul>
+                    <li><strong>pred_std大</strong>：该位置附近监测站稀疏，预测不可靠</li>
+                    <li><strong>pred_std小</strong>：该位置附近监测站密集，预测可靠</li>
+                </ul>
+                <p style="margin-top: 16px;"><strong>应用场景</strong>：</p>
+                <ul>
+                    <li>识别高风险区域：预测值高且标准差也高的区域</li>
+                    <li>指导监测站布点：标准差大的区域优先增设监测站</li>
+                    <li>置信区间：给出预测的置信范围，如 μ ± 1.96σ（95%置信区间）</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 5: Kernel Selection -->
+        <section id="kernel">
+            <div class="section-header">
+                <div class="section-number">第五章</div>
+                <h2>核函数选择：为什么是Matern？</h2>
+                <p class="section-desc">理解Matern核的物理优势。</p>
+            </div>
+
+            <div class="card">
+                <h3><span class="icon">📉</span>核函数对比</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>核函数</th>
+                            <th>公式特征</th>
+                            <th>衰减行为</th>
+                            <th>平均R²</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RBF</td>
+                            <td>指数平方衰减</td>
+                            <td>快速→0</td>
+                            <td>0.8421</td>
+                        </tr>
+                        <tr>
+                            <td>Matern(ν=0.5)</td>
+                            <td>指数核</td>
+                            <td>快速衰减</td>
+                            <td>0.8420</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Matern(ν=1.5)</strong></td>
+                            <td>指数核的平滑版本</td>
+                            <td>平缓衰减</td>
+                            <td><strong>0.8472</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Matern(ν=2.5)</td>
+                            <td>更光滑</td>
+                            <td>更平缓</td>
+                            <td>0.8461</td>
+                        </tr>
+                        <tr>
+                            <td>RationalQuadratic</td>
+                            <td>多尺度混合</td>
+                            <td>变化</td>
+                            <td>0.8385</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="key-point">
+                    <span class="icon">🏆</span>
+                    <p><strong>Matern(ν=1.5)最优</strong>：平均R²最高（0.8472），尤其在stage3（冬季）优势明显（0.7970 vs RBF的0.7814）。</p>
+                </div>
+            </div>
+
+            <div class="card card-highlight">
+                <h3><span class="icon">🌍</span>物理意义：为什么平缓衰减更好？</h3>
+                <p>想象一个PM₂.₅源区：</p>
+                <ul>
+                    <li>污染物向外扩散时，浓度<strong>逐渐</strong>降低</li>
+                    <li>不会在某个距离突然从"有影响"变成"无影响"</li>
+                    <li>而是随着距离增加，影响<strong>逐渐平缓</strong>衰减</li>
+                </ul>
+                <div class="quote">
+                    <p>RBF核在距离ℓ处急剧衰减，之后接近0——相当于"突然消失"。Matern核衰减更平缓，逐渐趋近于0——符合污染物扩散的物理规律。</p>
+                </div>
+            </div>
+
+            <div class="formula-box">
+                Matern核 (ν=1.5): k(d) = σ²(1 + √3·d/ℓ)exp(-√3·d/ℓ)
+
+                当 d = ℓ 时: k = σ²(1+√3)exp(-√3) ≈ 0.22σ²
+
+                RBF核: k(d) = σ²exp(-d²/2ℓ²)
+
+                当 d = ℓ 时: k = σ²exp(-0.5) ≈ 0.61σ²
+            </div>
+
+            <div class="warning-point">
+                <span class="icon">📝</span>
+                <p><strong>参数含义</strong>：ν控制光滑程度。ν=0.5是指数核（衰减太快），ν→∞是RBF核（衰减太慢）。ν=1.5在两者之间，物理上最符合PM₂.₅扩散规律。</p>
+            </div>
+        </section>
+
+        <!-- Section 6: How to Explain -->
+        <section id="explain">
+            <div class="section-header">
+                <div class="section-number">第六章</div>
+                <h2>如何向他人讲解AdvancedRK</h2>
+                <p class="section-desc">从问题到方案，用简洁的语言讲清楚。</p>
+            </div>
+
+            <div class="card">
+                <h3><span class="icon">🎤</span>30秒版本</h3>
+                <p>如果有人问："AdvancedRK是什么？"</p>
+                <div class="quote">
+                    <p>用二阶多项式代替线性模型，捕捉CMAQ偏差的非线性关系；用Matern核代替RBF核，让空间相关性衰减更符合物理规律；两步融合：全局趋势 + 局部调整。</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><span class="icon">🔑</span>核心比喻</h3>
+                <ul>
+                    <li><strong>线性方法</strong> = 用直尺量曲线</li>
+                    <li><strong>AdvancedRK</strong> = 用曲线拟合（多项式）+ 高精度空间插值（GPR-Matern）</li>
+                </ul>
+                <div class="key-point">
+                    <span class="icon">💡</span>
+                    <p>这个比喻能让人立刻理解：为什么AdvancedRK比VNA/eVNA更好——因为它用了更合适的工具。</p>
+                </div>
+            </div>
+
+            <div class="card card-accent">
+                <h3><span class="icon">📋</span>常见问题FAQ</h3>
+                <p><strong>Q：为什么要用二阶，三阶不行吗？</strong></p>
+                <p style="margin-left: 20px;">A：二阶是灵活性和复杂度的平衡。三阶以上容易过拟合，就像穿衣服——合身最好，太紧太松都不行。</p>
+
+                <p style="margin-top: 20px;"><strong>Q：为什么选ν=1.5？</strong></p>
+                <p style="margin-left: 20px;">A：ν控制光滑程度。ν=0.5是指数核（衰减太快），ν→∞是RBF核（衰减太慢）。ν=1.5在两者之间，物理上最符合PM₂.₅扩散规律。</p>
+
+                <p style="margin-top: 20px;"><strong>Q：计算复杂度高吗？</strong></p>
+                <p style="margin-left: 20px;">A：GPR原始复杂度是O(n³)，但使用稀疏近似，只保留显著元素（约0.45%密度），大幅降低计算量同时保持精度。</p>
+            </div>
+        </section>
+
+        <!-- Section 7: Summary -->
+        <section id="summary">
+            <div class="section-header">
+                <div class="section-number">结语</div>
+                <h2>核心要点总结</h2>
+                <p class="section-desc">记住这些，你就能自信地向他人讲解AdvancedRK。</p>
+            </div>
+
+            <div class="summary-box">
+                <h3>🎯 必须掌握的核心</h3>
+                <ul>
+                    <li><strong>问题</strong>：CMAQ模型存在非线性偏差，线性方法无法捕捉</li>
+                    <li><strong>方案</strong>：两步分工——多项式处理全局趋势，GPR处理空间细节</li>
+                    <li><strong>创新</strong>：二阶多项式（非线性）+ Matern核（符合物理规律）</li>
+                    <li><strong>效果</strong>：R²从0.90提升到0.92，4/4阶段通过主级创新判定</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3><span class="icon">📊</span>消融实验验证了什么？</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>实验</th>
+                            <th>结论</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Step 1 Only vs Step 1+2</td>
+                            <td>GPR贡献了绝大部分性能提升（+0.43~0.56 R²）</td>
+                        </tr>
+                        <tr>
+                            <td>多项式阶数比较</td>
+                            <td>有GPR时，阶数差异<0.003，二阶最优</td>
+                        </tr>
+                        <tr>
+                            <td>核函数比较</td>
+                            <td>Matern(1.5)最优，RF/KNN不如GPR精细</td>
+                        </tr>
+                        <tr>
+                            <td>跳过多项式</td>
+                            <td>去掉后R²下降2.9%~9.1%，分工策略有效</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="quote">
+                <p>AdvancedRK的成功在于：不是追求更复杂的模型，而是让每个组件做它最擅长的事——多项式捕捉非线性，GPR捕捉空间相关性，Matern核符合物理规律。</p>
+                <cite>— 实验验证的结论</cite>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>AdvancedRK 学习指南 | PM₂.₅ CMAQ数据融合方法</p>
+        <p style="margin-top: 8px; opacity: 0.7;">基于2020年实测数据验证 | 4/4阶段通过主级创新判定</p>
+    </footer>
+</body>
+</html>

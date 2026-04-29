@@ -28,7 +28,7 @@ from Code.Downscaler.common_setting import CommonSetting
 ROOT_DIR = 'E:/CodeProject/ClaudeRoom/Data_Fusion_AutoResearch'
 CMAQ_FILE = f'{ROOT_DIR}/test_data/raw/CMAQ/2020_PM25.nc'
 MONITOR_FILE = f'{ROOT_DIR}/test_data/raw/Monitor/2020_DailyPM2.5Monitor.csv'
-FOLD_FILE = f'{ROOT_DIR}/test_data/fold_split_table.csv'
+FOLD_FILE = f'{ROOT_DIR}/test_data/fold_split_table_daily.csv'
 OUTPUT_FILE = f'{ROOT_DIR}/test_result/基准方法/sparsekrig_multistage.json'
 
 
@@ -53,7 +53,7 @@ def ten_fold_for_day_sparsekrig(selected_day, setting):
     fold_df = pd.read_csv(FOLD_FILE)
 
     day_df = monitor_df[monitor_df['Date'] == selected_day].copy()
-    day_df = day_df.merge(fold_df, on='Site', how='left')
+    day_df = day_df.merge(fold_df, on=['Date', 'Site'], how='left')
     day_df = day_df.dropna(subset=['Lat', 'Lon', 'Conc'])
 
     # 加载CMAQ

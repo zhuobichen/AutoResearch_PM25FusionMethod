@@ -33,7 +33,7 @@ from pm25_downscaler import PM25Downscaler
 ROOT_DIR = 'E:/CodeProject/ClaudeRoom/Data_Fusion_AutoResearch'
 CMAQ_FILE = f'{ROOT_DIR}/test_data/raw/CMAQ/2020_PM25.nc'
 MONITOR_FILE = f'{ROOT_DIR}/test_data/raw/Monitor/2020_DailyPM2.5Monitor.csv'
-FOLD_FILE = f'{ROOT_DIR}/test_data/fold_split_table.csv'
+FOLD_FILE = f'{ROOT_DIR}/test_data/fold_split_table_daily.csv'
 OUTPUT_FILE = f'{ROOT_DIR}/test_result/基准方法/benchmark_multistage.json'
 
 
@@ -81,7 +81,7 @@ def ten_fold_for_day_vna(method_name, selected_day):
 
     # 筛选日期
     day_df = monitor_df[monitor_df['Date'] == selected_day].copy()
-    day_df = day_df.merge(fold_df, on='Site', how='left')
+    day_df = day_df.merge(fold_df, on=['Date', 'Site'], how='left')
     day_df = day_df.dropna(subset=['Lat', 'Lon', 'Conc'])
 
     # 如果站点数太少（少于100个），跳过这一天
@@ -182,7 +182,7 @@ def ten_fold_for_day_downscaler(selected_day):
 
     # 筛选日期
     day_df = monitor_df[monitor_df['Date'] == selected_day].copy()
-    day_df = day_df.merge(fold_df, on='Site', how='left')
+    day_df = day_df.merge(fold_df, on=['Date', 'Site'], how='left')
     day_df = day_df.dropna(subset=['Lat', 'Lon', 'Conc'])
 
     # 加载CMAQ全网格数据
@@ -339,8 +339,8 @@ def main():
         'stage3':  ('2020-12-01', '2020-12-31'),
     }
 
-    # 基准方法
-    methods = ['CMAQ', 'VNA', 'aVNA', 'eVNA', 'Downscaler']
+    # 基准方法 (Downscaler单独脚本)
+    methods = ['CMAQ', 'VNA', 'aVNA', 'eVNA']
 
     results = {}
 
@@ -386,7 +386,7 @@ def main():
     for stage_name in ['pre_exp', 'stage1', 'stage2', 'stage3']:
         best_method = None
         best_r2 = -np.inf
-        for method in ['VNA', 'aVNA', 'eVNA', 'Downscaler']:  # 排除CMAQ
+        for method in ['VNA', 'aVNA', 'eVNA']:  # 排除CMAQ和Downscaler
             r2 = results[method][stage_name]['R2']
             if not np.isnan(r2) and r2 > best_r2:
                 best_r2 = r2

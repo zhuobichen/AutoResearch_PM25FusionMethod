@@ -27,15 +27,15 @@ from joblib import Parallel, delayed
 ROOT_DIR = 'E:/CodeProject/ClaudeRoom/Data_Fusion_AutoResearch'
 CMAQ_FILE = f'{ROOT_DIR}/test_data/raw/CMAQ/2020_PM25.nc'
 MONITOR_FILE = f'{ROOT_DIR}/test_data/raw/Monitor/2020_DailyPM2.5Monitor.csv'
-FOLD_FILE = f'{ROOT_DIR}/test_data/fold_split_table.csv'
+FOLD_FILE = f'{ROOT_DIR}/test_data/fold_split_table_daily.csv'
 OUTPUT_FILE = f'{ROOT_DIR}/Innovation/success/PolyRK/PolyRK_all_stages.json'
 
-# VNA baseline
+# VNA baseline (from benchmark_multistage.json, updated 2026-04-16)
 BASELINE = {
-    'pre_exp': {'R2': 0.8941, 'RMSE': 16.42, 'MB': 0.76},
-    'stage1':  {'R2': 0.9057, 'RMSE': 16.28, 'MB': 0.50},
-    'stage2':  {'R2': 0.8458, 'RMSE': 4.97, 'MB': 0.04},
-    'stage3':  {'R2': 0.9078, 'RMSE': 11.90, 'MB': 0.36},
+    'pre_exp': {'R2': 0.8907, 'RMSE': 16.68, 'MB': 0.70},
+    'stage1':  {'R2': 0.9034, 'RMSE': 16.48, 'MB': 0.50},
+    'stage2':  {'R2': 0.8408, 'RMSE': 5.05, 'MB': 0.05},
+    'stage3':  {'R2': 0.9031, 'RMSE': 12.20, 'MB': 0.42},
 }
 
 
@@ -76,7 +76,7 @@ def ten_fold_poly_rk(selected_day, poly_degree=2):
     fold_df = pd.read_csv(FOLD_FILE)
 
     day_df = monitor_df[monitor_df['Date'] == selected_day].copy()
-    day_df = day_df.merge(fold_df, on='Site', how='left')
+    day_df = day_df.merge(fold_df, on=['Date', 'Site'], how='left')
     day_df = day_df.dropna(subset=['Lat', 'Lon', 'Conc'])
 
     if len(day_df) < 100:
